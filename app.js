@@ -11,6 +11,7 @@ const productRoutes = require("./routes/product");
 
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));
+// mime type issue attempted fix
 app.use("/matIcon/", express.static(path.join(__dirname, "node_modules/material-design-icons/iconfont")));
 app.use("/matIconFix/", express.static(path.join(__dirname, "node_modules/@fontsource/material-icons")));
 
