@@ -12,15 +12,13 @@
 .navLink {
   text-decoration: none;
   color: var(--fColor);
-  cursor: pointer;
-  display: inline;
-  padding: 5px 5px;
-  min-width: 80px;
-
+  /* cursor: pointer; */
+  /*display: inline;
+  /* padding: 5px 5px;
+  min-width: 80px; */
 }
 .navPill:hover {
   opacity: 0.4;
-  
 }
 .showMenuButton {
   /* display: inline-block; */

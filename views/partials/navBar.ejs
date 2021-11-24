@@ -6,28 +6,28 @@
   </div>
 </div>
 <div class="navBar" id="navBar">
-  <div class="navPill">
-    <a href="/home" class="navLink material-icons">home</a>
+  <a class="navPill navLink" href="/home">
+    <div class="material-icons">home</div>
     <div><small>Home</small></div>
-  </div>
-  <div class="navPill">
-    <a href="/about" class="navLink material-icons">info</a>
+  </a>
+  <a class="navPill navLink" href="/about">
+    <div class="material-icons">info</div>
     <div><small>About</small></div>
-  </div>
-  <div class="navPill">
-    <a href="/products" class="navLink material-icons">inventory</a>
+  </a>
+  <a class="navPill navLink" href="/products">
+    <div class="material-icons">inventory</div>
     <div><small>Products</small></div>
-  </div>
-  <div class="navPill">
-    <a href="/location" class="navLink material-icons">place</a>
+  </a>
+  <a class="navPill navLink" href="/location">
+    <div class="material-icons">place</div>
     <div><small>Location</small></div>
-  </div>
-  <div class="navPill <%= loggedIn == false ? 'showMenuButton' : 'hideMenuButton' %>">
-    <a href="/logIn" class="material-icons navLink">login</a>
+  </a>
+  <a class="navPill navLink <%= loggedIn == false ? 'showMenuButton' : 'hideMenuButton' %>" href="/logIn">
+    <div class="material-icons">login</div>
     <div><small>Log In</small></div>
-  </div>
-  <div class="navPill <%= loggedIn == true ? 'showMenuButton' : 'hideMenuButton' %>">
-    <a href="/logOut" class="material-icons navLink">logout</a>
+  </a>
+  <a class="navPill navLink <%= loggedIn == true ? 'showMenuButton' : 'hideMenuButton' %>" href="/logOut">
+    <div class="material-icons">logout</div>
     <div><small>Log Out</small></div>
-  </div>
+  </a>
 </div>
