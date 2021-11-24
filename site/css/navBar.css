@@ -1,5 +1,5 @@
 .navBar {
-  padding: 5px;
+  padding: 5px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,8 +17,14 @@
   /* padding: 5px 5px;
   min-width: 80px; */
 }
-.navPill:hover {
+.navLink:hover {
   opacity: 0.4;
+}
+.icon {
+
+}
+.iconLabel {
+  font-size: xx-small;
 }
 .showMenuButton {
   /* display: inline-block; */
