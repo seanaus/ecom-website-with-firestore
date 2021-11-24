@@ -1,0 +1,48 @@
+<%- include('../partials/head') %>
+
+    <body>
+        <div class="container row">
+            <div class="pannel">
+                <div id="error"></div>
+                <form action="/register" method="post" id="register">
+                    <div class="form-group">
+                        <label for="forename">
+                            Forename(s)
+                            <input type="text" name="forename" id="forename" required>
+                            <div class="errorDisplay hideMe" id="forname-errors">Forename Issues</div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">
+                            Surname
+                            <input type="text" name="surname" id="surname" required>
+                            <div class="errorDisplay hideMe" id="surname-errors">Surname Issues</div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            Email
+                            <input type="email" name="email" id="email" required>
+                            <div class="errorDisplay hideMe" id="email-errors">Forename Issues</div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">
+                            Password
+                            <input type="password" name="password" id="password" required>
+                            <div class="errorDisplay hideMe" id="password-errors">Forename Issues</div>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">
+                            Confirm Password
+                            <input type="password" name="password2" id="password2" required>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn" id="createNew">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>

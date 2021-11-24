@@ -1,0 +1,14 @@
+<!-- <a href="/product/<%= product.id %>/<%= product.name %>/<%= product.description %>/<%= product.image %>/<%= product.unitCost %>"> -->
+<a href="/product/<%= product.id %>" class="productCardLink">
+    <div class="productCard">
+        <div class="productCardName">
+            <%= product.name %>
+        </div>
+        <div class="productCardImage" style="background-image: url('<%= product.imageCard %>')">
+
+        </div>
+        <div class="productCardUnitCost">
+            £<%= product.unitCost %>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head') %>
+
+    <body>
+        <%- include('../partials/navBar', {loggedIn:loggedIn}) %>
+            <!-- <div class="container"> -->
+            <div class="productWrapper">
+                <div class="productName">
+                    <%=product.name %>
+                </div>
+                <div class="productImage" style="background-image: url('<%=product.image %>');">
+                    <!-- <image height="500" width="1000" src="<%=product.image %>"></image> -->
+                </div>
+                <div class="productDescription">
+                    <%=product.description %>
+                </div>
+                <div class="productUnitCost">
+                    £<%=product.unitCost %>
+                </div>
+                <div class="addToCartWrapper">
+                    <button class="addToCart">
+                        Add To Cart
+                    </button>
+                </div>
+
+            </div>
+            <!-- </div> -->
+    </body>
+
+</html>

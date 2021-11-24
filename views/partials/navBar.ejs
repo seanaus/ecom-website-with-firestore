@@ -1,0 +1,33 @@
+<div class="burger-container" onClick="toggleNavPills()">
+  <div class="burger">
+    <div class="burger-line burger-line-top"></div>
+    <div class="burger-line burger-line-middle"></div>
+    <div class="burger-line burger-line-bottom"></div>
+  </div>
+</div>
+<div class="navBar" id="navBar">
+  <div class="navPill">
+    <a href="/home" class="navLink material-icons">home</a>
+    <div><small>Home</small></div>
+  </div>
+  <div class="navPill">
+    <a href="/about" class="navLink material-icons">info</a>
+    <div><small>About</small></div>
+  </div>
+  <div class="navPill">
+    <a href="/products" class="navLink material-icons">inventory</a>
+    <div><small>Products</small></div>
+  </div>
+  <div class="navPill">
+    <a href="/location" class="navLink material-icons">place</a>
+    <div><small>Location</small></div>
+  </div>
+  <div class="navPill <%= loggedIn == false ? 'showMenuButton' : 'hideMenuButton' %>">
+    <a href="/logIn" class="material-icons navLink">login</a>
+    <div><small>Log In</small></div>
+  </div>
+  <div class="navPill <%= loggedIn == true ? 'showMenuButton' : 'hideMenuButton' %>">
+    <a href="/logOut" class="material-icons navLink">logout</a>
+    <div><small>Log Out</small></div>
+  </div>
+</div>

@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+  --bgColor: rgba(0, 0, 0, 0.8);
+  --fColor: rgba(255, 255, 255, 0.8);
+  --activeBgColor: rgba(255, 255, 255, 0.1);
+  --activeFColor: rgb(0, 223, 255);
+  --active:rgb(0, 223, 255);
+  --btnBgColor: rgba(255,0,0,0.8);
+  --btnBgColorAlternate: rgba(255,0,0,0.5);
+  font-family: Arial, Verdana, Helvetica, Tahoma, Trebuchet MS, Times New Roman,
+    Georgia, Garamond, Courier New, Brush Script MT;
+}
+
+body {
+  background-color: var(--bgColor);
+  color: var(--fColor);
+  /* margin: 0px 30px; */
+  overflow: auto;
+  /* display: flex;
+  flex-direction: column; */
+  min-height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 35px auto;
+  /* justify-content: center;
+  align-items: center; */
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.pannel {
+  padding: 5px;
+  margin: 35px 0px 20px 0px;
+  min-width: 300px;
+}
+label {
+  display: block;
+  width: 100%;
+  font-size: small;
+  font-weight: bold;
+  --background-color: var(--bgColor);
+  color: var(--fColor);
+}
+input {
+  display: block;
+  width: 100%;
+  background-color: var(--bgColor);
+  color: var(--fColor);
+  border-width: 0px;
+  border: none;
+  padding: 5px 0px;
+  background: transparent;
+  -webkit-appearance: none;
+  margin: 5px 0px 0px 0px;
+  padding: 5px;
+}
+input:focus {
+  outline: none;
+  border-left: 2px solid var(--active);
+}
+.btn {
+  display: block;
+  width: 100%;
+  background-color: var(--btnBgColor);
+  color: var(--fColor);
+  padding: 8px 5px;
+  border-style: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: var(--btnBgColorAlternate);
+}
+.form-group {
+  margin: 5px 0px;
+}
+.link {
+  text-decoration: none;
+  color: var(--fColor);
+  font-size: x-small;
+}
+.signInAltContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.errorDisplay {
+  text-align: center;
+  color: red;
+}
+.hideMe {
+  display: none;
+}
+
+/* body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}*/
+
+/* input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+} */
+
+button:hover {
+  opacity: 0.8;
+}
+.mapsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
+}
+.mapsHeader {
+  font-size: xx-large;
+  margin-bottom: 10px;
+}
+.mapsDescription {
+  font-size: small;
+}
+.mapsImage {
+  width: 180px;
+  margin: 15px;
+}
+.mapsLink {
+  text-decoration: none;
+  color: var(--fColor);
+  cursor: pointer;
+}
+.titleText {
+  text-align: center;
+  font-size:  xx-large;
+  margin: 0px 0px 10px;
+}
+.subTitleText {
+  font-size: large;
+  margin: 0px 0px 2px;
+}
+.contentText {
+  font-size: medium;
+  margin: 2px 0px 10px;
+}
+.layoutTopMargin {
+  margin-top: 50px;
+}
