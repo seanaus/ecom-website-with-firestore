@@ -22,6 +22,13 @@
     <div class="material-icons icon">place</div>
     <div class="iconLabel">Location</div>
   </a>
+  <a class="navPill navLink <%= loggedIn == true ? 'showMenuButton' : 'hideMenuButton' %>" href="/cart">
+    <div class="material-icons icon">shopping_cart</div>
+    <div class="iconLabel">Cart</div>
+    <div>
+      <%= cartCounter %>
+    </div>
+  </a>
   <a class="navPill navLink <%= loggedIn == false ? 'showMenuButton' : 'hideMenuButton' %>" href="/logIn">
     <div class="material-icons icon">login</div>
     <div class="iconLabel">Log In</div>

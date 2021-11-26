@@ -26,17 +26,19 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
   res.render("pages/index", {
     loggedIn: authUser(),
+    cartCounter: 2,
     slideShow: await slideShow()
   });
 });
 app.get("/about", (req, res) => {
   res.render("pages/about", {
-    loggedIn: authUser(),
-
+    loggedIn: authUser()
   });
 });
 app.get("/location", (req, res) => {
-  res.render("pages/location", { loggedIn: authUser() });
+  res.render("pages/location", {
+    loggedIn: authUser()
+  });
 });
 app.get("/logIn", (req, res) => {
   res.render("pages/logIn");
@@ -52,6 +54,11 @@ app.get("/register", (req, res) => {
 });
 app.post("/register", createNew, (req, res) => {
   res.redirect("/home");
+});
+app.get("/cart", (req, res) => {
+  res.render("pages/shoppingCart", {
+    cartCounter: 2
+  });
 });
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}.......`);

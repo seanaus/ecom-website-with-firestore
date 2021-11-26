@@ -10,7 +10,7 @@ const isSelected = () => {
   for (let i = 0; i < menuItem.length; i++) {
     if (menuItem[i].href === currentPageUrl) {
       if ((menuItem[i].className = "navPill navLink")) {
-        menuItem[i].className += "navPill navLink active";
+        menuItem[i].className += " active";
       }
     }
   }

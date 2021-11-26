@@ -68,7 +68,15 @@
 .burger-line-bottom {
   margin: 5px 0px 0px 0px;
 }
-
+.cartCounter {
+  position:relative;
+  width: 15px;
+  height: 15px;
+  left: 15px;
+  top: -45px;
+  --border-radius: 50px;
+  font-size: x-small;
+}
 @media only screen and (min-width: 768px) {
   .navBar {
     flex-direction: row;
