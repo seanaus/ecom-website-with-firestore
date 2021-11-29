@@ -4,4 +4,3 @@ npm install local-storage --save
 npm install serve-favicon
 npm install material-icons@latest
 npm install @fontsource/material-icons
-
