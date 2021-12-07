@@ -1,13 +1,17 @@
 const PORT = 8080;
 const express = require("express");
+const methodOverride = require('method-override');
 const app = express();
 const path = require("path");
 const favicon = require('serve-favicon');
+const Cart = require("./models/cart");
 const { createNew, logIn, logOut } = require("./controllers/auth");
 const { authUser } = require("./core/auth");
 const { slideShow } = require("./core/slideShow");
 const productRoutes = require("./routes/product");
+const cartRoutes = require("./routes/cart");
 
+const cart = new Cart();
 
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));
@@ -18,7 +22,12 @@ app.use("/matIconFix/", express.static(path.join(__dirname, "node_modules/@fonts
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use('/', productRoutes.routes);
+app.use('/', (req, res, next) => {
+  req.cart = cart;
+  next();
+}, cartRoutes.routes );
 
 app.get("/", (req, res) => {
   res.redirect("/home");
@@ -56,7 +65,7 @@ app.post("/register", createNew, (req, res) => {
   res.redirect("/home");
 });
 app.get("/cart", (req, res) => {
-  res.render("pages/shoppingCart", {
+  res.render("pages/cart", {
     cartCounter: 2
   });
 });

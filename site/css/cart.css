@@ -1,0 +1,110 @@
+* {
+  background-color: black;
+  color: white;
+  user-select: none;
+  box-sizing: border-box;
+  --button-bg-color: rgb(184, 51, 11);
+  --button-bg-color-alternate: rgba(184, 51, 11,0.8);
+}
+.cartContainer {
+  width: 60%;
+  margin: auto;
+}
+.cartPageTitle {
+  text-align: center;
+}
+.cartRow {
+  display: grid;
+  grid-template-columns: 100px 100px 100px auto 100px 100px;
+}
+.cartCol {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 2px 5px;
+  justify-content: center;
+  align-items: center;
+}
+.cartColHeader {
+  text-align: center;
+  padding: 15px 5px;
+  margin: 0px 0px 15px 0px;
+}
+.cartColBody {
+  text-align: center;
+}
+.cartColBodyPullLeft {
+  text-align: left !important;
+  align-self: flex-start;
+}
+.cartBtn {
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: var(--button-bg-color);
+
+}
+.cartBtnRemove {
+  background-color: var(--button-bg-color);
+  color: white;
+}
+.cartBtn:hover {
+  opacity: 0.8;
+}
+.cartImage {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+}
+.cartRockerWrapper {
+  display: inline-flex;
+}
+.cartRockerAdd {
+  text-align: center;
+  padding: 5px 10px;
+  border: none;
+}
+.cartRockerValue {
+  text-align: center;
+  padding: 5px 10px;
+  border-top: 1px solid var(--button-bg-color);;
+  border-bottom: 1px solid var(--button-bg-color);;
+  font-size: 15px;
+}
+.cartRockerRemove {
+  text-align: center;
+  padding: 5px 10px;
+  border: none;
+}
+.cartRockerQuantityBtn {
+  background-color: var(--button-bg-color);
+  color: white;
+  font-style: bold;
+  font-size: 15px;
+  border-radius: 3px;
+}
+.cartRockerAdd:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.cartRockerRemove:hover {
+  cursor: pointer;
+}
+.cartTotalsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.cartTotals {
+  padding: 5px;
+}
+.cartButtonsContainer {
+  display: flex;
+  justify-content: center;
+}
+.cartPannel {
+  padding: 5px;
+}
+.cartBtnAdd {
+  min-width: 150px;
+}

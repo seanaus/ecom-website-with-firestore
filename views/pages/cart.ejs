@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="PJS">
+    <meta name="author" content="PJS">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+    <link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
+    <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/cart.css" />
+    <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
+  
+    <script defer type="text/javascript" src="/js/navBar.js"></script>
+    <script defer type="text/javascript" src="/js/validation/user.js"></script>
+    
+    <title>PJS</title>
+</head>
+<body>
+  <div class="cartContainer">
+    <div class="cartRow">
+      <div class="cartCol">
+        <div class="cartColHeader">#</div>
+      </div>
+      <div class="cartCol">
+        <div class="cartcolHeader">Remove</div>
+      </div>
+      <div class="cartCol">
+        <div class="cartColHeader">Image</div>
+      </div>
+      <div class="cartCol">
+        <div class="cartcolHeader cartColBodyPullLeft">Name</div>
+      </div>
+      <div class="cartCol">
+        <div class="cartColHeader">Quantity</div>
+      </div>
+      <div class="cartCol">
+        <div class="cartColHeader">Price</div>
+      </div>
+    </div>
+    <% cart.items.forEach(item=> { %>
+      <div class="cartRow">
+        <div class="cartCol">
+          <div class="cartColBody">
+            <%= item.id %>
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody">
+            <form method="POST" action="/cart/<%= item.id %>?_method=DELETE">
+              <button type="submit" class="cartBtn cartBtnRemove">X</button>
+            </form>
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody">
+            <image class="cartImage" src="<%= item.image %>" />
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody cartColBodyPullLeft">
+            <%= item.name %>
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody">
+            <div class="cartRockerWrapper">
+              <form method="POST" action="/cart/<%= item.id %>/REMOVE?_method=PUT">
+                <button class="cartRockerQuantityBtn cartRockerAdd" type="submit">-</button>
+              </form>
+              <div class="cartRockerValue">
+                <%= item.quantity %>
+              </div>
+              <form method="POST" action="/cart/<%= item.id %>/ADD?_method=PUT">
+                <button class="cartRockerQuantityBtn cartRockerRemove type=" submit">+</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody">
+            <%= cart.formatGBP(item.cost) %>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+        <div class="cartTotalsContainer">
+          <div class="cartTotals">Total: <%= cart.formatGBP(cart.totalCost) %>
+          </div>
+        </div>
+        <!-- <div class="cartButtonsContainer">
+          <div class="cartPannel">
+            <form method="POST" action="/cart/1?_method=POST">
+              <button class="cartBtn cartBtnAdd" type="submit">Ford Anglia</button>
+            </form>
+            <form method="POST" action="/cart/2?_method=POST">
+              <button class="cartBtn cartBtnAdd" type="submit">Pink Cadilac</button>
+            </form>
+            <form method="POST" action="/cart/3?_method=POST">
+              <button class="cartBtn cartBtnAdd" type="submit">Robin Reliant</button>
+            </form>
+            <form method="POST" action="/cart/4?_method=POST">
+              <button class="cartBtn cartBtnAdd" type="submit">VW Beetle</button>
+            </form>
+          </div>
+        </div> -->
+  </div>
+</body>
+
+</html>

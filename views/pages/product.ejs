@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--%- include('../partials/head') %-->
-<head>
-	<meta charset="UTF-8">
-	<meta name="keywords" content="HTML, CSS, JavaScript">
-	<meta name="description" content="PJS">
-	<meta name="author" content="PJS">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/css/navBar.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="/css/products.css" /> -->
-	<link rel="stylesheet" type="text/css" href="/css/product.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="/css/productCard.css" />
+  <!--%- include('../partials/head') %-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="description" content="PJS" />
+    <meta name="author" content="PJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/css/products.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/product.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/css/productCard.css" />
 	<link rel="stylesheet" type="text/css" href="/css/slideShow.css" /> -->
-	<link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
-	<link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
-	<link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/iconfont/material-icons.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
+    <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
 
-	<!-- <link rel="stylesheet" type="text/css" href="../../node_modules/material-design-icons/iconfont/material-icons.css"> -->
-	<script defer type="text/javascript" src="/js/navBar.js"></script>
-	<!-- <script defer type="text/javascript" src="/js/validation/user.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../../node_modules/material-design-icons/iconfont/material-icons.css"> -->
+    <script defer type="text/javascript" src="/js/navBar.js"></script>
+    <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script>
 	<script defer type="text/javascript" src="/js/slideShow.js"></script> -->
-	<title>PJS</title>
-</head>
-<body>
+    <title>PJS</title>
+  </head>
+  <body>
     <%- include('../partials/navBar', {loggedIn:loggedIn}) %>
-        <!-- <div class="container"> -->
-        <div class="productWrapper">
-            <div class="productName">
-                <%=product.name %>
-            </div>
-            <div class="productImage" style="background-image: url('<%=product.image %>');">
-                <!-- <image height="500" width="1000" src="<%=product.image %>"></image> -->
-            </div>
-            <div class="productDescription">
-                <%=product.description %>
-            </div>
-            <div class="productUnitCost">
-                £<%=product.unitCost %>
-            </div>
-            <div class="addToCartWrapper">
-                <button class="addToCart">
-                    Add To Cart
-                </button>
-            </div>
-
-        </div>
-        <!-- </div> -->
-</body>
-
+    <!-- <div class="container"> -->
+    <div class="productWrapper">
+      <div class="productName"><%=product.name %></div>
+      <div
+        class="productImage"
+        style="background-image: url('<%=product.image %>')"
+      >
+        <!-- <image height="500" width="1000" src="<%=product.image %>"></image> -->
+      </div>
+      <div class="productDescription"><%=product.description %></div>
+      <div class="productUnitCost">£<%=product.unitCost %></div>
+      <form
+        class="addToCartWrapper"
+        method="POST"
+        action="/cart/<%=product.id %>?_method=POST"
+      >
+        <button class="addToCart" type="submit">Add To Cart</button>
+      </form>
+    </div>
+    <!-- </div> -->
+  </body>
 </html>
