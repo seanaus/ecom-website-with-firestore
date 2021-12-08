@@ -17,6 +17,7 @@ router.delete("/cart/:id", authGuard, (req, res, next) => {
   res.redirect("/cart");
   next();
 });
+
 router.put("/cart/:id/:option", authGuard, (req, res, next) => {
   const id = req.params.id;
   const option = req.params.option;
@@ -31,10 +32,10 @@ router.put("/cart/:id/:option", authGuard, (req, res, next) => {
 router.post("/cart/:id", authGuard, getProduct, (req, res, next) => {
 
   const id = req.params.id;
-  console.log("Added " + id);
-  // cart.addItem(id);
-  // res.redirect("/");
-  // next();
+  // const cart = req.params.cart;
+  global.cart.addItem(id);
+  res.redirect("/");
+  next();
 });
 
 module.exports = {

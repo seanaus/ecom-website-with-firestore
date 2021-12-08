@@ -54,7 +54,7 @@ const productById = async (id) => {
         if (!data.exists) {
             console.log('Product with the given ID not found');
         } else {
-            found.id = data.data().id;
+            found.id = id;
             found.name = data.data().name,
                 found.description = data.data().description,
                 found.imageCard = data.data().imageCard,

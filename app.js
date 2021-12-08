@@ -11,8 +11,8 @@ const { slideShow } = require("./core/slideShow");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 
-const cart = new Cart();
-
+// const cart = new Cart();
+global.cart = [];
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));
 // mime type issue attempted fix
@@ -27,7 +27,7 @@ app.use('/', productRoutes.routes);
 app.use('/', (req, res, next) => {
   req.cart = cart;
   next();
-}, cartRoutes.routes );
+}, cartRoutes.routes);
 
 app.get("/", (req, res) => {
   res.redirect("/home");
