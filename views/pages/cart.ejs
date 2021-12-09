@@ -42,7 +42,7 @@
         <div class="cartColHeader">Price</div>
       </div>
     </div>
-    <% cart.items.forEach(item=> { %>
+    <% cart.items.forEach(item => { %>
       <div class="cartRow">
         <div class="cartCol">
           <div class="cartColBody">
@@ -78,19 +78,18 @@
               <form method="POST" action="/cart/<%= item.id %>/ADD?_method=PUT">
                 <button class="cartRockerQuantityBtn cartRockerRemove type=" submit">+</button>
               </form>
-
             </div>
           </div>
         </div>
         <div class="cartCol">
           <div class="cartColBody">
-            <%= cart.formatGBP(item.cost) %>
+            <%= item.cost %>
           </div>
         </div>
       </div>
       <% }); %>
         <div class="cartTotalsContainer">
-          <div class="cartTotals">Total: <%= cart.formatGBP(cart.totalCost) %>
+          <div class="cartTotals">Total: <%= cart.totalCost %>
           </div>
         </div>
         <!-- <div class="cartButtonsContainer">

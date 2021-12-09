@@ -1,19 +1,32 @@
 const express = require("express");
-const methodOverride = require('method-override');
-const { getProducts, getProduct } = require("../controllers/product");
+const methodOverride = require("method-override");
+
 const { authGuard } = require("../controllers/auth");
+const { authUser } = require("../core/auth");
+const {
+  clearCart,
+  getCart,
+  addToCart,
+  deleteFromCart,
+  increaseQuantity,
+  reduceQuantity,
+  formatGBP,
+} = require("../cart");
 
 const router = express.Router();
-router.use(methodOverride('_method'));
+router.use(methodOverride("_method"));
 
 router.get("/cart", authGuard, (req, res, next) => {
-  res.render("pages/cart", { cart: req.cart });
+  res.render("pages/cart", {
+    loggedIn: authUser(),
+    cart: getCart(),
+  });
   next();
 });
 
 router.delete("/cart/:id", authGuard, (req, res, next) => {
   const id = req.params.id;
-  cart.deleteItem(id);
+  deleteFromCart(id);
   res.redirect("/cart");
   next();
 });
@@ -22,19 +35,17 @@ router.put("/cart/:id/:option", authGuard, (req, res, next) => {
   const id = req.params.id;
   const option = req.params.option;
   if (option === "ADD") {
-    cart.increaseQuantity(id);
+    increaseQuantity(id);
   } else {
-    cart.reduceQuantity(id);
+    reduceQuantity(id);
   }
   res.redirect("/cart");
   next();
 });
-router.post("/cart/:id", authGuard, getProduct, (req, res, next) => {
-
+router.post("/cart/:id", authGuard, async (req, res, next) => {
   const id = req.params.id;
-  // const cart = req.params.cart;
-  global.cart.addItem(id);
-  res.redirect("/");
+  await addToCart(id);
+  res.redirect("/cart");
   next();
 });
 

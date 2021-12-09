@@ -4,15 +4,12 @@ const methodOverride = require('method-override');
 const app = express();
 const path = require("path");
 const favicon = require('serve-favicon');
-const Cart = require("./models/cart");
 const { createNew, logIn, logOut } = require("./controllers/auth");
 const { authUser } = require("./core/auth");
 const { slideShow } = require("./core/slideShow");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 
-// const cart = new Cart();
-global.cart = [];
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));
 // mime type issue attempted fix
@@ -23,11 +20,12 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use('/', cartRoutes.routes);
 app.use('/', productRoutes.routes);
-app.use('/', (req, res, next) => {
-  req.cart = cart;
-  next();
-}, cartRoutes.routes);
+// app.use('/', (req, res, next) => {
+//   req.cart = cart;
+//   next();
+// }, cartRoutes.routes);
 
 app.get("/", (req, res) => {
   res.redirect("/home");
