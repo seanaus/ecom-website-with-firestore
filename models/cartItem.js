@@ -11,6 +11,7 @@ class CartItem extends Product {
         );
         this.quantity = 1;
         this.cost = product.unitCost;
+        this.formattedCost = "";
     }
 
 }

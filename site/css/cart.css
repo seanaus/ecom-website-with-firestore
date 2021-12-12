@@ -1,21 +1,21 @@
 * {
-  background-color: black;
-  color: white;
-  user-select: none;
-  box-sizing: border-box;
-  --button-bg-color: rgb(184, 51, 11);
-  --button-bg-color-alternate: rgba(184, 51, 11,0.8);
+  /* background-color: var(--bgColor);
+  color: var(--fColor); */
+  /* user-select: none;
+  box-sizing: border-box; */
+  /* --button-bg-color: rgb(184, 51, 11);
+  --button-bg-color-alternate: rgba(184, 51, 11, 0.8); */
 }
 .cartContainer {
   width: 60%;
-  margin: auto;
+  margin: 35px auto;
 }
 .cartPageTitle {
   text-align: center;
 }
 .cartRow {
   display: grid;
-  grid-template-columns: 100px 100px 100px auto 100px 100px;
+  grid-template-columns: 200px auto 100px 100px 100px;
 }
 .cartCol {
   display: flex;
@@ -43,7 +43,6 @@
   cursor: pointer;
   border-radius: 2px;
   background-color: var(--button-bg-color);
-
 }
 .cartBtnRemove {
   background-color: var(--button-bg-color);
@@ -53,9 +52,9 @@
   opacity: 0.8;
 }
 .cartImage {
-    height: 60px;
-    width: 60px;
-    border-radius: 5px;
+  height: 60px;
+  width: 60px;
+  border-radius: 5px;
 }
 .cartRockerWrapper {
   display: inline-flex;
@@ -68,8 +67,8 @@
 .cartRockerValue {
   text-align: center;
   padding: 5px 10px;
-  border-top: 1px solid var(--button-bg-color);;
-  border-bottom: 1px solid var(--button-bg-color);;
+  border-top: 1px solid var(--button-bg-color);
+  border-bottom: 1px solid var(--button-bg-color);
   font-size: 15px;
 }
 .cartRockerRemove {

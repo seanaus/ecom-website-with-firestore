@@ -22,7 +22,7 @@
 
 <body>
   <div class="cartContainer">
-    <div class="cartRow">
+    <!-- <div class="cartRow">
       <div class="cartCol">
         <div class="cartColHeader">#</div>
       </div>
@@ -41,21 +41,14 @@
       <div class="cartCol">
         <div class="cartColHeader">Price</div>
       </div>
-    </div>
+    </div> -->
     <% cart.items.forEach(item => { %>
       <div class="cartRow">
-        <div class="cartCol">
+        <!-- <div class="cartCol">
           <div class="cartColBody">
             <%= item.id %>
           </div>
-        </div>
-        <div class="cartCol">
-          <div class="cartColBody">
-            <form method="POST" action="/cart/<%= item.id %>?_method=DELETE">
-              <button type="submit" class="cartBtn cartBtnRemove">X</button>
-            </form>
-          </div>
-        </div>
+        </div> -->
         <div class="cartCol">
           <div class="cartColBody">
             <image class="cartImage" src="<%= item.image %>" />
@@ -70,20 +63,27 @@
           <div class="cartColBody">
             <div class="cartRockerWrapper">
               <form method="POST" action="/cart/<%= item.id %>/REMOVE?_method=PUT">
-                <button class="cartRockerQuantityBtn cartRockerAdd" type="submit">-</button>
+                <button class="material-icons cartRockerQuantityBtn cartRockerRemove" type="submit">remove</button>
               </form>
               <div class="cartRockerValue">
                 <%= item.quantity %>
               </div>
               <form method="POST" action="/cart/<%= item.id %>/ADD?_method=PUT">
-                <button class="cartRockerQuantityBtn cartRockerRemove type=" submit">+</button>
+                <button class="material-icons cartRockerQuantityBtn cartRockerAdd type=" submit">add</button>
               </form>
             </div>
           </div>
         </div>
         <div class="cartCol">
           <div class="cartColBody">
-            <%= item.cost %>
+            <form method="POST" action="/cart/<%= item.id %>?_method=DELETE">
+              <button type="submit" class="material-icons cartBtn cartBtnRemove">delete</button>
+            </form>
+          </div>
+        </div>
+        <div class="cartCol">
+          <div class="cartColBody">
+            <%= item.formattedCost %>
           </div>
         </div>
       </div>
@@ -92,22 +92,6 @@
           <div class="cartTotals">Total: <%= cart.totalCost %>
           </div>
         </div>
-        <!-- <div class="cartButtonsContainer">
-          <div class="cartPannel">
-            <form method="POST" action="/cart/1?_method=POST">
-              <button class="cartBtn cartBtnAdd" type="submit">Ford Anglia</button>
-            </form>
-            <form method="POST" action="/cart/2?_method=POST">
-              <button class="cartBtn cartBtnAdd" type="submit">Pink Cadilac</button>
-            </form>
-            <form method="POST" action="/cart/3?_method=POST">
-              <button class="cartBtn cartBtnAdd" type="submit">Robin Reliant</button>
-            </form>
-            <form method="POST" action="/cart/4?_method=POST">
-              <button class="cartBtn cartBtnAdd" type="submit">VW Beetle</button>
-            </form>
-          </div>
-        </div> -->
   </div>
 </body>
 

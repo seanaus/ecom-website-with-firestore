@@ -1,5 +1,5 @@
 const express = require("express");
-const methodOverride = require("method-override");
+// const methodOverride = require("method-override");
 
 const { authGuard } = require("../controllers/auth");
 const { authUser } = require("../core/auth");
@@ -14,12 +14,14 @@ const {
 } = require("../cart");
 
 const router = express.Router();
-router.use(methodOverride("_method"));
+// router.use(methodOverride("_method"));
 
-router.get("/cart", authGuard, (req, res, next) => {
+router.get("/cart", authGuard,(req, res, next) => {
+
   res.render("pages/cart", {
     loggedIn: authUser(),
     cart: getCart(),
+    
   });
   next();
 });

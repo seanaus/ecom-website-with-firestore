@@ -12,7 +12,7 @@ class Product {
         this.description = description;
         this.imageCard = imageCard;
         this.image = image;
-        this.unitCost = unitCost;
+        this.unitCost = parseFloat(unitCost);
     }
 
 }

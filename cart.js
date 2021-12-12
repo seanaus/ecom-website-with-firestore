@@ -1,5 +1,5 @@
 const CartItem = require("./models/cartItem");
-const { products } = require("./core/product");
+const { getProducts } = require("./core/product");
 let items = [];
 let totalCost = 0;
 let itemCount = 0;
@@ -28,10 +28,11 @@ const addToCart = async (id) => {
       items[idx].quantity++;
       items[idx].cost = items[idx].unitCost * items[idx].quantity;
     } else {
-      const productArray = await products();
-      for (let i = 0; i < productArray.length; i++) {
-        if (productArray[i].id === id) {
-          const item = new CartItem(productArray[i]);
+      const products = getProducts();
+      for (let i = 0; i < products.length; i++) {
+        if (products[i].id === id) {
+          const item = new CartItem(products[i]);
+          item.formattedCost = formatGBP(item.cost);
           items.push(item);
         }
       }
@@ -55,6 +56,7 @@ const increaseQuantity = (id) => {
   if (idx >= 0) {
     items[idx].quantity++;
     items[idx].cost = items[idx].unitCost * items[idx].quantity;
+    items[idx].formattedCost = formatGBP(items[idx].cost);
     totalCost = calcTotalCost(items);
     itemCount = calcItemCount(items);
   }
@@ -64,6 +66,7 @@ const reduceQuantity = (id) => {
   if (idx >= 0 && items[idx].quantity > 1) {
     items[idx].quantity--;
     items[idx].cost = items[idx].unitCost * items[idx].quantity;
+    items[idx].formattedCost = formatGBP(items[idx].cost);
     totalCost = calcTotalCost(items);
     itemCount = calcItemCount(items);
   }
@@ -109,6 +112,7 @@ const indexById = (items, id) => {
   for (let i = 0; i < items.length; i++) {
     if (items[i].id === id) {
       idx = i;
+      break;
     }
   }
   return idx;
@@ -119,7 +123,7 @@ const calcTotalCost = (items) => {
   for (let i = 0; i < items.length; i++) {
     totalCost += parseFloat(items[i].cost);
   }
-  return totalCost;
+  return formatGBP(totalCost);
 };
 const calcItemCount = (items) => {
   if (items) {

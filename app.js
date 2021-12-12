@@ -62,11 +62,11 @@ app.get("/register", (req, res) => {
 app.post("/register", createNew, (req, res) => {
   res.redirect("/home");
 });
-app.get("/cart", (req, res) => {
-  res.render("pages/cart", {
-    cartCounter: 2
-  });
-});
+// app.get("/cart", (req, res) => {
+//   res.render("pages/cart", {
+//     cartCounter: 2
+//   });
+// });
 app.listen(PORT, () => {
   console.log(`App listening on ${PORT}.......`);
 });
