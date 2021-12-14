@@ -1,5 +1,9 @@
+"use strict";
+const firebase = require("./db");
+const firestore = firebase.firestore();
 const CartItem = require("./models/cartItem");
 const { getProducts } = require("./core/product");
+
 let items = [];
 let totalCost = 0;
 let itemCount = 0;
@@ -132,6 +136,25 @@ const calcItemCount = (items) => {
     return 0;
   }
 };
+
+const saveCart = async (req, res, next) => {
+  try {
+    const jsonItems = items.map((obj) => { return Object.assign({}, obj) });
+    const cart = {
+      items: jsonItems,
+      totalCost,
+      itemCount,
+      created,
+      modified
+    };
+
+    await firestore.collection("cart").doc().set(cart);
+    console.log("Record saved successfuly");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = {
   clearCart,
   getCart,
@@ -140,4 +163,5 @@ module.exports = {
   increaseQuantity,
   reduceQuantity,
   formatGBP,
+  saveCart
 };

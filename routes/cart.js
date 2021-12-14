@@ -10,14 +10,13 @@ const {
   deleteFromCart,
   increaseQuantity,
   reduceQuantity,
-  formatGBP,
+  saveCart,
 } = require("../cart");
 
 const router = express.Router();
 // router.use(methodOverride("_method"));
 
-router.get("/cart", authGuard,(req, res, next) => {
-
+router.get("/cart", authGuard, (req, res, next) => {
   res.render("pages/cart", {
     loggedIn: authUser(),
     cart: getCart(),
@@ -49,7 +48,10 @@ router.post("/cart/:id", authGuard, async (req, res, next) => {
   res.redirect("/products");
   next();
 });
-
+router.post("/saveCart", authGuard, saveCart, async (req, res, next) => {
+  res.redirect("/");
+  next();
+});
 module.exports = {
   routes: router,
 };

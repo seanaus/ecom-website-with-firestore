@@ -88,10 +88,13 @@
         </div>
       </div>
       <% }); %>
-        <div class="cartTotalsContainer">
-          <div class="cartTotals">Total: <%= cart.totalCost %>
-          </div>
+      <form method="POST" action="/saveCart?_method=POST">
+        <button type="submit" class="material-icons cartBtn">done</button>
+      </form>
+      <div class="cartTotalsContainer">
+        <div class="cartTotals">Total: <%= cart.totalCost %>
         </div>
+      </div>
   </div>
 </body>
 

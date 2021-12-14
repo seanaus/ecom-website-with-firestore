@@ -28,7 +28,6 @@ const renderProduct = (req, res, next) => {
       cart: getCart()
     });
   }
-
   next();
 };
 module.exports = {
