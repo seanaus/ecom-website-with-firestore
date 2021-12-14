@@ -4,13 +4,14 @@ const Product = require("../models/product");
 const firestore = firebase.firestore();
 const { authUser } = require("../core/auth");
 const { loadProducts, getProduct } = require("../core/product");
-
+const { getCart } = require("../cart");
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
 
   res.render("pages/products", {
     loggedIn: authUser(),
     products: productArray,
+    cart: getCart()
   });
 
   next();
@@ -25,6 +26,7 @@ const renderProduct = (req, res, next) => {
     res.render("pages/product", {
       loggedIn: authUser(),
       product: product,
+      cart: getCart()
     });
   }
 

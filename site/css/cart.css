@@ -16,11 +16,15 @@
 .cartRow {
   display: grid;
   grid-template-columns: 200px auto 100px 100px 100px;
+  margin: 4px 0px;
+  background-color: black;
+  padding: 5px;
+  border-radius: 5px;
 }
 .cartCol {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* border: 1px solid rgba(0, 0, 0, 0.8); */
   padding: 2px 5px;
   justify-content: center;
   align-items: center;
@@ -52,8 +56,8 @@
   opacity: 0.8;
 }
 .cartImage {
-  height: 60px;
-  width: 60px;
+  height: 160px;
+  width: 160px;
   border-radius: 5px;
 }
 .cartRockerWrapper {
@@ -93,6 +97,7 @@
 .cartTotalsContainer {
   display: flex;
   justify-content: flex-end;
+  margin: 20px 0px;
 }
 .cartTotals {
   padding: 5px;
