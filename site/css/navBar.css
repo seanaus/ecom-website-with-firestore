@@ -21,7 +21,6 @@
   opacity: 0.4;
 }
 .icon {
-
 }
 .iconLabel {
   font-size: xx-small;
@@ -69,13 +68,19 @@
   margin: 5px 0px 0px 0px;
 }
 .cartCounter {
-  position:relative;
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+  position: relative;
+  display: inline-block;
   width: 15px;
   height: 15px;
-  left: 15px;
+  left: 10px;
   top: -45px;
-  --border-radius: 50px;
-  font-size: x-small;
+  border-radius: 50px;
+  font-size: small;
+  font-weight: bold;
+  z-index: 1;
 }
 @media only screen and (min-width: 768px) {
   .navBar {

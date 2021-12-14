@@ -21,7 +21,6 @@ router.get("/cart", authGuard,(req, res, next) => {
   res.render("pages/cart", {
     loggedIn: authUser(),
     cart: getCart(),
-    
   });
   next();
 });
@@ -47,7 +46,7 @@ router.put("/cart/:id/:option", authGuard, (req, res, next) => {
 router.post("/cart/:id", authGuard, async (req, res, next) => {
   const id = req.params.id;
   await addToCart(id);
-  res.redirect("/cart");
+  res.redirect("/products");
   next();
 });
 

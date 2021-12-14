@@ -16,16 +16,18 @@
 .cartRow {
   display: grid;
   grid-template-columns: 200px auto 100px 100px 100px;
-  margin: 4px 0px;
-  background-color: black;
+  margin: 10px 0px;
+  --background-color: black;
   padding: 5px;
   border-radius: 5px;
+  border: 1px solid rgba(136, 136, 136, 0.4);
+  box-shadow: 5px 5px 8px rgba(136, 136, 136, 0.4);
 }
 .cartCol {
   display: flex;
   flex-direction: column;
   /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  padding: 2px 5px;
+  /* padding: 2px 5px; */
   justify-content: center;
   align-items: center;
 }
