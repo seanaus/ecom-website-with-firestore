@@ -48,10 +48,10 @@
   border: none;
   cursor: pointer;
   border-radius: 2px;
-  background-color: var(--button-bg-color);
+  background-color: var(--btnBgColor);
 }
 .cartBtnRemove {
-  background-color: var(--button-bg-color);
+  background-color: var(--btnBgColor);
   color: white;
 }
 .cartBtn:hover {
@@ -113,4 +113,74 @@
 }
 .cartBtnAdd {
   min-width: 150px;
+}
+
+
+.cartCardContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cartCard {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 15px 5px;
+    margin: 15px;
+    min-width: 300px;
+    display: inline-grid;
+    grid-template-rows: auto 310px auto auto auto;
+    border: 1px solid rgba(136, 136, 136, 0.4);
+    box-shadow: 5px 5px 8px rgba(136, 136, 136, 0.4);
+}
+.cartCardName {
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    padding: 0px 0px 10px 0px;
+}
+.cartCardImage {
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover;
+
+}
+.cartCardQuantityContainer {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px 0px 0px 0px;
+  border: 1px solid var(--btnBgColor); 
+  border-radius: 5px;
+  width: fit-content;
+  justify-self: center;
+}
+.cartCardQuantity {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px 0px 10px;
+}
+.cartCardQuantityBtn {
+  background-color: var(--btnBgColor);
+  color: var(--fColor);
+  /* padding: 5px 5px; */
+  border-style: none;
+  cursor: pointer;
+}
+.cartCardQuantityBtnAdd {
+    /* margin-left: auto; */
+    /* border-radius: 0px 5px 5px 0px; */
+}
+.cartCardQuantityBtnRemove {
+    /* margin-right: auto; */
+    /* border-radius: 5px 0px 0px 5px; */
+}
+.cartCardCost {
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    padding: 10px 0px 0px 0px;
+}
+.cartCardDelete {
+    text-align: center;
 }

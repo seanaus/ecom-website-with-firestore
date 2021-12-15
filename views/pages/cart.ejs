@@ -77,25 +77,55 @@
           </div>
           <div class="cartCol">
             <div class="cartColBody">
+              <%= item.formattedCost %>
+            </div>
+          </div>
+          <div class="cartCol">
+            <div class="cartColBody">
               <form method="POST" action="/cart/<%= item.id %>?_method=DELETE">
                 <button type="submit" class="material-icons cartBtn cartBtnRemove">delete</button>
               </form>
             </div>
           </div>
-          <div class="cartCol">
-            <div class="cartColBody">
-              <%= item.formattedCost %>
-            </div>
-          </div>
         </div>
         <% }); %>
-          <form method="POST" action="/saveCart?_method=POST">
-            <button type="submit" class="material-icons cartBtn">done</button>
-          </form>
           <div class="cartTotalsContainer">
             <div class="cartTotals">Total: <%= cart.totalCost %>
             </div>
+            <div>
+              <form method="POST" action="/saveCart?_method=POST">
+                <button type="submit" class="cartBtn">Checkout</button>
+              </form>
+            </div>
           </div>
+    </div>
+
+    <div style="text-align: center;">New Attempt</div>
+    <div class="cartCardContainer">
+      <% cart.items.forEach(item=> { %>
+        <div class="cartCard">
+          <div class="cartCardName">
+            <%= item.name %>
+          </div>
+          <div class="cartCardImage" style="background-image: url('<%= item.imageCard %>')">
+          </div>
+          <div class="cartCardQuantityContainer">
+            <div class="material-icons 
+                        cartCardQuantityBtn
+                        cartCardQuantityBtnRemove">remove</div>
+            <div class="cartCardQuantity">
+              <%= item.quantity %>
+            </div>
+            <div class="material-icons
+                        cartCardQuantityBtn
+                        cartCardQuantityBtnAdd">add</div>
+          </div>
+          <div class="cartCardCost">
+            <%= item.formattedCost %>
+          </div>
+          <div class="material-icons cartCardDelete">delete</div>
+        </div>
+        <% }); %>
     </div>
 </body>
 
