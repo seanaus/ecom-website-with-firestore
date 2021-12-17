@@ -139,9 +139,13 @@ const calcItemCount = (items) => {
 
 const saveCart = async (req, res, next) => {
   try {
-    const jsonItems = items.map((obj) => { return Object.assign({}, obj) });
+    const itemsObj = items.map((obj) => {
+                       return Object.assign({}, obj) 
+                      });
     const cart = {
-      items: jsonItems,
+      items: items.map((obj) => {
+        return Object.assign({}, obj) 
+       }),
       totalCost,
       itemCount,
       created,
