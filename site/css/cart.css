@@ -7,13 +7,15 @@
   --button-bg-color-alternate: rgba(184, 51, 11, 0.8); */
 }
 .cartContainer {
-  width: 60%;
+  /* width: 60%; */
+  display: inline-grid;
   margin: 35px auto;
+  grid-template-columns: auto 200px;
 }
-.cartPageTitle {
+/* .cartPageTitle {
   text-align: center;
-}
-.cartRow {
+} */
+/* .cartRow {
   display: grid;
   grid-template-columns: 200px auto 100px 100px 100px;
   margin: 10px 0px;
@@ -22,27 +24,25 @@
   border-radius: 5px;
   border: 1px solid rgba(136, 136, 136, 0.4);
   box-shadow: 5px 5px 8px rgba(136, 136, 136, 0.4);
-}
-.cartCol {
+} */
+/* .cartCol {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  /* padding: 2px 5px; */
   justify-content: center;
   align-items: center;
-}
-.cartColHeader {
+} */
+/* .cartColHeader {
   text-align: center;
   padding: 15px 5px;
   margin: 0px 0px 15px 0px;
-}
-.cartColBody {
+} */
+/* .cartColBody {
   text-align: center;
-}
-.cartColBodyPullLeft {
+} */
+/* .cartColBodyPullLeft {
   text-align: left !important;
   align-self: flex-start;
-}
+} */
 .cartBtn {
   padding: 8px;
   border: none;
@@ -50,19 +50,19 @@
   border-radius: 2px;
   background-color: var(--btnBgColor);
 }
-.cartBtnRemove {
+/* .cartBtnRemove {
   background-color: var(--btnBgColor);
   color: white;
-}
+} */
 .cartBtn:hover {
   opacity: 0.8;
 }
-.cartImage {
+/* .cartImage {
   height: 160px;
   width: 160px;
   border-radius: 5px;
-}
-.cartRockerWrapper {
+} */
+/* .cartRockerWrapper {
   display: inline-flex;
 }
 .cartRockerAdd {
@@ -76,8 +76,8 @@
   border-top: 1px solid var(--button-bg-color);
   border-bottom: 1px solid var(--button-bg-color);
   font-size: 15px;
-}
-.cartRockerRemove {
+} */
+/* .cartRockerRemove {
   text-align: center;
   padding: 5px 10px;
   border: none;
@@ -95,26 +95,18 @@
 }
 .cartRockerRemove:hover {
   cursor: pointer;
-}
-.cartTotalsContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px 0px;
-}
-.cartTotals {
-  padding: 5px;
-}
-.cartButtonsContainer {
+} */
+
+/* .cartButtonsContainer {
   display: flex;
   justify-content: center;
 }
 .cartPannel {
   padding: 5px;
-}
-.cartBtnAdd {
+} */
+/* .cartBtnAdd {
   min-width: 150px;
-}
-
+} */
 
 .cartCardContainer {
   display: flex;
@@ -154,11 +146,13 @@
   border-radius: 5px;
   width: fit-content;
   justify-self: center;
+  font-size: medium;
 }
 .cartCardQuantity {
     display: flex;
     align-items: center;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 8px 0px 8px;
+    font-size: medium;
 }
 .cartCardQuantityBtn {
   background-color: var(--btnBgColor);
@@ -166,6 +160,7 @@
   /* padding: 5px 5px; */
   border-style: none;
   cursor: pointer;
+  font-size: medium;
 }
 .cartCardQuantityBtnAdd {
     /* margin-left: auto; */
@@ -179,8 +174,30 @@
     text-align: center;
     font-weight: bold;
     font-size: medium;
-    padding: 10px 0px 0px 0px;
+    padding: 10px 0px 10px 0px;
 }
 .cartCardDelete {
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+.cartFormLayoutFix {
+  display: flex;
+}
+.cartTotalsContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  /* margin: 20px 0px; */
+}
+.cartTotals {
+  padding: 5px;
+}
+@media only screen and (max-width: 768px) {
+  .cartContainer {
+    grid-template-columns: auto;
+  }
+}
+
+
