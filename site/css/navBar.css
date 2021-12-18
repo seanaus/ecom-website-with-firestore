@@ -11,7 +11,7 @@
 }
 .navLink {
   text-decoration: none;
-  color: var(--fColor);
+  color: var(--themeFColor);
   /* cursor: pointer; */
   /*display: inline;
   /* padding: 5px 5px;
@@ -33,14 +33,14 @@
   display: none !important;
 }
 .active {
-  border-bottom: 2px solid var(--active);
+  border-bottom: 2px solid var(--themeActiveLink);
 }
 .burger-container {
   display: flex;
   justify-content: flex-end;
 }
 .burger {
-  border: 1px solid var(--fColor);
+  border: 1px solid var(--themeFColor);
   border-radius: 3px;
   display: inline-block;
   margin: 10px;
@@ -53,10 +53,10 @@
   opacity: 0.4;
 }
 .burger-line {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--themeFColor);
 }
 .burger-line:hover {
-  border-bottom: 1px solid var(--active);
+  border-bottom: 1px solid var(--themeActiveLink);
 }
 .burger-line-top {
   margin: 5px 0px 0px 0px;
@@ -68,9 +68,10 @@
   margin: 5px 0px 0px 0px;
 }
 .cartCounter {
-  background-color: red;
-  color: white;
-  border: 1px solid red;
+  color: var(--themeHighlightFColor);
+  background-color: var(--themeHighlightBgColor);
+  /* color: white; */
+  border: 1px solid var(--themeHighlightBgColor);;
   position: relative;
   display: inline-block;
   width: 15px;

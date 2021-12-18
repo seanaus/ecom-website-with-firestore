@@ -3,7 +3,7 @@
   padding: 0;
   user-select: none;
   box-sizing: border-box;
-  --bgColor: rgba(0, 0, 0, 0.8);
+  /* --bgColor: rgba(0, 0, 0, 0.8);
   --fColor: rgba(255, 255, 255, 0.8);
   --activeBgColor: rgba(255, 255, 255, 0.1);
   --activeFColor: rgb(0, 223, 255);
@@ -11,13 +11,25 @@
   --btnBgColor: rgba(255,0,0,0.8);
   --btnBgColorAlternate: rgba(255,0,0,0.5);
   font-family: Arial, Verdana, Helvetica, Tahoma, Trebuchet MS, Times New Roman,
+    Georgia, Garamond, Courier New, Brush Script MT; */
+
+  font-family: Arial, Verdana, Helvetica, Tahoma, Trebuchet MS, Times New Roman,
     Georgia, Garamond, Courier New, Brush Script MT;
+
+  --themeBgColor: rgba(0, 0, 0);
+  --themeFColor: rgba(255, 255, 255);
+  --themeActiveLink: rgb(0, 223, 255);
+  --themeHighlightBgColor: rgb(255, 0, 0);
+  --themeHighlightFColor: rgb(180, 255, 0);
+  --themeButtonFace: rgb(255, 0, 0);;
+  --themeButtonText: rgb(255, 255, 255);
+  --themeBoxShadow: rgba(136, 136, 136, 0.4);
 }
 
 body {
-  background-color: var(--bgColor);
-  color: var(--fColor);
-  /* margin: 0px 30px; */
+  background-color: var(--themeBgColor);
+  color: var(--themeFColor);
+  margin: 0px 30px;
   overflow: auto;
   /* display: flex;
   flex-direction: column; */
@@ -100,7 +112,10 @@ input:focus {
 .hideMe {
   display: none;
 }
-
+.formLayoutFix {
+  display: flex;
+  justify-content: center;
+}
 /* body {font-family: Arial, Helvetica, sans-serif;}
 form {border: 3px solid #f1f1f1;}*/
 
@@ -151,7 +166,7 @@ button:hover {
 }
 .titleText {
   text-align: center;
-  font-size:  xx-large;
+  font-size: xx-large;
   margin: 0px 0px 10px;
 }
 .subTitleText {
