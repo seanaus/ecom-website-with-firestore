@@ -24,8 +24,8 @@
 
     <!-- <link rel="stylesheet" type="text/css" href="../../node_modules/material-design-icons/iconfont/material-icons.css"> -->
     <script defer type="text/javascript" src="/js/navBar.js"></script>
-    <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script>
-	<script defer type="text/javascript" src="/js/slideShow.js"></script> -->
+    <script defer type="text/javascript" src="/js/product.js"></script>
+    <script defer type="text/javascript" src="/js/cart.js"></script>
     <title>PJS</title>
   </head>
 
@@ -34,22 +34,28 @@
     cart.itemCount }) %>
     <!-- <div class="container"> -->
     <div class="productWrapper">
-      <div class="productName"><%=product.name %></div>
+      <div id="id" class="hide"><%=product.id %></div>
+      <div id="imageURL" class="hide"><%=product.image %></div>
+      <div id="name" class="productName"><%=product.name %></div>
       <div
+        id="image"
         class="productImage"
         style="background-image: url('<%=product.image %>')"
       >
         <!-- <image height="500" width="1000" src="<%=product.image %>"></image> -->
       </div>
-      <div class="productDescription"><%=product.description %></div>
-      <div class="productUnitCost">£<%=product.unitCost %></div>
-      <form
+      <div id="description" class="productDescription">
+        <%=product.description %>
+      </div>
+      <div id="unitCost" class="productUnitCost"><%=product.unitCost %></div>
+      <!-- <form
         class="addToCartWrapper"
         method="POST"
         action="/cart/<%=product.id %>?_method=POST"
       >
         <button class="addToCart" type="submit">Add To Cart</button>
-      </form>
+      </form> -->
+      <button id="addToCart" class="addToCart">Add To Cart</button>
     </div>
     <!-- </div> -->
   </body>

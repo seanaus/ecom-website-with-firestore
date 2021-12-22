@@ -8,6 +8,9 @@
   border: 1px solid var(--themeBoxShadow);
   box-shadow: 5px 5px 8px var(--themeBoxShadow);
 }
+.hide {
+  display: none;
+}
 .productName {
   font-size: larger;
   padding: 0px 0px 15px 0px;
