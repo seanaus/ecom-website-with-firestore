@@ -1,15 +1,31 @@
-const product = JSON.parse(localStorage.getItem("product"));
-let cartItem = {
-  id: product.id,
-  name: product.name,
-  imageURL: product.imageURL,
-  unitCost: product.unitCost,
-  quantity: 1,
-  cost: product.unitCost,
-  formattedCost: String(product.unitCost),
-};
-localStorage.removeItem("product");
+// 'cartItem' needs to be global as needs to be accessed from addToCart
+// However this file will be imported by the shopping cart EJS view also
+// Therefore as the product info will only be available from the addToCart functionality
+// It will not be set (causing an error) via the cart.ejs view.
+// Therefore variable is global but functionality to populate it is only called from AddToCart
+let cartItem = {};
+// let basket = {};
 
+// const doc = document.getElementById("cart");
+// window.onload = () => {
+//   doc.addEventListener("onload", getCart);
+//   basket = getCart();
+//   console.log(basket);
+// };
+
+const loadProduct = () => {
+  const product = JSON.parse(localStorage.getItem("product"));
+  cartItem = {
+    id: product.id,
+    name: product.name,
+    imageURL: product.imageURL,
+    unitCost: product.unitCost,
+    quantity: 1,
+    cost: product.unitCost,
+    formattedCost: String(product.unitCost),
+  };
+  //localStorage.removeItem("product");
+};
 const initCart = () => {
   const cart = {
     items: [],
@@ -41,6 +57,7 @@ const indexById = (items, id) => {
   return idx;
 };
 const addToCart = () => {
+  loadProduct();
   let cart = getCart();
   // const idx = indexById(cart.items, _id);
   const idx = indexById(cart.items, cartItem.id);

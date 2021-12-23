@@ -18,88 +18,13 @@
     <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
 
     <script defer type="text/javascript" src="/js/navBar.js"></script>
-    <script defer type="text/javascript" src="/js/validation/user.js"></script>
+    <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script> -->
+    <script defer type="text/javascript" src="/js/cart.js"></script>
 
     <title>PJS</title>
   </head>
 
-  <body>
-    <%- include('../partials/navBar', { loggedIn: loggedIn, itemCount:
-    cart.itemCount}) %>
-    <div class="cartContainer">
-      <!-- <div style="text-align: center;">New Attempt</div> -->
-      <div class="cartCardContainer">
-        <% cart.items.forEach(item=> { %>
-        <div class="cartCard">
-          <div class="cartCardName"><%= item.name %></div>
-          <div
-            class="cartCardImage"
-            style="background-image: url('<%= item.imageCard %>')"
-          ></div>
-          <div class="cartCardQuantityContainer">
-            <form
-              method="POST"
-              class="formLayoutFix"
-              action="/cart/<%= item.id %>/REMOVE?_method=PUT"
-            >
-              <button
-                class="
-                  material-icons
-                  cartCardQuantityBtn
-                  cartCardQuantityBtnRemove
-                "
-              >
-                remove
-              </button>
-            </form>
-            <div class="cartCardQuantity"><%= item.quantity %></div>
-            <form
-              method="POST"
-              class="formLayoutFix"
-              action="/cart/<%= item.id %>/ADD?_method=PUT"
-            >
-              <button
-                class="
-                  material-icons
-                  cartCardQuantityBtn
-                  cartCardQuantityBtnAdd
-                "
-              >
-                add
-              </button>
-            </form>
-          </div>
-          <div class="cartCardCost"><%= item.formattedCost %></div>
-          <form
-            method="POST"
-            action="/cart/<%= item.id %>?_method=DELETE"
-            class="formLayoutFix"
-          >
-            <button class="material-icons cartCardDelete" type="submit">
-              delete
-            </button>
-          </form>
-        </div>
-        <% }); %>
-      </div>
-      <!-- <div> -->
-      <div class="cartTotalsCol">
-        <div class="cartTotalsContainer">
-          <div class="cartTotals">Total: <%= cart.totalCost %></div>
-          <div class="cartTotals">VAT: 20%</div>
-          <div class="cartTotals">Gross Total</div>
-          <div class="cartTotals">
-            <form
-              method="POST"
-              action="/saveCart?_method=POST"
-              class="formLayoutFix"
-            >
-              <button type="submit" class="cartBtn">CHECK OUT</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- </div> -->
-    </div>
+  <body id="cart">
+    <%- include('../partials/navBar', { loggedIn: loggedIn}) %>
   </body>
 </html>
