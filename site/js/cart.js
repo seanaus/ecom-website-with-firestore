@@ -16,22 +16,16 @@ const cartItemTemplate = `
         </div>
         <div id="cartCardImage" class="cartCardImage" style="background-image: url('<%= item.imageCard %>')"></div>
         <div class="cartCardQuantityContainer">
-          <div class="formLayoutFix">
-            <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnRemove">remove</button>
-          </div>
+          <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnRemove">remove</button>
           <div id="cartCardQuantity" class="cartCardQuantity">
             <%= item.quantity %>
           </div>
-          <div class="formLayoutFix">
-            <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnAdd">add</button>
-          </div>
+          <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnAdd">add</button>
         </div>
         <div id="formattedCost" class="cartCardCost">
           <%= item.formattedCost %>
         </div>
-        <div class="formLayoutFix">
           <button class="material-icons cartCardDelete" type="submit">delete</button>
-        </div>
       </div >
 `;
 

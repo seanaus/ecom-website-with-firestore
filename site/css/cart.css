@@ -54,12 +54,14 @@
 }
 .cartCardQuantityContainer {
   /* display: inline-flex; */
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  /* justify-content: center; */
-  margin: 10px 0px 0px 0px;
+  justify-content: center;
+  margin: 10px 0px 0px 0px; */
   border: 1px solid var(--themeButtonFace);
   border-radius: 5px;
+  display: grid;
+  grid-template-columns: 20px auto 20px;
   /* width: fit-content; */
   /* justify-self: center; */
   /* font-size: medium; */
@@ -67,6 +69,7 @@
 .cartCardQuantity {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0px 8px 0px 8px;
   /* font-size: medium; */
 }
@@ -76,6 +79,7 @@
   /* padding: 5px 5px; */
   border-style: none;
   cursor: pointer;
+  margin: auto;
   /* font-size: medium; */
 }
 .cartCardQuantityBtnAdd {
@@ -83,7 +87,7 @@
   /* border-radius: 0px 5px 5px 0px; */
 }
 .cartCardQuantityBtnRemove {
-  /* margin-right: auto; */
+  margin-right: auto;
   /* border-radius: 5px 0px 0px 5px; */
 }
 .cartCardCost {
