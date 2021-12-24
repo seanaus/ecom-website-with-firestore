@@ -30,8 +30,9 @@
   <body>
     <%- include('../partials/navBar', { loggedIn:loggedIn }) %>
     <div class="productsContainer">
-      <% products.forEach(product=> { %> <%- include('../partials/productCard',
-      { product: product}) %> <% }); %>
+      <% products.forEach(product=> { %> 
+        <%- include('../partials/productCard', { product: product}) %> 
+      <% }); %>
     </div>
   </body>
 </html>

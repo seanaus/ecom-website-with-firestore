@@ -1,9 +1,10 @@
 .cartContainer {
-  /* width: 90%; */
-  display: inline-grid;
-  flex-direction: column-reverse;
+  width: 80%;
+  display: grid;
+  /* flex-direction: column-reverse; */
   margin: 35px auto;
   grid-template-columns: auto auto;
+  justify-content: center;
 }
 
 .cartBtn {
@@ -25,8 +26,8 @@
 .cartCardContainer {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
-  justify-content: space-around;
+  justify-content: center;
+  /* justify-content: space-around; */
   flex-wrap: wrap;
 }
 .cartCard {
@@ -52,14 +53,15 @@
   background-size: cover;
 }
 .cartCardQuantityContainer {
-  display: inline-flex;
+  /* display: inline-flex; */
+  display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   margin: 10px 0px 0px 0px;
   border: 1px solid var(--themeButtonFace);
   border-radius: 5px;
-  width: fit-content;
-  justify-self: center;
+  /* width: fit-content; */
+  /* justify-self: center; */
   /* font-size: medium; */
 }
 .cartCardQuantity {
@@ -77,7 +79,7 @@
   /* font-size: medium; */
 }
 .cartCardQuantityBtnAdd {
-  /* margin-left: auto; */
+  margin-left: auto;
   /* border-radius: 0px 5px 5px 0px; */
 }
 .cartCardQuantityBtnRemove {

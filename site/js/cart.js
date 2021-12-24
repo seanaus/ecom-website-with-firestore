@@ -4,14 +4,57 @@
 // It will not be set (causing an error) via the cart.ejs view.
 // Therefore variable is global but functionality to populate it is only called from AddToCart
 let cartItem = {};
-// let basket = {};
+let basket = {};
 
-// const doc = document.getElementById("cart");
-// window.onload = () => {
-//   doc.addEventListener("onload", getCart);
-//   basket = getCart();
-//   console.log(basket);
-// };
+const cartItemTemplate = `
+  <div class="cartCard">
+        <div id="cartCardId" style="display: none;">
+          <%= item.id %>
+        </div>
+        <div id="cartCardName" class="cartCardName">
+          <%= item.name %>
+        </div>
+        <div id="cartCardImage" class="cartCardImage" style="background-image: url('<%= item.imageCard %>')"></div>
+        <div class="cartCardQuantityContainer">
+          <div class="formLayoutFix">
+            <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnRemove">remove</button>
+          </div>
+          <div id="cartCardQuantity" class="cartCardQuantity">
+            <%= item.quantity %>
+          </div>
+          <div class="formLayoutFix">
+            <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnAdd">add</button>
+          </div>
+        </div>
+        <div id="formattedCost" class="cartCardCost">
+          <%= item.formattedCost %>
+        </div>
+        <div class="formLayoutFix">
+          <button class="material-icons cartCardDelete" type="submit">delete</button>
+        </div>
+      </div >
+`;
+
+window.onload = () => {
+  const cartParentElement = document.getElementById("cart");
+  let cartHTML = "";
+
+  if (cartParentElement) {
+    basket = getCart();
+    // console.log(basket);
+    let cartViewHTML = ""
+    basket.items.forEach((item) => {
+      let itemViewHTML = cartItemTemplate;
+      itemViewHTML = itemViewHTML.replace("<%= item.id %>", item.id);
+      itemViewHTML = itemViewHTML.replace("<%= item.name %>", item.name);
+      itemViewHTML = itemViewHTML.replace("<%= item.imageCard %>", item.imageURL);
+      itemViewHTML = itemViewHTML.replace("<%= item.quantity %>", item.quantity);
+      itemViewHTML = itemViewHTML.replace("<%= item.formattedCost %>", item.formattedCost);
+      cartViewHTML += itemViewHTML;
+    });
+    cartParentElement.innerHTML = cartViewHTML;
+  }
+};
 
 const loadProduct = () => {
   const product = JSON.parse(localStorage.getItem("product"));
@@ -70,7 +113,7 @@ const addToCart = () => {
   cart.totalCost = calcTotalCost(cart.items);
   cart.itemCount = calcItemCount(cart.items);
   saveToCart(cart);
-  console.log(getCart());
+  refreshCartIcon()
 };
 const deleteFromCart = (id) => {
   let cart = getCart();
@@ -95,6 +138,7 @@ const editQuantity = (item, option) => {
       item.formattedCost = item.cost;
     }
   }
+  refreshCartIcon();
 };
 const calcTotalCost = (items) => {
   let totalCost = 0;
@@ -111,3 +155,7 @@ const calcItemCount = (items) => {
     return 0;
   }
 };
+const refreshCartIcon = () => {
+  const cart = getCart();
+  document.getElementById("cartCounter").innerText = JSON.parse(cart.itemCount);
+}

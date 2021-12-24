@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="keywords" content="HTML, CSS, JavaScript" />
-    <meta name="description" content="PJS" />
-    <meta name="author" content="PJS" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/iconfont/material-icons.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
-    <link rel="stylesheet" type="text/css" href="/css/cart.css" />
-    <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
 
-    <script defer type="text/javascript" src="/js/navBar.js"></script>
-    <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script> -->
-    <script defer type="text/javascript" src="/js/cart.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="HTML, CSS, JavaScript" />
+  <meta name="description" content="PJS" />
+  <meta name="author" content="PJS" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+  <link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
+  <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
+  <link rel="stylesheet" type="text/css" href="/css/cart.css" />
+  <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
 
-    <title>PJS</title>
-  </head>
+  <script defer type="text/javascript" src="/js/navBar.js"></script>
+  <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script> -->
+  <script defer type="text/javascript" src="/js/cart.js"></script>
 
-  <body id="cart">
-    <%- include('../partials/navBar', { loggedIn: loggedIn}) %>
-  </body>
+  <title>PJS</title>
+</head>
+
+<body>
+  <%- include('../partials/navBar', { loggedIn: loggedIn}) %>
+    <!-- <div id="cart" class="container">
+      <div>Your Cart Is Empty</div>
+    </div> -->
+    <div class="cartContainer">
+      <div id="cart" class="cartCardContainer">
+        <!-- shopping cart html is generated in cart.js and injected here -->
+      </div>
+    </div>
+
+</body>
+
 </html>

@@ -31,7 +31,7 @@ window.onload = () => {
 const cartItemCount = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
   if (cart) {
-    console.log(`Count: ${cart.itemCount}`)
+    // console.log(`Count: ${cart.itemCount}`)
     return cart.itemCount;
   } else {
     return 0;
