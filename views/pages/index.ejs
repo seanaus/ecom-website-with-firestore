@@ -22,14 +22,16 @@
     <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
 
     <!-- <link rel="stylesheet" type="text/css" href="../../node_modules/material-design-icons/iconfont/material-icons.css"> -->
+    <script defer type="text/javascript" src="/js/index.js"></script>
     <script defer type="text/javascript" src="/js/navBar.js"></script>
     <!-- <script defer type="text/javascript" src="/js/validation/user.js"></script> -->
     <script defer type="text/javascript" src="/js/slideShow.js"></script>
     <title>PJS</title>
   </head>
   <body>
-    <%- include('../partials/navBar', { loggedIn: loggedIn }) %> 
-	<%- include('../partials/slideShow', {slideShow:slideShow}) %>
+    <%- include('../partials/navBar', { loggedIn: loggedIn,
+                                        user: user }) %> <%-
+    include('../partials/slideShow', {slideShow:slideShow}) %>
 
     <div class="container">
       <div class="titleText">Welcome to Potteries Jag Spares</div>

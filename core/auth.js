@@ -7,7 +7,7 @@ const admin = {
   email: "admin@googlemail.com",
   password: "Aus25031549",
   salt: "$2b$10$0bOy5I.kfP3qwOeMXqWUle",
-  hash: ""
+  hash: "",
 };
 const signInOptions = {
   emailAndPassword: 0,
@@ -62,9 +62,19 @@ const checkPassword = async (raw, encrypted) => {
 const cacheUser = (auth) => {
   localStorage.set("id", auth.id);
   localStorage.set("forename", auth.forename);
-  localStorage.set("surname", auth.forename);
+  localStorage.set("surname", auth.surname);
   localStorage.set("email", auth.email);
   localStorage.set("token", auth.token);
+};
+const activeUser = () => {
+  let user = {
+    id: localStorage.get("id") !== "" ? localStorage.get("id") : "-1",
+    forename: localStorage.get("forename"),
+    surname: localStorage.get("surname"),
+    email: localStorage.get("email"),
+    token: localStorage.get("token"),
+  };
+  return user
 };
 const clearCache = () => {
   localStorage.clear();
@@ -139,17 +149,15 @@ const signInWithEmailAndPassword = async (email, password) => {
         };
       } else {
         console.log("Password Miss Match");
-        return authFailed
+        return authFailed;
       }
-
     } else {
       console.log("User Not Found");
-      return authFailed
+      return authFailed;
     }
-
   } catch (error) {
     console.log(error.message);
-    return authFailed
+    return authFailed;
   }
 };
 const createFirebaseUser = async (email, password, signInOption) => {
@@ -170,6 +178,7 @@ const signInFirebaseUser = async (email, password, signInOption) => {
 };
 module.exports = {
   signInOptions,
+  activeUser,
   encrypt,
   checkUser,
   checkEmail,

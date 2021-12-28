@@ -3,25 +3,14 @@
   padding: 0;
   user-select: none;
   box-sizing: border-box;
-  /* --bgColor: rgba(0, 0, 0, 0.8);
-  --fColor: rgba(255, 255, 255, 0.8);
-  --activeBgColor: rgba(255, 255, 255, 0.1);
-  --activeFColor: rgb(0, 223, 255);
-  --active:rgb(0, 223, 255);
-  --btnBgColor: rgba(255,0,0,0.8);
-  --btnBgColorAlternate: rgba(255,0,0,0.5);
-  font-family: Arial, Verdana, Helvetica, Tahoma, Trebuchet MS, Times New Roman,
-    Georgia, Garamond, Courier New, Brush Script MT; */
-
   font-family: Arial, Verdana, Helvetica, Tahoma, Trebuchet MS, Times New Roman,
     Georgia, Garamond, Courier New, Brush Script MT;
-
   --themeBgColor: rgba(0, 0, 0);
   --themeFColor: rgba(255, 255, 255);
   --themeActiveLink: rgb(0, 223, 255);
   --themeHighlightBgColor: rgb(255, 0, 0);
   --themeHighlightFColor: rgb(180, 255, 0);
-  --themeButtonFace: rgb(255, 0, 0);;
+  --themeButtonFace: rgb(255, 0, 0);
   --themeButtonText: rgb(255, 255, 255);
   --themeBoxShadow: rgba(136, 136, 136, 0.4);
 }
@@ -31,8 +20,6 @@ body {
   color: var(--themeFColor);
   margin: 0px 30px;
   overflow: auto;
-  /* display: flex;
-  flex-direction: column; */
   min-height: 100vh;
 }
 .container {
@@ -40,8 +27,6 @@ body {
   flex-direction: column;
   width: 80%;
   margin: 35px auto;
-  /* justify-content: center;
-  align-items: center; */
 }
 .row {
   display: flex;
@@ -59,14 +44,14 @@ label {
   width: 100%;
   font-size: small;
   font-weight: bold;
-  --background-color: var(--bgColor);
-  color: var(--fColor);
+  --background-color: var(--themeBgColor: );
+  color: var(--themeFColor);
 }
 input {
   display: block;
   width: 100%;
-  background-color: var(--bgColor);
-  color: var(--fColor);
+  background-color: var(--themeBgColor);
+  color: var(--themeFColor);
   border-width: 0px;
   border: none;
   padding: 5px 0px;
@@ -77,27 +62,28 @@ input {
 }
 input:focus {
   outline: none;
-  border-left: 2px solid var(--active);
+  border-left: 2px solid var(--themeActiveLink);
 }
 .btn {
   display: block;
   width: 100%;
-  background-color: var(--btnBgColor);
-  color: var(--fColor);
+  background-color: var(--themeButtonFace);
+  color: var(--themeFColor);
   padding: 8px 5px;
   border-style: none;
   border-radius: 5px;
   cursor: pointer;
 }
 .btn:hover {
-  background-color: var(--btnBgColorAlternate);
+  opacity: 0.8;
+  /* background-color: var(--btnBgColorAlternate); */
 }
 .form-group {
   margin: 5px 0px;
 }
 .link {
   text-decoration: none;
-  color: var(--fColor);
+  color: var(--themeFColor);
   font-size: x-small;
 }
 .signInAltContainer {
@@ -107,7 +93,7 @@ input:focus {
 }
 .errorDisplay {
   text-align: center;
-  color: red;
+  color: var(--themeHighlightBgColor);
 }
 .hideMe {
   display: none;
@@ -116,28 +102,6 @@ input:focus {
   display: flex;
   justify-content: center;
 }
-/* body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}*/
-
-/* input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-} */
-
 button:hover {
   opacity: 0.8;
 }
@@ -161,7 +125,7 @@ button:hover {
 }
 .mapsLink {
   text-decoration: none;
-  color: var(--fColor);
+  color: var(--themeFColor);
   cursor: pointer;
 }
 .titleText {

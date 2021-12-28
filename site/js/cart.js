@@ -1,12 +1,4 @@
-// 'cartItem' needs to be global as needs to be accessed from addToCart
-// However this file will be imported by the shopping cart EJS view also
-// Therefore as the product info will only be available from the addToCart functionality
-// It will not be set (causing an error) via the cart.ejs view.
-// Therefore variable is global but functionality to populate it is only called from AddToCart
-let cartItem = {};
-let basket = {};
-
-const cartItemTemplate = `
+const cartCardTemplate = `
   <div class="cartCard">
         <div id="cartCardId" style="display: none;">
           <%= item.id %>
@@ -15,53 +7,103 @@ const cartItemTemplate = `
           <%= item.name %>
         </div>
         <div id="cartCardImage" class="cartCardImage" style="background-image: url('<%= item.imageCard %>')"></div>
-        <div class="cartCardQuantityContainer">
-          <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnRemove">remove</button>
-          <div id="cartCardQuantity" class="cartCardQuantity">
-            <%= item.quantity %>
-          </div>
-          <button class="material-icons cartCardQuantityBtn cartCardQuantityBtnAdd">add</button>
-        </div>
-        <div id="formattedCost" class="cartCardCost">
+		<div class="cartCardQuantityContainer">
+			<button id="cartCardQuantityBtnRemove" 
+                class="cartCardQuantityBtn 
+                cartCardQuantityBtnRemove 
+                material-icons"
+                data-idx="<%= idx %>"
+                >remove
+        </button>
+   			<div id="cartCardQuantity" class="cartCardQuantity" data-idx="<%= idx %>"><%= item.quantity %></div>
+    		<button id="cartCardQuantityBtnAdd" 
+                    class="cartCardQuantityBtn 
+                    cartCardQuantityBtnAdd
+                    material-icons"
+                    data-idx="<%= idx %>"
+                    >add
+        </button>
+		</div>
+        <div id="formattedCost" 
+            class="cartCardCost"
+            data-idx="<%= idx %>"
+        >
           <%= item.formattedCost %>
         </div>
-          <button class="material-icons cartCardDelete" type="submit">delete</button>
+          <button id="cartCardDelete" class="material-icons cartCardDelete" data-idx="<%= idx %>">delete</button>
       </div >
 `;
 
-window.onload = () => {
-  const cartParentElement = document.getElementById("cart");
-  let cartHTML = "";
+const btnAddToCart = document.getElementById("addToCart");
+const cartCardQuantity = document.getElementById("cartCardQuantity");
 
-  if (cartParentElement) {
-    basket = getCart();
-    // console.log(basket);
-    let cartViewHTML = ""
-    basket.items.forEach((item) => {
-      let itemViewHTML = cartItemTemplate;
-      itemViewHTML = itemViewHTML.replace("<%= item.id %>", item.id);
-      itemViewHTML = itemViewHTML.replace("<%= item.name %>", item.name);
-      itemViewHTML = itemViewHTML.replace("<%= item.imageCard %>", item.imageURL);
-      itemViewHTML = itemViewHTML.replace("<%= item.quantity %>", item.quantity);
-      itemViewHTML = itemViewHTML.replace("<%= item.formattedCost %>", item.formattedCost);
-      cartViewHTML += itemViewHTML;
+// window.onload = () => {
+if (btnAddToCart) {
+  btnAddToCart.addEventListener("click", addToCart);
+  renderCart();
+}
+const renderCart = () => {
+  const cartContainer = document.getElementById("cart");
+  if (cartContainer) {
+    let cart = getCart();
+    let cartViewHTML = "";
+    // let cartItem = {};
+    let idx = 0;
+    const dataIdx = new RegExp("<%= idx %>", "g");
+    cart.items.forEach((item) => {
+      let cardViewHTML = cartCardTemplate;
+      cardViewHTML = cardViewHTML.replace("<%= item.id %>", item.id);
+      cardViewHTML = cardViewHTML.replace("<%= item.name %>", item.name);
+      cardViewHTML = cardViewHTML.replace(
+        "<%= item.imageCard %>",
+        item.imageURL
+      );
+      cardViewHTML = cardViewHTML.replace(
+        "<%= item.quantity %>",
+        item.quantity
+      );
+      cardViewHTML = cardViewHTML.replace(
+        "<%= item.formattedCost %>",
+        item.formattedCost
+      );
+      cardViewHTML = cardViewHTML.replace(dataIdx, idx);
+      cartViewHTML += cardViewHTML;
+      idx++;
     });
-    cartParentElement.innerHTML = cartViewHTML;
+    cartContainer.innerHTML = cartViewHTML;
   }
+  attachEventListeners();
+  refreshCartIcon();
 };
-
-const loadProduct = () => {
-  const product = JSON.parse(localStorage.getItem("product"));
-  cartItem = {
-    id: product.id,
-    name: product.name,
-    imageURL: product.imageURL,
-    unitCost: product.unitCost,
-    quantity: 1,
-    cost: product.unitCost,
-    formattedCost: String(product.unitCost),
-  };
-  //localStorage.removeItem("product");
+const attachEventListeners = () => {
+  const btns = document.querySelectorAll("button");
+  btns.forEach((btn) => {
+    if (btn.id === "cartCardQuantityBtnAdd") {
+      btn.addEventListener("click", editCardQuantity);
+    }
+    if (btn.id === "cartCardQuantityBtnRemove") {
+      btn.addEventListener("click", editCardQuantity);
+    }
+    if (btn.id === "cartCardDelete") {
+      btn.addEventListener("click", deleteCardItem);
+    }
+  });
+};
+const saveToCart = (cart) => {
+  calcCartTotals(cart);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  refreshCartIcon();
+};
+const indexById = (items, id) => {
+  let idx = -1;
+  // let isNew = true;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].id === id) {
+      idx = i;
+      break;
+    }
+  }
+  return idx;
 };
 const initCart = () => {
   const cart = {
@@ -79,60 +121,73 @@ const getCart = () => {
   }
   return cart;
 };
-const saveToCart = (cart) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
-const indexById = (items, id) => {
-  let idx = -1;
-  // let isNew = true;
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].id === id) {
-      idx = i;
-      break;
-    }
-  }
-  return idx;
-};
 const addToCart = () => {
-  loadProduct();
   let cart = getCart();
-  // const idx = indexById(cart.items, _id);
+  const cartItem = getProduct();
   const idx = indexById(cart.items, cartItem.id);
 
   if (idx < 0) {
     cart.items.push(cartItem);
+    saveToCart(cart);
   } else {
-    editQuantity(cart.items[idx], "+");
+    editCartQuantity(cart, idx, "+");
   }
-  cart.totalCost = calcTotalCost(cart.items);
-  cart.itemCount = calcItemCount(cart.items);
-  saveToCart(cart);
-  refreshCartIcon()
+  window.location.href = "../products";
 };
-const deleteFromCart = (id) => {
+const deleteCardItem = (event) => {
+  const btn = event.target;
+  const idx = parseInt(btn.getAttribute("data-idx"));
   let cart = getCart();
-  const idx = indexById(cart.items, id);
   if (idx >= 0) {
     cart.items.splice(idx, 1);
-    cart.totalCost = calcTotalCost(cart.items);
-    cart.itemCount = calcItemCount(cart.items);
     saveToCart(cart);
+    renderCart();
   }
 };
-const editQuantity = (item, option) => {
-  if (option === "+") {
-    item.quantity++;
-    item.cost += item.unitCost;
-    item.formattedCost = item.cost;
+const editCardQuantity = (event) => {
+  let option = "";
+  const btn = event.target;
+  const cart = getCart();
+  const idx = parseInt(btn.getAttribute("data-idx"));
+  if (btn.getAttribute("id") === "cartCardQuantityBtnAdd") {
+    option = "+";
   }
-  if (option === "-") {
-    if (item.quantity > 1) {
-      item.quantity--;
-      item.cost -= item.unitCost;
-      item.formattedCost = item.cost;
+  if (btn.getAttribute("id") === "cartCardQuantityBtnRemove") {
+    option = "-";
+  }
+  editCartQuantity(cart, idx, option);
+  refreshCardCartGUI(cart, idx);
+};
+const refreshCardCartGUI = (cart, idx) => {
+  const quantityValue = document.querySelector(
+    `[id='cartCardQuantity'][data-idx="${idx}"]`
+  );
+  const formattedCostValue = document.querySelector(
+    `[id='formattedCost'][data-idx="${idx}"]`
+  );
+  if (quantityValue) quantityValue.innerText = cart.items[idx].quantity;
+  if (formattedCostValue)
+    formattedCostValue.innerText = cart.items[idx].formattedCost;
+};
+const editCartQuantity = (cart, idx, option) => {
+  if (cart.items[idx] && option === "+") {
+    cart.items[idx].quantity++;
+    cart.items[idx].cost += cart.items[idx].unitCost;
+    cart.items[idx].formattedCost = cart.items[idx].cost;
+    saveToCart(cart);
+  }
+  if (cart.items[idx] && option === "-") {
+    if (cart.items[idx].quantity > 1) {
+      cart.items[idx].quantity--;
+      cart.items[idx].cost -= cart.items[idx].unitCost;
+      cart.items[idx].formattedCost = cart.items[idx].cost;
+      saveToCart(cart);
     }
   }
-  refreshCartIcon();
+};
+const calcCartTotals = (cart) => {
+  cart.totalCost = calcTotalCost(cart.items);
+  cart.itemCount = calcItemCount(cart.items);
 };
 const calcTotalCost = (items) => {
   let totalCost = 0;
@@ -152,4 +207,4 @@ const calcItemCount = (items) => {
 const refreshCartIcon = () => {
   const cart = getCart();
   document.getElementById("cartCounter").innerText = JSON.parse(cart.itemCount);
-}
+};

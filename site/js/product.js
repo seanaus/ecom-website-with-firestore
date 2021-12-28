@@ -3,7 +3,7 @@ const _name = document.getElementById("name").innerHTML;
 const _imageURL = document.getElementById("imageURL").innerHTML;
 const _description = document.getElementById("description").innerHTML;
 const _unitCost = parseFloat(document.getElementById("unitCost").innerHTML);
-const btnAddToCart = document.getElementById("addToCart");
+// const btnAddToCart = document.getElementById("addToCart");
 
 let _product = {
   id: _id,
@@ -11,7 +11,21 @@ let _product = {
   imageURL: _imageURL,
   unitCost: _unitCost 
 }
-localStorage.setItem("product", JSON.stringify(_product));
+//localStorage.setItem("product", JSON.stringify(_product));
+const getProduct = () => {
+  // const product = JSON.parse(localStorage.getItem("product"));
+  cartItem = {
+    id: _product.id,
+    name: _product.name,
+    imageURL: _product.imageURL,
+    unitCost: _product.unitCost,
+    quantity: 1,
+    cost: _product.unitCost,
+    formattedCost: String(_product.unitCost),
+  };
+  //localStorage.removeItem("product");
+  return cartItem
+};
 // let item = {
 //   id: _id,
 //   name: _name,
@@ -43,7 +57,7 @@ localStorage.setItem("product", JSON.stringify(_product));
 // };
 
 window.onload = () => {
-  btnAddToCart.addEventListener("click", addToCart);
+  // btnAddToCart.addEventListener("click", addToCart);
 };
 
 // const initCart = () => {

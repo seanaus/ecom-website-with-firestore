@@ -1,4 +1,4 @@
-let _cartItemCount = 0;
+// let _cartItemCount = 0;
 const gridView = window.matchMedia("(min-width: 768px)");
 //Toggle navPill visibillity on smaller devices
 const toggleNavPills = () => {
@@ -24,16 +24,18 @@ const configureNavBar = () => {
 
 window.onload = () => {
   isSelected();
-  _cartItemCount = cartItemCount();
+  const items = cartItemCount();
   const cartCounter = document.getElementById("cartCounter");
-  cartCounter.innerText = _cartItemCount;
+  cartCounter.innerText = items;
+  const loggedIn= '<%= loggedIn %>';
+  const user="<%= user %>";
+  console.log(`loggedIn ${loggedIn} - User ${user}`)
 };
 const cartItemCount = () => {
+  let count = 0;
   const cart = JSON.parse(localStorage.getItem("cart"));
   if (cart) {
-    // console.log(`Count: ${cart.itemCount}`)
-    return cart.itemCount;
-  } else {
-    return 0;
+    count = cart.itemCount;
   }
+  return count
 };
