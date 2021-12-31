@@ -1,45 +1,45 @@
 const cartCardTemplate = `
   <div class="cartCard">
         <div id="cartCardId" style="display: none;">
-          <%= item.id %>
+          {item.id}
         </div>
         <div id="cartCardName" class="cartCardName">
-          <%= item.name %>
+          {item.name}
         </div>
-        <div id="cartCardImage" class="cartCardImage" style="background-image: url('<%= item.imageCard %>')"></div>
+        <div id="cartCardImage" class="cartCardImage" style="background-image: url('{item.imageCard}')"></div>
 		<div class="cartCardQuantityContainer">
 			<button id="cartCardQuantityBtnRemove" 
                 class="cartCardQuantityBtn 
                 cartCardQuantityBtnRemove 
                 material-icons"
-                data-idx="<%= idx %>"
+                data-idx="{idx}"
                 >remove
         </button>
-   			<div id="cartCardQuantity" class="cartCardQuantity" data-idx="<%= idx %>"><%= item.quantity %></div>
+   			<div id="cartCardQuantity" class="cartCardQuantity" data-idx="{idx}">{item.quantity}</div>
     		<button id="cartCardQuantityBtnAdd" 
                     class="cartCardQuantityBtn 
                     cartCardQuantityBtnAdd
                     material-icons"
-                    data-idx="<%= idx %>"
+                    data-idx="{idx}"
                     >add
         </button>
 		</div>
         <div id="formattedCost" 
             class="cartCardCost"
-            data-idx="<%= idx %>"
+            data-idx="{idx}"
         >
-          <%= item.formattedCost %>
+          {item.formattedCost}
         </div>
-          <button id="cartCardDelete" class="material-icons cartCardDelete" data-idx="<%= idx %>">delete</button>
+          <button id="cartCardDelete" class="material-icons cartCardDelete" data-idx="{idx}">delete</button>
       </div >
 `;
-
 const btnAddToCart = document.getElementById("addToCart");
 const cartCardQuantity = document.getElementById("cartCardQuantity");
 
-// window.onload = () => {
-if (btnAddToCart) {
-  btnAddToCart.addEventListener("click", addToCart);
+window.onload = () => {
+  if (btnAddToCart) {
+    btnAddToCart.addEventListener("click", addToCart);
+  }
   renderCart();
 }
 const renderCart = () => {
@@ -49,21 +49,21 @@ const renderCart = () => {
     let cartViewHTML = "";
     // let cartItem = {};
     let idx = 0;
-    const dataIdx = new RegExp("<%= idx %>", "g");
+    const dataIdx = new RegExp("{idx}", "g");
     cart.items.forEach((item) => {
       let cardViewHTML = cartCardTemplate;
-      cardViewHTML = cardViewHTML.replace("<%= item.id %>", item.id);
-      cardViewHTML = cardViewHTML.replace("<%= item.name %>", item.name);
+      cardViewHTML = cardViewHTML.replace("{item.id}", item.id);
+      cardViewHTML = cardViewHTML.replace("{item.name}", item.name);
       cardViewHTML = cardViewHTML.replace(
-        "<%= item.imageCard %>",
+        "{item.imageCard}",
         item.imageURL
       );
       cardViewHTML = cardViewHTML.replace(
-        "<%= item.quantity %>",
+        "{item.quantity}",
         item.quantity
       );
       cardViewHTML = cardViewHTML.replace(
-        "<%= item.formattedCost %>",
+        "{item.formattedCost}",
         item.formattedCost
       );
       cardViewHTML = cardViewHTML.replace(dataIdx, idx);

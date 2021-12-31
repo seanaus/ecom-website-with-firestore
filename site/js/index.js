@@ -12,6 +12,6 @@
 //     console.log(user);
 // };
 // window.alert("WTF!!!");
-window.onload = () => {
-  window.alert("WTF!!!");
-};
+// window.onload = () => {
+//   window.alert("WTF!!!++");
+// };

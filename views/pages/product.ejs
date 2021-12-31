@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { loggedIn: loggedIn }) %>
+    <%- include('../partials/navBar', { loggedIn: loggedIn, user: user }) %>
     <!-- <div class="container"> -->
     <div class="productWrapper">
       <div id="id" class="hide"><%=product.id %></div>
@@ -41,21 +41,14 @@
         class="productImage"
         style="background-image: url('<%=product.image %>')"
       >
-        <!-- <image height="500" width="1000" src="<%=product.image %>"></image> -->
       </div>
       <div id="description" class="productDescription">
         <%=product.description %>
       </div>
       <div id="unitCost" class="productUnitCost"><%=product.unitCost %></div>
-      <!-- <form
-        class="addToCartWrapper"
-        method="POST"
-        action="/cart/<%=product.id %>?_method=POST"
-      >
-        <button class="addToCart" type="submit">Add To Cart</button>
-      </form> -->
-      <button id="addToCart" class="addToCart">Add To Cart</button>
+      <div class="addToCartWrapper">
+        <button id="addToCart" class="addToCart">Add To Cart</button>
+      </div>
     </div>
-    <!-- </div> -->
   </body>
 </html>

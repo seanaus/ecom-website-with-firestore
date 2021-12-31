@@ -2,7 +2,7 @@
 const firebase = require("../db");
 const Product = require("../models/product");
 const firestore = firebase.firestore();
-const { authUser } = require("../core/auth");
+const { authUser, activeUser } = require("../core/auth");
 const { loadProducts, getProduct } = require("../core/product");
 const { getCart } = require("../cart");
 
@@ -10,8 +10,9 @@ const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
   res.render("pages/products", {
     loggedIn: authUser(),
+    user: activeUser(),
     products: productArray,
-    cart: getCart()
+    cart: getCart(),
   });
   next();
 };
@@ -24,8 +25,8 @@ const renderProduct = (req, res, next) => {
   } else {
     res.render("pages/product", {
       loggedIn: authUser(),
-      product: product,
-      cart: getCart()
+      user: activeUser(),
+      product: product
     });
   }
   next();

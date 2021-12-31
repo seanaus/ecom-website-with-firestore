@@ -2,7 +2,7 @@ const express = require("express");
 // const methodOverride = require("method-override");
 
 const { authGuard } = require("../controllers/auth");
-const { authUser } = require("../core/auth");
+const { authUser, activeUser } = require("../core/auth");
 const {
   clearCart,
   getCart,
@@ -19,7 +19,7 @@ const router = express.Router();
 router.get("/cart", authGuard, (req, res, next) => {
   res.render("pages/cart", {
     loggedIn: authUser(),
-    cart: getCart(),
+    user: activeUser(),
   });
   next();
 });
