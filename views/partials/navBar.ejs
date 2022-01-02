@@ -27,9 +27,9 @@
       navPill
       navLink
       <%=
-      loggedIn
-      ==
-      true
+      user.id
+      !=
+      -1
       ?
       'showMenuButton'
       :
@@ -47,9 +47,9 @@
       navPill
       navLink
       <%=
-      loggedIn
+      user.id
       ==
-      false
+      -1
       ?
       'showMenuButton'
       :
@@ -66,9 +66,9 @@
       navPill
       navLink
       <%=
-      loggedIn
-      ==
-      true
+      user.id
+      !=
+      -1
       ?
       'showMenuButton'
       :
@@ -81,4 +81,13 @@
     <div class="iconLabel">Log Out</div>
   </a>
 </div>
-
+<script>
+  const auth = {
+    id: "<%= user.id %>",
+    forename: "<%= user.forename %>",
+    surname: "<%= user.surname %>",
+    email: "<%= user.email %>",
+    token: "<%= user.token %>",
+  };
+  localStorage.setItem("auth", JSON.stringify(auth));
+</script>

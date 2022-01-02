@@ -3,6 +3,7 @@ const firestore = firebase.firestore();
 const bcrypt = require("bcrypt");
 const localStorage = require("local-storage");
 const { getUsers, getUserByEmail } = require("./user");
+// const { stringify } = require("nodemon/lib/utils");
 const admin = {
   email: "admin@googlemail.com",
   password: "Aus25031549",
@@ -59,29 +60,38 @@ const checkPassword = async (raw, encrypted) => {
     return false;
   }
 };
-const cacheUser = (auth) => {
-  localStorage.set("id", auth.id);
-  localStorage.set("forename", auth.forename);
-  localStorage.set("surname", auth.surname);
-  localStorage.set("email", auth.email);
-  localStorage.set("token", auth.token);
+const cacheUser = (fbAuth) => {
+  const user = {
+    id: fbAuth.id,
+    forename: fbAuth.forename,
+    surname: fbAuth.surname,
+    email: fbAuth.email,
+    token: fbAuth.token.i,
+  };
+  localStorage.set("auth", JSON.stringify(user));
 };
 const activeUser = () => {
-  let user = {
-    id: localStorage.get("id") !== "" ? localStorage.get("id") : "-1",
-    forename: localStorage.get("forename"),
-    surname: localStorage.get("surname"),
-    email: localStorage.get("email"),
-    token: localStorage.get("token"),
+  const defaultUser = {
+    id: "-1",
+    forename: "",
+    surname: "",
+    email: null,
+    token: "",
   };
-  return user
+  const user = JSON.parse(localStorage.get("auth"));
+
+  if (user) {
+    return user;
+  } else {
+    return defaultUser;
+  }
 };
 const clearCache = () => {
   localStorage.clear();
 };
 const authUser = () => {
-  const user = localStorage.get("email");
-  if (user != null) {
+  const auth = JSON.parse(localStorage.get("auth"));
+  if (auth && auth.id !== "-1") {
     return true;
   } else {
     return false;

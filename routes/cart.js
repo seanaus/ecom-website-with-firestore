@@ -18,8 +18,7 @@ const router = express.Router();
 
 router.get("/cart", authGuard, (req, res, next) => {
   res.render("pages/cart", {
-    loggedIn: authUser(),
-    user: activeUser(),
+    user: activeUser()
   });
   next();
 });

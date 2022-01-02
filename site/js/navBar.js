@@ -27,10 +27,6 @@ window.onload = () => {
   const items = cartItemCount();
   const cartCounter = document.getElementById("cartCounter");
   cartCounter.innerText = items;
-  // const loggedIn= '<%= loggedIn %>';
-  // const user= "<%- JSON.stringify(user) %>"; 
-  // console.log(user);
-  // console.log(`loggedIn ${loggedIn} - User ${user}`)
 };
 const cartItemCount = () => {
   let count = 0;
@@ -38,5 +34,5 @@ const cartItemCount = () => {
   if (cart) {
     count = cart.itemCount;
   }
-  return count
+  return count;
 };

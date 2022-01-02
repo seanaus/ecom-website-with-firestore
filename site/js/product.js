@@ -1,31 +1,31 @@
-const _id = document.getElementById("id").innerText.trim();
-const _name = document.getElementById("name").innerText.trim();
-const _imageURL = document.getElementById("imageURL").innerText.trim();
-const _description = document.getElementById("description").innerText.trim();
-const _unitCost = parseFloat(
-  document.getElementById("unitCost").innerText.trim()
-);
+// const _id = document.getElementById("id").innerText.trim();
+// const _name = document.getElementById("name").innerText.trim();
+// const _imageURL = document.getElementById("imageURL").innerText.trim();
+// const _description = document.getElementById("description").innerText.trim();
+// const _unitCost = parseFloat(
+//   document.getElementById("unitCost").innerText.trim()
+// );
 // const btnAddToCart = document.getElementById("addToCart");
 
-let _product = {
-  id: _id,
-  name: _name,
-  imageURL: _imageURL,
-  unitCost: _unitCost,
-};
+// let _product = {
+//   id: _id,
+//   name: _name,
+//   imageURL: _imageURL,
+//   unitCost: _unitCost,
+// };
 //localStorage.setItem("product", JSON.stringify(_product));
 const getProduct = () => {
-  // const product = JSON.parse(localStorage.getItem("product"));
+  const product = JSON.parse(localStorage.getItem("product"));
   cartItem = {
-    id: _product.id,
-    name: _product.name,
-    imageURL: _product.imageURL,
-    unitCost: _product.unitCost,
+    id: product.id,
+    name: product.name,
+    imageURL: product.imageURL,
+    unitCost: product.unitCost,
+    description: product.description,
     quantity: 1,
-    cost: _product.unitCost,
-    formattedCost: String(_product.unitCost),
+    cost: product.unitCost,
+    formattedCost: String(product.unitCost),
   };
-  //localStorage.removeItem("product");
   return cartItem;
 };
 // let item = {
@@ -58,9 +58,9 @@ const getProduct = () => {
 //   }
 // };
 
-window.onload = () => {
+// window.onload = () => {
   // btnAddToCart.addEventListener("click", addToCart);
-};
+// };
 
 // const initCart = () => {
 //   const cart = {

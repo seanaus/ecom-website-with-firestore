@@ -30,8 +30,7 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { loggedIn: loggedIn, user: user }) %>
-    <!-- <div class="container"> -->
+    <%- include('../partials/navBar', { user: user }) %>
     <div class="productWrapper">
       <div id="id" class="hide"><%=product.id %></div>
       <div id="imageURL" class="hide"><%=product.image %></div>
@@ -40,8 +39,7 @@
         id="image"
         class="productImage"
         style="background-image: url('<%=product.image %>')"
-      >
-      </div>
+      ></div>
       <div id="description" class="productDescription">
         <%=product.description %>
       </div>
@@ -50,5 +48,16 @@
         <button id="addToCart" class="addToCart">Add To Cart</button>
       </div>
     </div>
+    <script>
+      const data = {
+        id: "<%= product.id %>",
+        name: "<%= product.name %>",
+        description: "<%= product.description %>",
+        imageCard: "<%= product.imageCard %>",
+        image: "<%= product.image %>",
+        unitCost: "<%= product.unitCost %>",
+      };
+      localStorage.setItem("product", JSON.stringify(data));
+    </script>
   </body>
 </html>

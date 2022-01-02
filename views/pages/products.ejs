@@ -28,7 +28,7 @@
     <title>PJS</title>
   </head>
   <body>
-    <%- include('../partials/navBar', { loggedIn:loggedIn, user: user  }) %>
+    <%- include('../partials/navBar', { user: user  }) %>
     <div class="productsContainer">
       <% products.forEach(product=> { %> 
         <%- include('../partials/productCard', { product: product}) %> 

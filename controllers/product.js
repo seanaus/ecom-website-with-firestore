@@ -24,7 +24,6 @@ const renderProduct = (req, res, next) => {
     console.log("Product with the given ID not found");
   } else {
     res.render("pages/product", {
-      loggedIn: authUser(),
       user: activeUser(),
       product: product
     });
