@@ -19,11 +19,11 @@ const getProduct = () => {
   cartItem = {
     id: product.id,
     name: product.name,
-    imageURL: product.imageURL,
-    unitCost: product.unitCost,
+    imageCard: product.imageCard,
+    unitCost: parseFloat(product.unitCost),
     description: product.description,
     quantity: 1,
-    cost: product.unitCost,
+    cost: parseFloat(product.unitCost),
     formattedCost: String(product.unitCost),
   };
   return cartItem;

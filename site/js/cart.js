@@ -1,3 +1,4 @@
+import { auth } from "./auth.js";
 const cartCardTemplate = `
   <div class="cartCard">
         <div id="cartCardId" style="display: none;">
@@ -41,27 +42,20 @@ window.onload = () => {
     btnAddToCart.addEventListener("click", addToCart);
   }
   renderCart();
-}
+};
 const renderCart = () => {
   const cartContainer = document.getElementById("cart");
   if (cartContainer) {
     let cart = getCart();
     let cartViewHTML = "";
-    // let cartItem = {};
     let idx = 0;
     const dataIdx = new RegExp("{idx}", "g");
     cart.items.forEach((item) => {
       let cardViewHTML = cartCardTemplate;
       cardViewHTML = cardViewHTML.replace("{item.id}", item.id);
       cardViewHTML = cardViewHTML.replace("{item.name}", item.name);
-      cardViewHTML = cardViewHTML.replace(
-        "{item.imageCard}",
-        item.imageURL
-      );
-      cardViewHTML = cardViewHTML.replace(
-        "{item.quantity}",
-        item.quantity
-      );
+      cardViewHTML = cardViewHTML.replace("{item.imageCard}", item.imageCard);
+      cardViewHTML = cardViewHTML.replace("{item.quantity}", item.quantity);
       cardViewHTML = cardViewHTML.replace(
         "{item.formattedCost}",
         item.formattedCost
@@ -106,7 +100,9 @@ const indexById = (items, id) => {
   return idx;
 };
 const initCart = () => {
+  const user = auth();
   const cart = {
+    userId: user.id,
     items: [],
     itemCount: 0,
     totalCost: 0,
