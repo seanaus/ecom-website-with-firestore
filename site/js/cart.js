@@ -34,6 +34,23 @@ const cartCardTemplate = `
           <button id="cartCardDelete" class="material-icons cartCardDelete" data-idx="{idx}">delete</button>
       </div >
 `;
+const cartTotalsTemplate = `
+<div class="cartTotalCell cartTotalCellLabel">Items</div>
+<div class="cartTotalCell cartTotalCellValue">{items}</div>
+<div class="cartTotalCell cartTotalCellLabel">Net</div>  
+<div class="cartTotalCell cartTotalCellValue">{netTotal}</div>
+<div class="cartTotalCell cartTotalCellLabel">Vat</div>
+<div class="cartTotalCell cartTotalCellValue">{vat}</div>
+<div class="cartTotalCell cartTotalCellLabel">Total</div>
+<div class="cartTotalCell cartTotalCellValue">{total}</div>
+<button class="cartBtn cartTotalBtn">Checkout</button>
+`;
+const cartCardTemplateEmpty = `
+  <div class="cartCardEmpty">
+    <span>Your Shopping Cart Is Empty!</span>
+    <span class="material-icons">sentiment_very_dissatisfied</span>
+  </div>
+`;
 const btnAddToCart = document.getElementById("addToCart");
 const cartCardQuantity = document.getElementById("cartCardQuantity");
 
@@ -44,27 +61,51 @@ window.onload = () => {
   renderCart();
 };
 const renderCart = () => {
-  const cartContainer = document.getElementById("cart");
-  if (cartContainer) {
+  const cartContainerElement = document.getElementById("cartContainer");
+  const cartElement = document.getElementById("cart");
+  const cartTotalsContainerElement = document.getElementById("cartTotals");
+  if (cartElement) {
     let cart = getCart();
     let cartViewHTML = "";
+    let cartTotalsViewHTML = cartTotalsTemplate;
     let idx = 0;
     const dataIdx = new RegExp("{idx}", "g");
-    cart.items.forEach((item) => {
-      let cardViewHTML = cartCardTemplate;
-      cardViewHTML = cardViewHTML.replace("{item.id}", item.id);
-      cardViewHTML = cardViewHTML.replace("{item.name}", item.name);
-      cardViewHTML = cardViewHTML.replace("{item.imageCard}", item.imageCard);
-      cardViewHTML = cardViewHTML.replace("{item.quantity}", item.quantity);
-      cardViewHTML = cardViewHTML.replace(
-        "{item.formattedCost}",
-        item.formattedCost
-      );
-      cardViewHTML = cardViewHTML.replace(dataIdx, idx);
-      cartViewHTML += cardViewHTML;
-      idx++;
-    });
-    cartContainer.innerHTML = cartViewHTML;
+    let _calcVat = 0;
+    if (cart.itemCount > 0) {
+      cart.items.forEach((item) => {
+        let cardViewHTML = cartCardTemplate;
+        cardViewHTML = cardViewHTML.replace("{item.id}", item.id);
+        cardViewHTML = cardViewHTML.replace("{item.name}", item.name);
+        cardViewHTML = cardViewHTML.replace("{item.imageCard}", item.imageCard);
+        cardViewHTML = cardViewHTML.replace("{item.quantity}", item.quantity);
+        cardViewHTML = cardViewHTML.replace(
+          "{item.formattedCost}",
+          item.formattedCost
+        );
+        cardViewHTML = cardViewHTML.replace(dataIdx, idx);
+        cartViewHTML += cardViewHTML;
+        idx++;
+      });
+    } else {
+      cartViewHTML = cartCardTemplateEmpty;
+      addClass(cartContainerElement, "cartContainerEmpty");
+      removeClass(cartElement, "cartCardContainerAlignCenter");
+    }
+    // Render all Cards
+    cartElement.innerHTML = cartViewHTML;
+    // Populate Cart Totals
+    _calcVat = calcVat(cart.totalCost, 20);
+    cartTotalsViewHTML = cartTotalsViewHTML.replace("{items}", cart.itemCount);
+    cartTotalsViewHTML = cartTotalsViewHTML.replace(
+      "{netTotal}",
+      cart.totalCost
+    );
+    cartTotalsViewHTML = cartTotalsViewHTML.replace("{vat}", _calcVat);
+    cartTotalsViewHTML = cartTotalsViewHTML.replace(
+      "{total}",
+      cart.totalCost + _calcVat
+    );
+    cartTotalsContainerElement.innerHTML = cartTotalsViewHTML;
   }
   attachEventListeners();
   refreshCartIcon();
@@ -198,6 +239,19 @@ const calcItemCount = (items) => {
     return items.length;
   } else {
     return 0;
+  }
+};
+const calcVat = (value, percentage) => {
+  return Math.ceil(value * (percentage / 100));
+};
+const addClass = (element, className) => {
+  if (element) {
+    element.classList.add(className);
+  }
+};
+const removeClass = (element, className) => {
+  if (element) {
+    element.classList.remove(className);
   }
 };
 const refreshCartIcon = () => {

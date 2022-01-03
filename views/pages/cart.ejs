@@ -26,12 +26,14 @@
 
   <body>
     <%- include('../partials/navBar', { user: user }) %>
-    <!-- <div id="cart" class="container">
-      <div>Your Cart Is Empty</div>
-    </div> -->
-    <div class="cartContainer">
-      <div id="cart" class="cartCardContainer">
+    <div id="cartContainer" class="cartContainer">
+      <div id="cart" class="cartCardContainer cartCardContainerAlignCenter">
         <!-- shopping cart html is generated in cart.js and injected here -->
+      </div>
+      <div>
+        <div id="cartTotals" class="cartTotals">
+          <!-- Cart Totals html is generated in cart.js and injected here -->
+        </div>
       </div>
     </div>
   </body>
