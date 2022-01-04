@@ -280,7 +280,7 @@ const checkout = () => {
         cart: cart,
       })
     );
-    localStorage.clear();
+    localStorage.removeItem("cart");
     window.location.href = "/home";
   } catch (error) {
     console.log(error.message);

@@ -141,12 +141,13 @@ const saveCart = async (req, res, next) => {
   try {
     const cart = req.body.cart;
     const fsCart = {
-      items: cart.items.map((obj) => {
-        return Object.assign({}, obj);
-      }),
+      created: dateTime(),
       totalcost: cart.totalCost,
       itemCount: cart.itemCount,
-      created: dateTime()
+      userId: cart.userId,
+      items: cart.items.map((obj) => {
+        return Object.assign({}, obj);
+      })
     };
     await firestore.collection("cart").doc().set(fsCart);
   } catch (error) {
