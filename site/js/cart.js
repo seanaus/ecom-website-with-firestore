@@ -1,4 +1,5 @@
 import { auth } from "./auth.js";
+import { getProduct, asGBP } from "./product.js";
 const cartCardTemplate = `
   <div class="cartCard">
         <div id="cartCardId" style="display: none;">
@@ -43,15 +44,16 @@ const cartTotalsTemplate = `
 <div class="cartTotalCell cartTotalCellValue">{vat}</div>
 <div class="cartTotalCell cartTotalCellLabel">Total</div>
 <div class="cartTotalCell cartTotalCellValue">{total}</div>
-<button class="cartBtn cartTotalBtn">Checkout</button>
+<button id="checkout" class="cartBtn cartTotalBtn">Checkout</button>
 `;
 const cartCardTemplateEmpty = `
   <div class="cartCardEmpty">
-    <span>Your Shopping Cart Is Empty!</span>
-    <span class="material-icons">sentiment_very_dissatisfied</span>
+    <div>Your Shopping Cart Is Empty!</div>
+    <div class="material-icons">sentiment_very_dissatisfied</div>
   </div>
 `;
 const btnAddToCart = document.getElementById("addToCart");
+const btnCheckout = document.getElementById("checkout");
 const cartCardQuantity = document.getElementById("cartCardQuantity");
 
 window.onload = () => {
@@ -63,14 +65,11 @@ window.onload = () => {
 const renderCart = () => {
   const cartContainerElement = document.getElementById("cartContainer");
   const cartElement = document.getElementById("cart");
-  const cartTotalsContainerElement = document.getElementById("cartTotals");
   if (cartElement) {
     let cart = getCart();
     let cartViewHTML = "";
-    let cartTotalsViewHTML = cartTotalsTemplate;
     let idx = 0;
     const dataIdx = new RegExp("{idx}", "g");
-    let _calcVat = 0;
     if (cart.itemCount > 0) {
       cart.items.forEach((item) => {
         let cardViewHTML = cartCardTemplate;
@@ -94,21 +93,30 @@ const renderCart = () => {
     // Render all Cards
     cartElement.innerHTML = cartViewHTML;
     // Populate Cart Totals
-    _calcVat = calcVat(cart.totalCost, 20);
-    cartTotalsViewHTML = cartTotalsViewHTML.replace("{items}", cart.itemCount);
-    cartTotalsViewHTML = cartTotalsViewHTML.replace(
-      "{netTotal}",
-      cart.totalCost
-    );
-    cartTotalsViewHTML = cartTotalsViewHTML.replace("{vat}", _calcVat);
-    cartTotalsViewHTML = cartTotalsViewHTML.replace(
-      "{total}",
-      cart.totalCost + _calcVat
-    );
-    cartTotalsContainerElement.innerHTML = cartTotalsViewHTML;
+    renderCartTotals(cart);
+    attachEventListeners();
+    refreshCartIcon();
   }
-  attachEventListeners();
-  refreshCartIcon();
+};
+const renderCartTotals = (cart) => {
+  const cartTotalsContainerElement = document.getElementById("cartTotals");
+  let cartTotalsViewHTML = cartTotalsTemplate;
+  let _calcVat = 0;
+  _calcVat = calcVat(cart.totalCost, 20);
+  cartTotalsViewHTML = cartTotalsViewHTML.replace("{items}", cart.itemCount);
+  cartTotalsViewHTML = cartTotalsViewHTML.replace(
+    "{netTotal}",
+    asGBP.format(cart.totalCost)
+  );
+  cartTotalsViewHTML = cartTotalsViewHTML.replace(
+    "{vat}",
+    asGBP.format(_calcVat)
+  );
+  cartTotalsViewHTML = cartTotalsViewHTML.replace(
+    "{total}",
+    asGBP.format(cart.totalCost + _calcVat)
+  );
+  cartTotalsContainerElement.innerHTML = cartTotalsViewHTML;
 };
 const attachEventListeners = () => {
   const btns = document.querySelectorAll("button");
@@ -121,6 +129,9 @@ const attachEventListeners = () => {
     }
     if (btn.id === "cartCardDelete") {
       btn.addEventListener("click", deleteCardItem);
+    }
+    if (btn.id === "checkout") {
+      btn.addEventListener("click", checkout);
     }
   });
 };
@@ -194,6 +205,7 @@ const editCardQuantity = (event) => {
   }
   editCartQuantity(cart, idx, option);
   refreshCardCartGUI(cart, idx);
+  renderCartTotals(cart);
 };
 const refreshCardCartGUI = (cart, idx) => {
   const quantityValue = document.querySelector(
@@ -210,14 +222,14 @@ const editCartQuantity = (cart, idx, option) => {
   if (cart.items[idx] && option === "+") {
     cart.items[idx].quantity++;
     cart.items[idx].cost += cart.items[idx].unitCost;
-    cart.items[idx].formattedCost = cart.items[idx].cost;
+    cart.items[idx].formattedCost = asGBP.format(cart.items[idx].cost);
     saveToCart(cart);
   }
   if (cart.items[idx] && option === "-") {
     if (cart.items[idx].quantity > 1) {
       cart.items[idx].quantity--;
       cart.items[idx].cost -= cart.items[idx].unitCost;
-      cart.items[idx].formattedCost = cart.items[idx].cost;
+      cart.items[idx].formattedCost = asGBP.format(cart.items[idx].cost);
       saveToCart(cart);
     }
   }
@@ -228,7 +240,6 @@ const calcCartTotals = (cart) => {
 };
 const calcTotalCost = (items) => {
   let totalCost = 0;
-
   for (let i = 0; i < items.length; i++) {
     totalCost += parseFloat(items[i].cost);
   }
@@ -257,4 +268,21 @@ const removeClass = (element, className) => {
 const refreshCartIcon = () => {
   const cart = getCart();
   document.getElementById("cartCounter").innerText = JSON.parse(cart.itemCount);
+};
+const checkout = () => {
+  try {
+    const req = new XMLHttpRequest();
+    const cart = getCart();
+    req.open("POST", "/saveCart", true);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.send(
+      JSON.stringify({
+        cart: cart,
+      })
+    );
+    localStorage.clear();
+    window.location.href = "/home";
+  } catch (error) {
+    console.log(error.message);
+  }
 };

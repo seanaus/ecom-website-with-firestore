@@ -139,24 +139,38 @@ const calcItemCount = (items) => {
 
 const saveCart = async (req, res, next) => {
   try {
-    const itemsObj = items.map((obj) => {
-                       return Object.assign({}, obj) 
-                      });
-    const cart = {
-      items: items.map((obj) => {
-        return Object.assign({}, obj) 
-       }),
-      totalCost,
-      itemCount,
-      created,
-      modified
+    const cart = req.body.cart;
+    const fsCart = {
+      items: cart.items.map((obj) => {
+        return Object.assign({}, obj);
+      }),
+      totalcost: cart.totalCost,
+      itemCount: cart.itemCount,
+      created: dateTime()
     };
-
-    await firestore.collection("cart").doc().set(cart);
-    console.log("Record saved successfuly");
+    await firestore.collection("cart").doc().set(fsCart);
   } catch (error) {
     console.log(error.message);
   }
+  // try {
+  //   const itemsObj = items.map((obj) => {
+  //                      return Object.assign({}, obj)
+  //                     });
+  //   const cart = {
+  //     items: items.map((obj) => {
+  //       return Object.assign({}, obj)
+  //      }),
+  //     totalCost,
+  //     itemCount,
+  //     created,
+  //     modified
+  //   };
+
+  //   await firestore.collection("cart").doc().set(cart);
+  //   console.log("Record saved successfuly");
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
 };
 
 module.exports = {
@@ -167,5 +181,5 @@ module.exports = {
   increaseQuantity,
   reduceQuantity,
   formatGBP,
-  saveCart
+  saveCart,
 };

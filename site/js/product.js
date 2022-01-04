@@ -16,7 +16,7 @@
 //localStorage.setItem("product", JSON.stringify(_product));
 const getProduct = () => {
   const product = JSON.parse(localStorage.getItem("product"));
-  cartItem = {
+  const cartItem = {
     id: product.id,
     name: product.name,
     imageCard: product.imageCard,
@@ -24,85 +24,16 @@ const getProduct = () => {
     description: product.description,
     quantity: 1,
     cost: parseFloat(product.unitCost),
-    formattedCost: String(product.unitCost),
+    formattedCost: String(asGBP.format(product.unitCost)),
   };
   return cartItem;
 };
-// let item = {
-//   id: _id,
-//   name: _name,
-//   imageURL: _imageURL,
-//   unitCost: _unitCost,
-//   quantity: 1,
-//   cost: _unitCost,
-//   formattedCost: _unitCost,
-// };
+const asGBP = new Intl.NumberFormat("en-GB", {
+  style: "currency",
+  currency: "GBP",
 
-// const formatMoney =(amount, decimalCount = 2, decimal = ".", thousands = ",")=> {
-//   try {
-//     decimalCount = Math.abs(decimalCount);
-//     decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
-
-//     const negativeSign = amount < 0 ? "-" : "";
-
-//     let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
-//     let j = (i.length > 3) ? i.length % 3 : 0;
-
-//     return
-//     negativeSign +
-//       (j ? i.substr(0, j) + thousands : '') +
-//       i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
-//       (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
-//   } catch (e) {
-//     console.log(e)
-//   }
-// };
-
-// window.onload = () => {
-  // btnAddToCart.addEventListener("click", addToCart);
-// };
-
-// const initCart = () => {
-//   const cart = {
-//     items: [],
-//     itemCount: 0,
-//     totalCost: 0,
-//   };
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   return cart;
-// };
-// const getCart = () => {
-//   let cart = JSON.parse(localStorage.getItem("cart"));
-//   if (!cart) {
-//     cart = initCart();
-//   }
-//   return cart;
-// };
-// const newItem = (items, id) => {
-//   let idx = -1;
-//   // let isNew = true;
-//   for (let i = 0; i < items.length; i++) {
-//     if (items[i].id === id) {
-//       idx = i;
-//       break;
-//     }
-//   }
-//   return idx;
-// };
-// const addToCart = () => {
-
-//   let cart = getCart();
-//   const idx = newItem(cart.items, _id);
-
-//   if (idx < 0) {
-//     cart.items.push(item);
-//   } else {
-//     cart.items[idx].quantity++;
-//     cart.items[idx].cost += cart.items[idx].unitCost;
-//     cart.items[idx].formattedCost = cart.items[idx].cost;
-//   }
-
-//   // localStorage.removeItem("cart");
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   console.log(getCart());
-// };
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+export { getProduct, asGBP };
