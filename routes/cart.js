@@ -14,6 +14,12 @@ router.get("/cart", authGuard, (req, res, next) => {
   });
   next();
 });
+router.get("/checkout", authGuard, (req, res, next) => {
+  res.render("pages/checkout", {
+    user: activeUser()
+  });
+  next();
+});
 
 // router.delete("/cart/:id", authGuard, (req, res, next) => {
 //   const id = req.params.id;

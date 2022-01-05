@@ -44,7 +44,9 @@ const cartTotalsTemplate = `
 <div class="cartTotalCell cartTotalCellValue">{vat}</div>
 <div class="cartTotalCell cartTotalCellLabel">Total</div>
 <div class="cartTotalCell cartTotalCellValue">{total}</div>
-<button id="checkout" class="cartBtn cartTotalBtn">Checkout</button>
+<form action="/checkout" class="cartTotalBtn">
+  <button id="checkout" class="cartBtn" type="/submit">Checkout</button>
+</form>
 `;
 const cartCardTemplateEmpty = `
   <div class="cartCardEmpty">
@@ -53,7 +55,7 @@ const cartCardTemplateEmpty = `
   </div>
 `;
 const btnAddToCart = document.getElementById("addToCart");
-const btnCheckout = document.getElementById("checkout");
+const btnCheckout = document.getElementById("confirmPayment");
 const cartCardQuantity = document.getElementById("cartCardQuantity");
 
 window.onload = () => {
@@ -130,7 +132,7 @@ const attachEventListeners = () => {
     if (btn.id === "cartCardDelete") {
       btn.addEventListener("click", deleteCardItem);
     }
-    if (btn.id === "checkout") {
+    if (btn.id === "confirmPayment") {
       btn.addEventListener("click", checkout);
     }
   });
@@ -269,19 +271,32 @@ const refreshCartIcon = () => {
   const cart = getCart();
   document.getElementById("cartCounter").innerText = JSON.parse(cart.itemCount);
 };
-const checkout = () => {
+const checkout = (event) => {
   try {
-    const req = new XMLHttpRequest();
-    const cart = getCart();
-    req.open("POST", "/saveCart", true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.send(
-      JSON.stringify({
-        cart: cart,
-      })
-    );
-    localStorage.removeItem("cart");
-    window.location.href = "/home";
+    console.log(event.target)
+    // const form = document.getElementById("checkout")
+    if (form) {
+      let jsonObject = {};
+      for (let field of form.elements) {
+        if (field.name) {
+          jsonObject[field.name] = field.value;
+        }
+      }
+      console.log(jsonObject);
+    } else {
+      console.log(form);
+    }
+    // const req = new XMLHttpRequest();
+    // const cart = getCart();
+    // req.open("POST", "/saveCart", true);
+    // req.setRequestHeader("Content-Type", "application/json");
+    // req.send(
+    //   JSON.stringify({
+    //     cart: cart,
+    //   })
+    // );
+    // localStorage.removeItem("cart");
+    // window.location.href = "/checkout";
   } catch (error) {
     console.log(error.message);
   }

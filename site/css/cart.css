@@ -128,6 +128,8 @@
   text-align: right;
 }
 .cartTotalBtn {
+  display: grid;
+  justify-content: stretch;
   grid-column: 1 / 3;
 }
 .cartContainerEmpty {
