@@ -150,6 +150,7 @@ const saveCart = async (req, res, next) => {
       })
     };
     await firestore.collection("cart").doc().set(fsCart);
+    
   } catch (error) {
     console.log(error.message);
   }

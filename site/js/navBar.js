@@ -26,7 +26,7 @@ window.onload = () => {
   isSelected();
   const items = cartItemCount();
   const cartCounter = document.getElementById("cartCounter");
-  cartCounter.innerText = items;
+  cartCounter.innerText = items === null ? 0 : items;
 };
 const cartItemCount = () => {
   let count = 0;
