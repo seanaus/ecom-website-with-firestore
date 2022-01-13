@@ -4,7 +4,7 @@ const Product = require("../models/product");
 const firestore = firebase.firestore();
 const { authUser, activeUser } = require("../core/auth");
 const { loadProducts, getProduct } = require("../core/product");
-const { getCart } = require("../cart");
+const { getCart } = require("../core/cart");
 
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();

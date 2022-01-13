@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="description" content="PJS" />
+    <meta name="author" content="PJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/iconfont/material-icons.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/checkout.css" />
+    <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
+    <script defer type="module" src="/js/cart.js"></script>
+    <script defer type="module" src="/js/checkout.js"></script>
+    <title>PJS</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="keywords" content="HTML, CSS, JavaScript" />
-  <meta name="description" content="PJS" />
-  <meta name="author" content="PJS" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="/css/style.css" />
-  <link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
-  <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
-  <link rel="stylesheet" type="text/css" href="/css/checkout.css" />
-  <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
-  <script defer type="module" src="/js/cart.js"></script>
-  <script defer type="module" src="/js/checkout.js"></script>
-  <title>PJS</title>
-</head>
-
-<body>
-  <div class="container row">
-    <div class="pannel">
-      <div id="error"></div>
-      <form id="checkout">
-        <div class="form-group">
-          <label for="fullname">
-            Full Name
-            <input type="text" name="fullname" id="fullname" required />
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="email">
-            Email
-            <input type="email" name="email" id="email" required />
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="address">
-            Address
-            <input type="text" name="address" id="address" required />
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="townCity">
-            Town/City
-            <input type="text" name="townCity" id="townCity" required />
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="postcode">
-            Postcode
-            <input type="text" name="postcode" id="postcode" required />
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="cardNumber">
-            Card Number
-            <input type="number" name="cardNumber" id="cardNumber" required />
-          </label>
-        </div>
-        <div class="form-group row">
-          <div class="colExpiry">
-            <label for="cardExpiry">
-              Card Expiry
-              <input type="date" name="cardExpiry" id="cardExpiry" required />
+  <body>
+    <div class="container row">
+      <div class="pannel">
+        <div id="error"></div>
+        <div id="checkout">
+          <div class="form-group">
+            <label for="fullname">
+              Full Name
+              <input type="text" name="fullname" id="fullname" required />
             </label>
           </div>
-          <div class="colCvc">
-            <label for="cvc">
-              CVC
-              <input type="number" name="cvc" id="cvc" required />
+          <div class="form-group">
+            <label for="email">
+              Email
+              <input type="email" name="email" id="email" required />
             </label>
           </div>
+          <div class="form-group">
+            <label for="address">
+              Address
+              <input type="text" name="address" id="address" required />
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="townCity">
+              Town/City
+              <input type="text" name="townCity" id="townCity" required />
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="postcode">
+              Postcode
+              <input type="text" name="postcode" id="postcode" required />
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="cardNumber">
+              Card Number
+              <input type="number" name="cardNumber" id="cardNumber" required />
+            </label>
+          </div>
+          <div class="form-group row">
+            <div class="colExpiry">
+              <label for="cardExpiry">
+                Card Expiry
+                <input type="date" name="cardExpiry" id="cardExpiry" required />
+              </label>
+            </div>
+            <div class="colCvc">
+              <label for="cvc">
+                CVC
+                <input type="number" name="cvc" id="cvc" required />
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn" id="confirmPayment">CONFIRM</button>
+          </div>
         </div>
-        <div class="form-group">
-          <button type="submit" class="btn" id="confirmPayment">CONFIRM</button>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

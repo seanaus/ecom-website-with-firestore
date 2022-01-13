@@ -1,8 +1,8 @@
 "use strict";
-const firebase = require("./db");
+const firebase = require("../db");
 const firestore = firebase.firestore();
-const CartItem = require("./models/cartItem");
-const { getProducts } = require("./core/product");
+const CartItem = require("../models/cartItem");
+const { getProducts } = require("./product");
 
 let items = [];
 let totalCost = 0;
@@ -141,16 +141,23 @@ const saveCart = async (req, res, next) => {
   try {
     const cart = req.body.cart;
     const fsCart = {
-      created: dateTime(),
-      totalcost: cart.totalCost,
-      itemCount: cart.itemCount,
       userId: cart.userId,
+      itemCount: cart.itemCount,
       items: cart.items.map((obj) => {
         return Object.assign({}, obj);
-      })
+      }),
+      fullname: cart.fullname,
+      email: cart.email,
+      address: cart.address,
+      townCity: cart.townCity,
+      postcode: cart.postcode,
+      cardNumber: cart.cardNumber,
+      cardExpiry: cart.cardExpiry,
+      cvc: cart.cvc,
+      totalcost: cart.totalCost,
+      created: dateTime(),
     };
     await firestore.collection("cart").doc().set(fsCart);
-    
   } catch (error) {
     console.log(error.message);
   }

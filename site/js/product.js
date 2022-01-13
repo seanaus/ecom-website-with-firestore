@@ -1,19 +1,8 @@
-// const _id = document.getElementById("id").innerText.trim();
-// const _name = document.getElementById("name").innerText.trim();
-// const _imageURL = document.getElementById("imageURL").innerText.trim();
-// const _description = document.getElementById("description").innerText.trim();
-// const _unitCost = parseFloat(
-//   document.getElementById("unitCost").innerText.trim()
-// );
-// const btnAddToCart = document.getElementById("addToCart");
-
-// let _product = {
-//   id: _id,
-//   name: _name,
-//   imageURL: _imageURL,
-//   unitCost: _unitCost,
-// };
-//localStorage.setItem("product", JSON.stringify(_product));
+// Sean Austin
+// 13/01/2022
+// Get Product data from BROWSER'S localStorage, this is passed up from the node js 
+// Web Server to the <script> section of the product.ejs view and saved to the 
+// BROWSER's localStorage and returns the data as a cartItem
 const getProduct = () => {
   const product = JSON.parse(localStorage.getItem("product"));
   const cartItem = {
@@ -28,6 +17,9 @@ const getProduct = () => {
   };
   return cartItem;
 };
+// Sean Austin
+// 13/01/2022
+// Format numbers to currency in GBP
 const asGBP = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",

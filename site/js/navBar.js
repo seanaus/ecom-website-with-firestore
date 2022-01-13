@@ -1,6 +1,6 @@
-// let _cartItemCount = 0;
+
 const gridView = window.matchMedia("(min-width: 768px)");
-//Toggle navPill visibillity on smaller devices
+// Toggle navPill visibillity on smaller devices
 const toggleNavPills = () => {
   const navBar = document.getElementById("navBar");
   navBar.style.display = navBar.style.display === "none" ? "flex" : "none";
@@ -21,7 +21,9 @@ const configureNavBar = () => {
   const navBar = document.getElementById("navBar");
   navBar.style.display = gridView.matches ? "flex" : "none";
 };
-
+// Sean Austin
+// 13/01/2022
+// ...
 window.onload = () => {
   isSelected();
   const items = cartItemCount();
