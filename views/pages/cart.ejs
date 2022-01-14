@@ -20,11 +20,11 @@
     <script defer type="module" src="/js/auth.js"></script>
     <script defer type="module" src="/js/cart.js"></script>
 
-    <title>PJS</title>
+    <title><%= settings.projectName %>/title>
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user: user }) %>
+    <%- include('../partials/navBar', { user: user ,settings:settings}) %>
     <div id="cartContainer" class="cartContainer">
       <div id="cart" class="cartCardContainer cartCardContainerAlignCenter">
         <!-- shopping cart html is generated in cart.js and injected here -->

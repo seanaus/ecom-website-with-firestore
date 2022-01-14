@@ -23,19 +23,7 @@
     <div class="iconLabel">Location</div>
   </a>
   <a
-    class="
-      navPill
-      navLink
-      <%=
-      user.id
-      !=
-      -1
-      ?
-      'showMenuButton'
-      :
-      'hideMenuButton'
-      %>
-    "
+    class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>"
     href="/cart"
   >
     <div class="material-icons">shopping_cart</div>
@@ -43,38 +31,14 @@
     <div id="cartCounter" class="cartCounter"></div>
   </a>
   <a
-    class="
-      navPill
-      navLink
-      <%=
-      user.id
-      ==
-      -1
-      ?
-      'showMenuButton'
-      :
-      'hideMenuButton'
-      %>
-    "
+    class="navPill navLink <%= user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>"
     href="/logIn"
   >
     <div class="material-icons icon">login</div>
     <div class="iconLabel">Log In</div>
   </a>
   <a
-    class="
-      navPill
-      navLink
-      <%=
-      user.id
-      !=
-      -1
-      ?
-      'showMenuButton'
-      :
-      'hideMenuButton'
-      %>
-    "
+    class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>"
     href="/logOut"
   >
     <div class="material-icons icon">logout</div>
@@ -82,6 +46,11 @@
   </a>
 </div>
 <script>
+  const settings = {
+    id: "<%= settings.id %>",
+    projectName: "<%= settings.projectName %>",
+    vatPercentage: "<%= settings.vatPercentage %>",
+  };
   const auth = {
     id: "<%= user.id %>",
     forename: "<%= user.forename %>",
@@ -89,5 +58,6 @@
     email: "<%= user.email %>",
     token: "<%= user.token %>",
   };
+  localStorage.setItem("settings", JSON.stringify(settings));
   localStorage.setItem("auth", JSON.stringify(auth));
 </script>

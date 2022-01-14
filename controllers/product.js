@@ -2,6 +2,7 @@
 const firebase = require("../db");
 const Product = require("../models/product");
 const firestore = firebase.firestore();
+const { loadSettings } = require("../core/settings");
 const { authUser, activeUser } = require("../core/auth");
 const { loadProducts, getProduct } = require("../core/product");
 const { getCart } = require("../core/cart");
@@ -9,7 +10,7 @@ const { getCart } = require("../core/cart");
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
   res.render("pages/products", {
-    loggedIn: authUser(),
+    settings: loadSettings(),
     user: activeUser(),
     products: productArray,
     cart: getCart(),
@@ -17,13 +18,14 @@ const renderProducts = async (req, res, next) => {
   next();
 };
 
-const renderProduct = (req, res, next) => {
+const renderProduct = async(req, res, next) => {
   const id = req.params.id;
   const product = getProduct(id);
   if (!product) {
     console.log("Product with the given ID not found");
   } else {
     res.render("pages/product", {
+      settings: loadSettings(),
       user: activeUser(),
       product: product
     });

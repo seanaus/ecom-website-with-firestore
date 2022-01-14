@@ -16,11 +16,11 @@
   <script defer type="text/javascript" src="/js/navBar.js"></script>
   <script defer type="module" src="/js/product.js"></script>
   <script defer type="module" src="/js/cart.js"></script>
-  <title>PJS</title>
+  <title><%= settings.projectName %></title>
 </head>
 
 <body>
-  <%- include('../partials/navBar', { user: user }) %>
+  <%- include('../partials/navBar', { user: user,settings:settings }) %>
     <div class="productWrapper">
       <div id="id" class="hide">
         <%=product.id %>
