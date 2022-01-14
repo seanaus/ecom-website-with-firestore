@@ -13,7 +13,7 @@ const getProduct = () => {
     description: product.description,
     quantity: 1,
     cost: parseFloat(product.unitCost),
-    formattedCost: String(asGBP.format(product.unitCost)),
+    formattedCost: (product.formattedCost)
   };
   return cartItem;
 };

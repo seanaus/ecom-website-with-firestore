@@ -5,7 +5,8 @@ class Product {
         description,
         imageCard,
         image,
-        unitCost
+        unitCost,
+        formattedCost
     ) {
         this.id = id;
         this.name = name;
@@ -13,6 +14,7 @@ class Product {
         this.imageCard = imageCard;
         this.image = image;
         this.unitCost = parseFloat(unitCost);
+        this.formattedCost = formattedCost
     }
 
 }
