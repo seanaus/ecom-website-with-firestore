@@ -21,14 +21,14 @@ router.get("/home", async (req, res, next) => {
 router.get("/about", async (req, res, next) => {
   res.render("pages/about", {
     settings: await loadSettings(),
-    user: activeUser()
+    user: activeUser(),
   });
   next();
 });
 router.get("/location", async (req, res, next) => {
   res.render("pages/location", {
     settings: await loadSettings(),
-    user: activeUser()
+    user: activeUser(),
   });
   next();
 });
@@ -50,7 +50,7 @@ router.get("/logOut", logOut, (req, res, next) => {
 router.get("/register", async (req, res, next) => {
   res.render("pages/register", {
     settings: await loadSettings(),
-    user: activeUser()
+    user: activeUser(),
   });
   next();
 });

@@ -11,14 +11,14 @@ const router = express.Router();
 
 router.get("/cart", authGuard, async(req, res, next) => {
   res.render("pages/cart", {
-    settings: loadSettings(),
+    settings: await loadSettings(),
     user: activeUser()
   });
   next();
 });
 router.get("/checkout", authGuard, async(req, res, next) => {
   res.render("pages/checkout", {
-    settings: loadSettings(),
+    settings: await loadSettings(),
     user: activeUser()
   });
   next();

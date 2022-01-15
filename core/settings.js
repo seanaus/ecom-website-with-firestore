@@ -19,7 +19,6 @@ const loadSettings = async () => {
                 );
                 settings.push(tmp);
             });
-            // console.log(JSON.stringify(settings[0]));
             return settings[0];
         }
     } catch (error) {

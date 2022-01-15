@@ -1,13 +1,6 @@
+"use strict"
 const getSettings = () => {
-  const settings = localStorage.getItem("settings");
-  if (settings) {
-    return settings;
-  } else {
-    return null;
-  }
-};
-const getSettings = () => {
-  const settings = localStorage.getItem("settings");
+  const settings = JSON.parse(localStorage.getItem("settings"));
   if (settings) {
     return settings;
   } else {
@@ -25,9 +18,9 @@ const getProjectName = () => {
 const getVatPercentage = () => {
   const settings = getSettings();
   if (settings) {
-    return settings.vatPercentage;
+    return parseInt(settings.vatPercentage);
   } else {
-    return "Invalid Settings Data";
+    return parseInt("20");
   }
 };
 export { getSettings, getProjectName,getVatPercentage };

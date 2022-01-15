@@ -1,4 +1,5 @@
 import { auth } from "./auth.js";
+import { getSettings, getProjectName, getVatPercentage } from "./settings.js";
 import { getProduct, asGBP } from "./product.js";
 const cartCardTemplate = `
   <div class="cartCard">
@@ -56,6 +57,7 @@ const cartCardTemplateEmpty = `
 `;
 const btnAddToCart = document.getElementById("addToCart");
 const cartCardQuantity = document.getElementById("cartCardQuantity");
+// const settings = getSettings();
 
 window.onload = () => {
   if (btnAddToCart) {
@@ -103,7 +105,7 @@ const renderCartTotals = (cart) => {
   const cartTotalsContainerElement = document.getElementById("cartTotals");
   let cartTotalsViewHTML = cartTotalsTemplate;
   let _calcVat = 0;
-  _calcVat = calcVat(cart.totalCost, 20);
+  _calcVat = calcVat(cart.totalCost, getVatPercentage());
   cartTotalsViewHTML = cartTotalsViewHTML.replace("{items}", cart.itemCount);
   cartTotalsViewHTML = cartTotalsViewHTML.replace(
     "{netTotal}",

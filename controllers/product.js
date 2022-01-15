@@ -25,7 +25,7 @@ const renderProduct = async(req, res, next) => {
     console.log("Product with the given ID not found");
   } else {
     res.render("pages/product", {
-      settings: loadSettings(),
+      settings: await loadSettings(),
       user: activeUser(),
       product: product
     });
