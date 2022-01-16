@@ -5,9 +5,9 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const methodOverride = require("method-override");
 
-const routes = require("./routes/route");
-const productRoutes = require("./routes/product");
-const cartRoutes = require("./routes/cart");
+const routes = require("./routes/routes");
+const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));

@@ -1,9 +1,9 @@
 "use strict";
 const firebase = require("../db");
-const Product = require("../models/product");
+// const Product = require("../models/product");
 const firestore = firebase.firestore();
 const { loadSettings } = require("../core/settings");
-const { authUser, activeUser } = require("../core/auth");
+const { activeUser } = require("../core/auth");
 const { loadProducts, getProduct } = require("../core/product");
 const { getCart } = require("../core/cart");
 
@@ -17,7 +17,6 @@ const renderProducts = async (req, res, next) => {
   });
   next();
 };
-
 const renderProduct = async(req, res, next) => {
   const id = req.params.id;
   const product = getProduct(id);

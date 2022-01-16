@@ -3,14 +3,13 @@ const firebase = require("../db");
 const { addUser } = require("../core/user");
 const {
   encrypt,
-  checkUser,
-  checkEmail,
   cacheUser,
   clearCache,
   authUser,
   createFirebaseUser,
   signInFirebaseUser,
 } = require("../core/auth");
+
 const createNew = async (req, res, next) => {
   try {
     const password = await encrypt(req.body.password);
