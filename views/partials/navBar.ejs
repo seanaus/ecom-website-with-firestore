@@ -22,25 +22,16 @@
     <div class="material-icons icon">place</div>
     <div class="iconLabel">Location</div>
   </a>
-  <a
-    class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>"
-    href="/cart"
-  >
+  <a class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/cart">
     <div class="material-icons">shopping_cart</div>
     <div class="iconLabel">Cart</div>
     <div id="cartCounter" class="cartCounter"></div>
   </a>
-  <a
-    class="navPill navLink <%= user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>"
-    href="/logIn"
-  >
+  <a class="navPill navLink <%= user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/logIn">
     <div class="material-icons icon">login</div>
     <div class="iconLabel">Log In</div>
   </a>
-  <a
-    class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>"
-    href="/logOut"
-  >
+  <a class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/logOut">
     <div class="material-icons icon">logout</div>
     <div class="iconLabel">Log Out</div>
   </a>
@@ -58,6 +49,17 @@
     email: "<%= user.email %>",
     token: "<%= user.token %>",
   };
+  // Save projectSettings and auth info to BROWSER's local storage
+  // So that the data is available for the dynamic javascript code
   localStorage.setItem("settings", JSON.stringify(settings));
   localStorage.setItem("auth", JSON.stringify(auth));
+  // If different user logs in on same machine remove the cached cart
+  // Data from the previous user
+  const cartCache = JSON.parse(localStorage.getItem("cart"));
+  if (cartCache) {
+    if (cartCache.userId !== "<%= user.id %>") {
+      localStorage.removeItem("cart");
+    }
+  }
+
 </script>

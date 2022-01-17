@@ -1,4 +1,5 @@
 const { activeUser } = require("../core/auth");
+const { loadPage } = require("../core/page");
 const { loadSettings } = require("../core/settings");
 const { slideShow } = require("../core/slideShow");
 
@@ -7,6 +8,7 @@ const renderHome = async (req, res, next) => {
     settings: await loadSettings(),
     user: activeUser(),
     slideShow: await slideShow(),
+    content: await loadPage("home")
   });
   next();
 };
@@ -14,6 +16,7 @@ const renderAbout = async (req, res, next) => {
   res.render("pages/about", {
     settings: await loadSettings(),
     user: activeUser(),
+    content: await loadPage("about")
   });
   next();
 };

@@ -140,9 +140,16 @@ button:hover {
   font-size: large;
   margin: 0px 0px 2px;
 }
+.subTitleImage {
+  font-size: large;
+  text-align: center;
+}
 .contentText {
   font-size: medium;
   margin: 2px 0px 10px;
+}
+.contentImage {
+  margin: 20px auto;
 }
 .layoutTopMargin {
   margin-top: 50px;

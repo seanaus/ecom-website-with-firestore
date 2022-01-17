@@ -1,29 +1,19 @@
 const express = require("express");
 const { authGuard } = require("../controllers/authCont");
-const { activeUser } = require("../core/auth");
+const { renderCart, renderCheckOut } = require("../controllers/cartCont");
 const { saveCart } = require("../core/cart");
-const { loadSettings } = require("../core/settings");
 
 const router = express.Router();
 
-router.get("/cart", authGuard, async(req, res, next) => {
-  res.render("pages/cart", {
-    settings: await loadSettings(),
-    user: activeUser()
-  });
-  next();
-});
-router.get("/checkout", authGuard, async(req, res, next) => {
-  res.render("pages/checkout", {
-    settings: await loadSettings(),
-    user: activeUser()
-  });
-  next();
-});
-router.post("/saveCart", saveCart, async (req, res, next) => {
+const navToHome = (req, res, next) => {
   res.redirect("/");
   next();
-});
+};
+
+router.get("/cart", authGuard, renderCart);
+router.get("/checkout", authGuard, renderCheckOut);
+router.post("/saveCart", saveCart, navToHome);
+
 module.exports = {
   routes: router
 };

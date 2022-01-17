@@ -11,6 +11,7 @@ const {
 
 const navToHome = (req, res, next) => {
   res.redirect("/");
+  next();
 };
 router.get(["/", "/home"], renderHome);
 router.get("/about", renderAbout);
