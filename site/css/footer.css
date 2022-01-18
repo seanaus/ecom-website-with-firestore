@@ -1,0 +1,14 @@
+[footer] {
+  /* position: fixed;
+  bottom: 0; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: 30px auto 0px auto;
+  z-index: 1;
+}
+[col] {
+  text-align: center;
+  background-color: var(--theme-bgColor);
+  padding: 5px;
+}

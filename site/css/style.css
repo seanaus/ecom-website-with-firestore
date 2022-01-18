@@ -18,14 +18,17 @@
 body {
   background-color: var(--themeBgColor);
   color: var(--themeFColor);
-  margin: 0px 30px;
-  overflow: auto;
-  min-height: 100vh;
+  /* margin: 0px 30px; */
+  /* overflow: auto; */
+  /* min-height: 100vh; */
+  overflow-y: scroll;
+  margin: 0px auto 10px auto;
+  width: 95%;
 }
 .container {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  /* width: 80%; */
   margin: 35px auto;
 }
 .row {
