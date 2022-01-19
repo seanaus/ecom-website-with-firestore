@@ -3,6 +3,7 @@
   display: grid;
   margin: 35px auto;
   grid-template-columns: auto;
+  /* min-height: 100vh; */
 }
 .cartBtn {
   padding: 8px;

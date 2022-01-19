@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+  <link rel="stylesheet" type="text/css" href="/css/footer.css" />
   <link rel="stylesheet" type="text/css" href="/css/product.css" />
   <link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
   <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
@@ -42,6 +43,7 @@
         <button id="addToCart" class="addToCart">Add To Cart</button>
       </div>
     </div>
+    <%- include('../partials/footer', { footer: footer }) %>
     <script>
       const data = {
         id: "<%= product.id %>",

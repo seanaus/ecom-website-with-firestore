@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+	<link rel="stylesheet" type="text/css" href="/css/footer.css" />
 	<link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
 	<link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
 	<link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
@@ -18,16 +19,16 @@
 
 <body>
 	<%- include('../partials/navBar',{ user: user,settings:settings })%>
-		<div class="container">
-			<div class="mapsWrapper">
-				<div class="mapsHeader">Directions</div>
-				<div class="mapsDescription">Click here for Google Map directions</div>
-				<a href="https://www.google.com/maps/place/Potteries+Jaguar+Spares/@53.049102,-2.1984056,672m/data=!3m2!1e3!4b1!4m5!3m4!1s0x487a42ec90fe77c9:0x2f60514ecf0926d1!8m2!3d53.0489972!4d-2.1960377"
-					target="_blank" class="mapsLink">
-					<image src="/images/maps.png" class="mapsImage"></image>
-				</a>
-			</div>
+	<div class="container">
+		<div class="mapsWrapper">
+			<div class="mapsHeader">Directions</div>
+			<div class="mapsDescription">Click here for Google Map directions</div>
+			<a href="https://www.google.com/maps/place/Potteries+Jaguar+Spares/@53.049102,-2.1984056,672m/data=!3m2!1e3!4b1!4m5!3m4!1s0x487a42ec90fe77c9:0x2f60514ecf0926d1!8m2!3d53.0489972!4d-2.1960377"
+				target="_blank" class="mapsLink">
+				<image src="/images/maps.png" class="mapsImage"></image>
+			</a>
 		</div>
+	</div>
+	<%- include('../partials/footer', { footer: footer }) %>
 </body>
-
 </html>

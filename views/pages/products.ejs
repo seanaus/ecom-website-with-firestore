@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" />
     <link rel="stylesheet" type="text/css" href="/css/products.css" />
     <link rel="stylesheet" type="text/css" href="/css/productCard.css" />
     <link rel="stylesheet" type="text/css" href="/css/slideShow.css" />
@@ -28,5 +29,6 @@
         <%- include('../partials/productCard', { product: product}) %> 
       <% }); %>
     </div>
+    <%- include('../partials/footer', { footer: footer }) %>
   </body>
 </html>

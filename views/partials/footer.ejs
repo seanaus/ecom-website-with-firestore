@@ -1,11 +1,5 @@
 <footer footer>
-  <div col>col1:1</div>
-  <div col>col1:2</div>
-  <div col>col1:3</div>
-  <div col>col2:1</div>
-  <div col>col2:2</div>
-  <div col>col2:3</div>
-  <div col>col3:1</div>
-  <div col>col3:2</div>
-  <div col>col3:3</div>
+  <% footer.items.forEach(link => { %>
+    <a col href="<%= link.route %>"><%= link.caption %></a>
+  <% }) %>
 </footer>

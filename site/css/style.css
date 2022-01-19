@@ -20,7 +20,6 @@ body {
   color: var(--themeFColor);
   /* margin: 0px 30px; */
   /* overflow: auto; */
-  /* min-height: 100vh; */
   overflow-y: scroll;
   margin: 0px auto 10px auto;
   width: 95%;
@@ -30,6 +29,7 @@ body {
   flex-direction: column;
   /* width: 80%; */
   margin: 35px auto;
+  /* min-height: 100vh; */
 }
 .row {
   display: flex;
