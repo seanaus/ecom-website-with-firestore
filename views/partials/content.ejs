@@ -6,10 +6,10 @@
 		<div class="contentText">
 			<%= item.content %>
 		</div>
-		<% } %>
-			<% if(item.contentType==='IMAGE' ) { %>
-				<div class="contentImage">
-					<image src="<%= item.content %>"></image>
-				</div>
-				<% } %>
-					<% }); %>
+	<% } %>
+	<% if(item.contentType==='IMAGE' ) { %>
+		<!-- <div class="contentImage" style="background-image: url('<%= item.content %>')"> -->
+			<image src="<%= item.content %>"></image>
+		<!-- </div> -->
+	<% } %>
+<% }); %>

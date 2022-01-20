@@ -23,7 +23,11 @@
     <title><%= settings.projectName %></title>
   </head>
   <body>
-    <%- include('../partials/navBar', { user: user,settings:settings }) %>
+    <%- include('../partials/navBar', { user: user,
+                                        navbar: navbar, 
+                                        settings: settings 
+                                      }) 
+    %> 
     <div class="productsContainer">
       <% products.forEach(product=> { %> 
         <%- include('../partials/productCard', { product: product}) %> 

@@ -6,11 +6,11 @@ const firestore = firebase.firestore();
 let configData = {};
 const loadConfig = async (id) => {
     try {
-        const items = await firestore.collection("configuration");
+        const items = await firestore.collection("components");
         const data = await items.get();
 
         if (data.empty) {
-            console.log("No page configuration data found");
+            console.log("No component data found");
         } else {
             data.forEach((doc) => {
                 if (doc.id === id) {
@@ -25,6 +25,7 @@ const loadConfig = async (id) => {
     } catch (error) {
         console.log(error.message);
     }
+    // console.log(configData);
     return configData;
 }
 module.exports = {

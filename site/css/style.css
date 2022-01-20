@@ -20,7 +20,7 @@ body {
   color: var(--themeFColor);
   /* margin: 0px 30px; */
   /* overflow: auto; */
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 0px auto 10px auto;
   width: 95%;
 }

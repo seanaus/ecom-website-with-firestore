@@ -26,7 +26,11 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user:user, settings:settings}) %>
+    <%- include('../partials/navBar', { user: user,
+                                        navbar: navbar, 
+                                        settings: settings 
+                                      }) 
+    %> 
     <div id="cartContainer" class="cartContainer">
       <div id="cart" class="cartCardContainer cartCardContainerAlignCenter">
         <!-- shopping cart html is generated in cart.js and injected here -->

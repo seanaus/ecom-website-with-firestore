@@ -18,7 +18,11 @@
 </head>
 
 <body>
-	<%- include('../partials/navBar',{ user: user,settings:settings })%>
+    <%- include('../partials/navBar', { user: user,
+                                        navbar: navbar, 
+                                        settings: settings 
+                                      }) 
+    %> 
 	<div class="container">
 		<div class="mapsWrapper">
 			<div class="mapsHeader">Directions</div>
