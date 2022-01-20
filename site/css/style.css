@@ -23,19 +23,20 @@ body {
   overflow-y: auto;
   margin: 0px auto 10px auto;
   width: 95%;
+  /* min-height: 100vh; */
 }
 .container {
   display: flex;
   flex-direction: column;
   /* width: 80%; */
-  margin: 35px auto;
-  /* min-height: 100vh; */
+  margin: 5px auto;
+  min-height: 75vh;
 }
 .row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 .pannel {
   padding: 5px;
@@ -116,7 +117,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 150px;
+  margin-top: 50px;
 }
 .mapsHeader {
   font-size: xx-large;

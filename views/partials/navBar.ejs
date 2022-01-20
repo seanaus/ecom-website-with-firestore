@@ -10,6 +10,9 @@
     <a class="navPill navLink <%= link.visible =='true' ? 'showMenuButton' : link.visible =='onAuth' && user.id != -1 ? 'showMenuButton' : link.visible =='!onAuth' && user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="<%= link.route %>">
       <div class="material-icons icon"><%= link.matIcon %></div>
       <div class="iconLabel"><%= link.caption %></div>
+      <% if(link.caption == 'Cart') { %>
+        <div id="cartCounter" class="cartCounter"></div>
+      <% } %>
     </a>
   <% }) %>
 </div>
