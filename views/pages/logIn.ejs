@@ -15,6 +15,11 @@
 	<title><%= settings.projectName %></title>
 </head>
 <body>
+    <%- include('../partials/navBar', { user: user,
+                                        navbar: navbar, 
+                                        settings: settings 
+                                      }) 
+    %> 
     <div class="container row">
         <div class="pannel">
             <form action="logIn" method="post">

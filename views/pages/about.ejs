@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="keywords" content="HTML, CSS, JavaScript" />
@@ -18,30 +17,14 @@
     <%= settings.projectName %>
   </title>
 </head>
-
 <body>
     <%- include('../partials/navBar', { user: user,
                                         navbar: navbar, 
                                         settings: settings 
                                       }) 
     %> 
-    <div class="container layoutTopMargin">
+    <div class="container">
       <%- include('../partials/content', { content:content }) %>
-        <!-- <% content.onPage.forEach(item => { %>
-        <div class="subTitleText">
-          <%= item.title %>
-        </div>
-        <% if(item.contentType ==='TEXT' ) { %>
-          <div class="contentText">
-            <%= item.content %>
-          </div>
-        <% } %>
-        <% if(item.contentType ==='IMAGE' ) { %>
-           <div class="contentImage">
-           	<image src="<%= item.content %>"></image>
-	         </div>
-        <% } %>
-      <% }); %> -->
     </div>
     <%- include('../partials/footer', { footer: footer }) %>
 </body>

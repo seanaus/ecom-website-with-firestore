@@ -1,15 +1,18 @@
 <% content.onPage.forEach(item=> { %>
-	<div class="subTitleText">
-		<%= item.title %>
-	</div>
 	<% if(item.contentType==='TEXT' ) { %>
+		<div class="subTitleText">
+			<%= item.title %>
+		</div>
 		<div class="contentText">
 			<%= item.content %>
 		</div>
 	<% } %>
 	<% if(item.contentType==='IMAGE' ) { %>
-		<!-- <div class="contentImage" style="background-image: url('<%= item.content %>')"> -->
-			<image src="<%= item.content %>"></image>
-		<!-- </div> -->
+		<div class="subTitleText">
+			<%= item.title %>
+		</div>
+		<div class="contentImage" style="background-image: url('<%= item.content %>')">
+			<!-- <image src="<%= item.content %>"></image> -->
+		</div>
 	<% } %>
 <% }); %>
