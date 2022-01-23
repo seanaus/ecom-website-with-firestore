@@ -1,9 +1,6 @@
-/* Slideshow container */
-.slideshow-container {
-  --max-width: 800px;
+/* carousel container */
+.carouselContainer {
   position: relative;
-  --margin: 15px;
-  --max-height: 200px;
 }
 
 /* Hide the images by default */

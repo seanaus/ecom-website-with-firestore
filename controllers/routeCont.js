@@ -8,8 +8,7 @@ const renderHome = async (req, res, next) => {
   res.render("pages/index", {
     settings: await loadSettings(),
     user: activeUser(),
-    // slideShow: await slideShow(),
-    slideShow: await loadConfig("carousel"),
+    carousel: await loadConfig("carousel"),
     navbar: await loadConfig("navbar"),
     content: await loadPage("home"),
     footer: await loadConfig("footer")

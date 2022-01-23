@@ -1,0 +1,8 @@
+<div class="carouselContainer">
+  <% slide = 0 %> 
+  <% slides = carousel.items.length %> 
+  <% carousel.items.forEach(content => { %> 
+    <% slide = slide + 1 %> 
+    <%- include('../partials/slide', { content:content, slide:slide, slides:slides })%> 
+  <% }); %>
+</div>
