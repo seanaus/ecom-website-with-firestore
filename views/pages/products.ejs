@@ -24,16 +24,25 @@
   </head>
   <body>
     <div id="pageLayoutContainer" class="container">
-      <%- include('../partials/navBar', { user: user, navbar: navbar, settings: settings }) %> 
+      <%- include('../partials/navBar', { user: user, navbar: navbar, settings:
+      settings }) %>
       <div class="productsContainer">
-        <% products.forEach(product=> { %> 
-          <%- include('../partials/productCard', { product: product}) %> 
-        <% }); %>
+        <% products.forEach(product=> { %> <%-
+        include('../partials/productCard', { product: product}) %> <% }); %>
       </div>
       <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <script>
-      document.getElementById('pageLayoutContainer').style.setProperty('width', '<%= settings.pageWidthMaxPercentage %>%')
+    <script type="text/javascript">
+      const sizePage = () => {
+        const layoutContainer = document.getElementById("pageLayoutContainer");
+        if (layoutContainer) {
+          layoutContainer.style.setProperty(
+            "width",
+            "<%= settings.pageWidthMaxPercentage %>%"
+          );
+        }
+      };
+      window.onload = sizePage();
     </script>
   </body>
 </html>

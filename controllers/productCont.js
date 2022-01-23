@@ -10,7 +10,7 @@ const { getCart } = require("../core/cart");
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
   res.render("pages/products", {
-    settings: loadSettings(),
+    settings: await loadSettings(),
     navbar: await loadConfig("navbar"),
     footer: await loadConfig("footer"),
     user: activeUser(),

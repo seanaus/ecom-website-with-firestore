@@ -1,50 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="keywords" content="HTML, CSS, JavaScript">
-	<meta name="description" content="PJS">
-	<meta name="author" content="PJS">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="HTML, CSS, JavaScript" />
+    <meta name="description" content="PJS" />
+    <meta name="author" content="PJS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
     <link rel="stylesheet" type="text/css" href="/css/footer.css" />
-	<link rel="stylesheet" type="text/css" href="/iconfont/material-icons.css" />
-	<link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
-	<link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
-	<title><%= settings.projectName %></title>
-</head>
-<body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-    <div class="container row">
-        <div class="pannel">
-            <form action="logIn" method="post">
-                <div class="form-group">
-                    <label for="email">
-                        Email
-                        <input type="email" name="email" required>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="password">
-                        Password
-                        <input type="password" name="password" required>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn">Login</button>
-                </div>
-                <div class="form-group signInAltContainer">
-                    <a class="link" href="/pwd-reset">Forgot Password</a>
-                    <a class="link" href="/register">Register</a>
-                </div>
-            </form>
-        </div>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/iconfont/material-icons.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
+    <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
+    <script defer type="text/javascript" src="/js/navBar.js"></script>
+    <title><%= settings.projectName %></title>
+  </head>
+  <body>
+    <div id="pageLayoutContainer" class="container">
+      <%- include('../partials/navBar', {user:user, navbar:navbar,
+      settings:settings}) %>
+      <div class="pannel">
+        <form action="logIn" method="post">
+          <div class="form-group">
+            <label for="email">
+              Email
+              <input type="email" name="email" required />
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="password">
+              Password
+              <input type="password" name="password" required />
+            </label>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn">Login</button>
+          </div>
+          <div class="form-group signInAltContainer">
+            <a class="link" href="/pwd-reset">Forgot Password</a>
+            <a class="link" href="/register">Register</a>
+          </div>
+        </form>
+      </div>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <%- include('../partials/footer', { footer: footer }) %>
-</body>
+    <script type="text/javascript">
+      const sizePage = () => {
+        const layoutContainer = document.getElementById("pageLayoutContainer");
+        if (layoutContainer) {
+          layoutContainer.style.setProperty(
+            "width",
+            "<%= settings.pageWidthMaxPercentage %>%"
+          );
+        }
+      };
+      window.onload = sizePage();
+    </script>
+  </body>
 </html>

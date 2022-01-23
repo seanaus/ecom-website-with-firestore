@@ -1,15 +1,12 @@
 .productsContainer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: 35px auto;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
-
 @media only screen and (min-width: 768px) {
-    .productsContainer {
-        flex-direction: row;
-    }
+  .productsContainer {
+    flex-direction: row;
+  }
 }

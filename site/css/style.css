@@ -18,18 +18,16 @@ body {
   background-color: var(--themeBgColor);
   color: var(--themeFColor);
   display: grid;
-	grid-template-rows: auto 1fr auto;
-	grid-template-columns: auto;
-	min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto;
+  min-height: 100vh;
   margin: 0px auto 10px auto;
   overflow-y: auto;
 }
 .container {
   display: flex;
   flex-direction: column;
-  width: 90%;
   margin: 5px auto;
-  /* min-height: 75vh; */
 }
 .row {
   display: flex;
@@ -39,8 +37,9 @@ body {
 }
 .pannel {
   padding: 5px;
-  margin: 35px 0px 20px 0px;
-  min-width: 300px;
+  margin: 35px auto 20px auto;
+  width: 300px;
+  min-height: 60vh;
 }
 label {
   display: block;
@@ -111,7 +110,7 @@ input:focus {
 button:hover {
   opacity: 0.8;
 }
-.mapsWrapper {
+/* .mapsWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,7 +132,7 @@ button:hover {
   text-decoration: none;
   color: var(--themeFColor);
   cursor: pointer;
-}
+} */
 /* .titleText {
   text-align: center;
   font-size: xx-large;
