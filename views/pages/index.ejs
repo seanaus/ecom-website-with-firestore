@@ -25,15 +25,27 @@
 
   <body>
     <div id="pageLayoutContainer" class="container">
-      <%- include('../partials/navBar', { user: user,navbar:
-      navbar,settings:settings }) %> <%- include('../partials/carousel, {
-      carousel: carousel }) %> <%- include('../partials/content', { content:
-      content }) %> <%- include('../partials/footer', { footer: footer }) %>
+      <%- include('../partials/navBar', {user:user,navbar:navbar,settings:settings}) %> 
+      <%- include('../partials/carousel', {carousel: carousel }) %> 
+      <%- include('../partials/content', { content:content }) %> 
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <script>
+<!--     <script>
       document
         .getElementById("pageLayoutContainer")
         .style.setProperty("width", "<%= settings.pageWidthMaxPercentage %>%");
+    </script> -->
+    <script type="text/javascript">
+      const reSizePage = () => {
+        const layoutContainer = document.getElementById("pageLayoutContainer");
+        if (layoutContainer) {
+          layoutContainer.style.setProperty(
+            "width",
+            "<%= settings.pageWidthMaxPercentage %>%"
+          );
+        }
+      };
+      window.onload = reSizePage();
     </script>
   </body>
 </html>

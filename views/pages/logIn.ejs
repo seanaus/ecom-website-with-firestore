@@ -49,7 +49,7 @@
       <%- include('../partials/footer', { footer: footer }) %>
     </div>
     <script type="text/javascript">
-      const sizePage = () => {
+      const reSizePage = () => {
         const layoutContainer = document.getElementById("pageLayoutContainer");
         if (layoutContainer) {
           layoutContainer.style.setProperty(
@@ -58,7 +58,7 @@
           );
         }
       };
-      window.onload = sizePage();
+      window.onload = reSizePage();
     </script>
   </body>
 </html>

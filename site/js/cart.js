@@ -117,7 +117,7 @@ const renderCartTotals = (cart) => {
   );
   cartTotalsViewHTML = cartTotalsViewHTML.replace(
     "{total}",
-    asGBP.format(cart.totalCost + _calcVat)
+    asGBP.format(cart.totalCost + _profitMetricPercentage)
   );
   cartTotalsContainerElement.innerHTML = cartTotalsViewHTML;
 };

@@ -17,16 +17,14 @@
     <link rel="stylesheet" type="text/css" href="/matIconFix/index.css" />
     <link rel="icon" href="/favicon/favicon.ico?v=2" type="image/x-icon" />
     <script defer type="text/javascript" src="/js/user.js"></script>
+    <script defer type="text/javascript" src="/js/navBar.js"></script>
     <title><%= settings.projectName %></title>
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-    <div class="container">
+    <div id="pageLayoutContainer" class="container">
+      <%- include('../partials/navBar', {user:user, navbar:navbar,
+      settings:settings}) %>
       <div class="pannel">
         <div id="error"></div>
         <form action="/register" method="post" id="register">
@@ -77,7 +75,19 @@
           </div>
         </form>
       </div>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <%- include('../partials/footer', { footer: footer }) %>
+    <script type="text/javascript">
+      const reSizePage = () => {
+        const layoutContainer = document.getElementById("pageLayoutContainer");
+        if (layoutContainer) {
+          layoutContainer.style.setProperty(
+            "width",
+            "<%= settings.pageWidthMaxPercentage %>%"
+          );
+        }
+      };
+      window.onload = reSizePage();
+    </script>
   </body>
 </html>
