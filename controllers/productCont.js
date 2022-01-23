@@ -1,6 +1,5 @@
 "use strict";
 const firebase = require("../db");
-// const Product = require("../models/product");
 const firestore = firebase.firestore();
 const { loadSettings } = require("../core/settings");
 const { loadConfig } = require("../core/config");

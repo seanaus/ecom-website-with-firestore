@@ -1,46 +1,51 @@
-<div class="burger-container" onClick="toggleNavPills()">
-  <div class="burger">
-    <div class="burger-line burger-line-top"></div>
-    <div class="burger-line burger-line-middle"></div>
-    <div class="burger-line burger-line-bottom"></div>
-  </div>
-</div>
-<div class="navBar" id="navBar">
-  <% navbar.items.forEach(link => { %>
-    <a class="navPill navLink <%= link.visible =='true' ? 'showMenuButton' : link.visible =='onAuth' && user.id != -1 ? 'showMenuButton' : link.visible =='!onAuth' && user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="<%= link.route %>">
-      <div class="material-icons icon"><%= link.matIcon %></div>
-      <div class="iconLabel"><%= link.caption %></div>
-      <% if(link.caption == 'Cart') { %>
-        <div id="cartCounter" class="cartCounter"></div>
-      <% } %>
-    </a>
-  <% }) %>
-</div>
-<script>
-  const settings = {
-    id: "<%= settings.id %>",
-    projectName: "<%= settings.projectName %>",
-    profitMetricPercentage: "<%= settings.profitMetricPercentage %>",
-    pageWidthMaxPercentage: "<%= settings.pageWidthMaxPercentage %>",
-  };
-  const auth = {
-    id: "<%= user.id %>",
-    forename: "<%= user.forename %>",
-    surname: "<%= user.surname %>",
-    email: "<%= user.email %>",
-    token: "<%= user.token %>",
-  };
-  // Save projectSettings and auth info to BROWSER's local storage
-  // So that the data is available for the dynamic javascript code
-  localStorage.setItem("settings", JSON.stringify(settings));
-  localStorage.setItem("auth", JSON.stringify(auth));
-  // If different user logs in on same machine remove the cached cart
-  // Data from the previous user
-  const cartCache = JSON.parse(localStorage.getItem("cart"));
-  if (cartCache) {
-    if (cartCache.userId !== "<%= user.id %>") {
-      localStorage.removeItem("cart");
+const gridView = window.matchMedia("(min-width: 768px)");
+// Sean Austin
+// 13/01/2022
+// Toggle navPill visibillity on smaller devices
+const toggleNavPills = () => {
+  const navBar = document.getElementById("navBar");
+  navBar.style.display = navBar.style.display === "none" ? "flex" : "none";
+};
+// Sean Austin
+// 13/01/2022
+// Highlight selected navPill
+const isSelected = () => {
+  const currentPageUrl = location.href;
+  const menuItem = document.querySelectorAll("a");
+  for (let i = 0; i < menuItem.length; i++) {
+    if (menuItem[i].href === currentPageUrl) {
+      if ((menuItem[i].className = "navPill navLink")) {
+        menuItem[i].className += " active";
+      }
     }
   }
-
-</script>
+};
+// Sean Austin
+// 13/01/2022
+// Hide burger on smaller divices
+const configureNavBar = () => {
+  const navBar = document.getElementById("navBar");
+  navBar.style.display = gridView.matches ? "flex" : "none";
+};
+// Sean Austin
+// 13/01/2022
+// ...
+window.onload = () => {
+  isSelected();
+  const items = cartItemCount();
+  const cartCounter = document.getElementById("cartCounter");
+  if (cartCounter) {
+    cartCounter.innerText = items === null ? 0 : items;
+  }
+};
+// Sean Austin
+// 13/01/2022
+// Get Item Count from BROWSER'S localStorage
+const cartItemCount = () => {
+  let count = 0;
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  if (cart) {
+    count = cart.itemCount;
+  }
+  return count;
+};

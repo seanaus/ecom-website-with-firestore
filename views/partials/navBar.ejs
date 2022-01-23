@@ -7,51 +7,24 @@
 </div>
 <div class="navBar" id="navBar">
   <% navbar.items.forEach(link => { %>
-    <a class="navPill navLink <%= link.visible =='true' ? 'showMenuButton' : link.visible =='onAuth' && user.id != -1 ? 'showMenuButton' : link.visible =='!onAuth' && user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="<%= link.route %>">
-      <div class="material-icons icon"><%= link.matIcon %></div>
-      <div class="iconLabel"><%= link.caption %></div>
-      <% if(link.caption == 'Cart') { %>
-        <div id="cartCounter" class="cartCounter"></div>
-      <% } %>
-    </a>
+  <a
+    class="navPill navLink <%= link.visible =='true' ? 'showMenuButton' : link.visible =='onAuth' && user.id != -1 ? 'showMenuButton' : link.visible =='!onAuth' && user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>"
+    href="<%= link.route %>"
+  >
+    <div class="material-icons icon"><%= link.matIcon %></div>
+    <div class="iconLabel"><%= link.caption %></div>
+    <% if(link.caption == 'Cart') { %>
+    <div id="cartCounter" class="cartCounter"></div>
+    <% } %>
+  </a>
   <% }) %>
 </div>
-<!-- <div class="navBar" id="navBar">
-  <a class="navPill navLink" href="/home">
-    <div class="material-icons icon">home</div>
-    <div class="iconLabel">Home</div>
-  </a>
-  <a class="navPill navLink" href="/about">
-    <div class="material-icons icon">info</div>
-    <div class="iconLabel">About</div>
-  </a>
-  <a class="navPill navLink" href="/products">
-    <div class="material-icons icon">inventory</div>
-    <div class="iconLabel">Products</div>
-  </a>
-  <a class="navPill navLink" href="/location">
-    <div class="material-icons icon">place</div>
-    <div class="iconLabel">Location</div>
-  </a>
-  <a class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/cart">
-    <div class="material-icons">shopping_cart</div>
-    <div class="iconLabel">Cart</div>
-    <div id="cartCounter" class="cartCounter"></div>
-  </a>
-  <a class="navPill navLink <%= user.id == -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/logIn">
-    <div class="material-icons icon">login</div>
-    <div class="iconLabel">Log In</div>
-  </a>
-  <a class="navPill navLink <%= user.id != -1 ? 'showMenuButton' : 'hideMenuButton' %>" href="/logOut">
-    <div class="material-icons icon">logout</div>
-    <div class="iconLabel">Log Out</div>
-  </a>
-</div> -->
 <script>
   const settings = {
     id: "<%= settings.id %>",
     projectName: "<%= settings.projectName %>",
-    vatPercentage: "<%= settings.vatPercentage %>",
+    profitMetricPercentage: "<%= settings.profitMetricPercentage %>",
+    pageWidthMaxPercentage: "<%= settings.pageWidthMaxPercentage %>",
   };
   const auth = {
     id: "<%= user.id %>",
@@ -72,5 +45,4 @@
       localStorage.removeItem("cart");
     }
   }
-
 </script>

@@ -134,7 +134,7 @@ button:hover {
   color: var(--themeFColor);
   cursor: pointer;
 }
-.titleText {
+/* .titleText {
   text-align: center;
   font-size: xx-large;
   margin: 0px 0px 10px;
@@ -165,4 +165,4 @@ button:hover {
 }
 .layoutTopMargin {
   margin-top: 50px;
-}
+} */

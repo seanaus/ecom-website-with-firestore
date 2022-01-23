@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/css/navBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/content.css" />
     <link rel="stylesheet" type="text/css" href="/css/footer.css" />
     <link rel="stylesheet" type="text/css" href="/css/slideShow.css" />
     <link
@@ -24,13 +25,15 @@
 
   <body>
     <div id="pageLayoutContainer" class="container">
-      <%- include('../partials/navBar', { user: user,navbar: navbar,settings: settings }) %> 
-      <%- include('../partials/slideShow', { slideShow: slideShow }) %>
+      <%- include('../partials/navBar', { user: user,navbar: navbar,settings:settings }) %>
+      <%- include('../partials/slideShow', { slideShow: slideShow }) %> 
       <%- include('../partials/content', { content: content }) %>
       <%- include('../partials/footer', { footer: footer }) %>
     </div>
     <script>
-      document.getElementById('pageLayoutContainer').style.setProperty('width', '<%= settings.pageWidthMaxPercentage %>%')
+      document
+        .getElementById("pageLayoutContainer")
+        .style.setProperty("width", "<%= settings.pageWidthMaxPercentage %>%");
     </script>
   </body>
 </html>
