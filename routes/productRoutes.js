@@ -1,11 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const { renderProducts, renderProduct } = require("../controllers/productCont");
-const { authGuard } = require("../controllers/authCont");
-
-router.get("/products", authGuard, renderProducts);
-router.get("/product/:id", authGuard,renderProduct);
-
-module.exports = {
-  routes: router,
+const renderProducts = async (req, res, next) => {
+  const productArray = await loadProducts();
+  res.render("pages/products", {
+    settings: await loadSettings(),
+    navbar: await loadConfig("navbar"),
+    footer: await loadConfig("footer"),
+    user: activeUser(),
+    products: productArray,
+    cart: getCart(),
+  });
+  next();
 };

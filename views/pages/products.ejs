@@ -23,16 +23,17 @@
     <title><%= settings.projectName %></title>
   </head>
   <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-    <div class="productsContainer">
-      <% products.forEach(product=> { %> 
-        <%- include('../partials/productCard', { product: product}) %> 
-      <% }); %>
+    <div id="pageLayoutContainer" class="container">
+      <%- include('../partials/navBar', { user: user, navbar: navbar, settings: settings }) %> 
+      <div class="productsContainer">
+        <% products.forEach(product=> { %> 
+          <%- include('../partials/productCard', { product: product}) %> 
+        <% }); %>
+      </div>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <%- include('../partials/footer', { footer: footer }) %>
+    <script>
+      document.getElementById('pageLayoutContainer').style.setProperty('width', '<%= settings.pageWidthMaxPercentage %>%')
+    </script>
   </body>
 </html>

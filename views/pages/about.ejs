@@ -18,15 +18,14 @@
   </title>
 </head>
 <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-    <div class="container">
-      <%- include('../partials/content', { content:content }) %>
-    </div>
+  <div id="pageLayoutContainer" class="container">
+    <%- include('../partials/navBar', { user: user,navbar: navbar, settings: settings }) %> 
+    <%- include('../partials/content', { content:content }) %>
     <%- include('../partials/footer', { footer: footer }) %>
+  </div>
+  <script>
+    document.getElementById('pageLayoutContainer').style.setProperty('width', '<%= settings.pageWidthMaxPercentage %>%')
+  </script>
 </body>
 
 </html>

@@ -8,10 +8,10 @@
 		</div>
 	<% } %>
 	<% if(item.contentType==='IMAGE' ) { %>
-		<div class="subTitleText">
-			<%= item.title %>
-		</div>
 		<div class="contentImage" style="background-image: url('<%= item.content %>')">
+			<div class="subTitleImage">
+				<%= item.title %>
+			</div>
 			<!-- <image src="<%= item.content %>"></image> -->
 		</div>
 	<% } %>

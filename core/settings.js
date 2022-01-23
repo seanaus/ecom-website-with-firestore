@@ -15,7 +15,8 @@ const loadSettings = async () => {
                 const tmp = new Settings(
                     doc.id,
                     doc.data().projectName,
-                    doc.data().vatPercentage
+                    doc.data().profitMetricPercentage,
+                    doc.data().pageWidthMaxPercentage,
                 );
                 settings.push(tmp);
             });

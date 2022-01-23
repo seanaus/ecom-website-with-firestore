@@ -1,5 +1,5 @@
 import { auth } from "./auth.js";
-import { getSettings, getProjectName, getVatPercentage } from "./settings.js";
+import { getSettings, projectName, profitMetricPercentage } from "./settings.js";
 import { getProduct, asGBP } from "./product.js";
 const cartCardTemplate = `
   <div class="cartCard">
@@ -42,7 +42,7 @@ const cartTotalsTemplate = `
 <div class="cartTotalCell cartTotalCellLabel">Net</div>  
 <div class="cartTotalCell cartTotalCellValue">{netTotal}</div>
 <div class="cartTotalCell cartTotalCellLabel">Vat</div>
-<div class="cartTotalCell cartTotalCellValue">{vat}</div>
+<div class="cartTotalCell cartTotalCellValue">{profitMetricPercentage}</div>
 <div class="cartTotalCell cartTotalCellLabel">Total</div>
 <div class="cartTotalCell cartTotalCellValue">{total}</div>
 <form action="/checkout" class="cartTotalBtn">
@@ -104,16 +104,16 @@ const renderCart = () => {
 const renderCartTotals = (cart) => {
   const cartTotalsContainerElement = document.getElementById("cartTotals");
   let cartTotalsViewHTML = cartTotalsTemplate;
-  let _calcVat = 0;
-  _calcVat = calcVat(cart.totalCost, getVatPercentage());
+  let _profitMetricPercentage = 0;
+  _profitMetricPercentage= calcprofitMetricPercentage(cart.totalCost, profitMetricPercentage());
   cartTotalsViewHTML = cartTotalsViewHTML.replace("{items}", cart.itemCount);
   cartTotalsViewHTML = cartTotalsViewHTML.replace(
     "{netTotal}",
     asGBP.format(cart.totalCost)
   );
   cartTotalsViewHTML = cartTotalsViewHTML.replace(
-    "{vat}",
-    asGBP.format(_calcVat)
+    "{profitMetricPercentage}",
+    asGBP.format(_profitMetricPercentage)
   );
   cartTotalsViewHTML = cartTotalsViewHTML.replace(
     "{total}",
@@ -252,7 +252,7 @@ const calcItemCount = (items) => {
     return 0;
   }
 };
-const calcVat = (value, percentage) => {
+const calcprofitMetricPercentage = (value, percentage) => {
   return Math.ceil(value * (percentage / 100));
 };
 const addClass = (element, className) => {
@@ -267,6 +267,9 @@ const removeClass = (element, className) => {
 };
 const refreshCartIcon = () => {
   const cart = getCart();
-  document.getElementById("cartCounter").innerText = JSON.parse(cart.itemCount);
+  const cartCounterElement = document.getElementById("cartCounter");
+  if(cartCounterElement) {
+    cartCounterElement.innerText = JSON.parse(cart.itemCount);
+  }
 };
 export { getCart };

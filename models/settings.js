@@ -2,11 +2,14 @@ class Settings {
     constructor(
         id,
         projectName,
-        vatPercentage
+        profitMetricPercentage,
+        pageWidthMaxPercentage
+
     ) {
-        this.id = id,
-        this.projectName = projectName,
-        this.vatPercentage = vatPercentage
+        this.id = id;
+        this.projectName = projectName;
+        this.profitMetricPercentage = profitMetricPercentage;
+        this.pageWidthMaxPercentage = pageWidthMaxPercentage;
     }
 }
 module.exports = Settings

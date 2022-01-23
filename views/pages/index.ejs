@@ -23,16 +23,14 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-
-    <div class="container">
+    <div id="pageLayoutContainer" class="container">
+      <%- include('../partials/navBar', { user: user,navbar: navbar,settings: settings }) %> 
       <%- include('../partials/slideShow', { slideShow: slideShow }) %>
       <%- include('../partials/content', { content: content }) %>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <%- include('../partials/footer', { footer: footer }) %>
+    <script>
+      document.getElementById('pageLayoutContainer').style.setProperty('width', '<%= settings.pageWidthMaxPercentage %>%')
+    </script>
   </body>
 </html>

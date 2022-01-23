@@ -7,7 +7,7 @@ const getSettings = () => {
     return null;
   }
 };
-const getProjectName = () => {
+const projectName = () => {
   const settings = getSettings();
   if (settings) {
     return settings.getProjectName;
@@ -15,12 +15,12 @@ const getProjectName = () => {
     return "Invalid Settings Data";
   }
 };
-const getVatPercentage = () => {
+const profitMetricPercentage = () => {
   const settings = getSettings();
   if (settings) {
-    return parseInt(settings.vatPercentage);
+    return parseInt(settings.profitMetricPercentage);
   } else {
     return parseInt("20");
   }
 };
-export { getSettings, getProjectName,getVatPercentage };
+export { getSettings, projectName,profitMetricPercentage };
