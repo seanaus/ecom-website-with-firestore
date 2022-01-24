@@ -32,7 +32,9 @@
   border-radius: 5px;
   padding: 15px 5px;
   margin: 0px 15px 15px 15px;
-  min-width: 300px;
+  min-width: 350px;
+  width: 100%;
+  max-height: 470px;
   display: inline-grid;
   grid-template-rows: auto 310px auto auto auto;
   border: 1px solid var(--themeBoxShadow);
@@ -118,6 +120,7 @@
   border-radius: 5px;
   border: 1px solid var(--themeBoxShadow);
   box-shadow: 5px 5px 8px var(--themeBoxShadow);
+  margin: 0px 15px 15px 15px;
 }
 .cartTotalCell {
   padding: 5px;
@@ -142,5 +145,10 @@
 @media only screen and (min-width: 768px) {
   .cartContainer {
     grid-template-columns: auto 200px;
+  }
+  .cartCard {
+    width: 350px;
+  }
+  .cartTotals {
   }
 }

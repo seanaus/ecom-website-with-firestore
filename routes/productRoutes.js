@@ -4,7 +4,8 @@ const { renderProducts, renderProduct } = require("../controllers/productCont");
 const { authGuard } = require("../controllers/authCont");
 
 router.get("/products", authGuard, renderProducts);
-router.get("/product/:id", authGuard,renderProduct);
+// router.get("/products", renderProducts);
+router.get("/product/:id", authGuard, renderProduct);
 
 module.exports = {
   routes: router,

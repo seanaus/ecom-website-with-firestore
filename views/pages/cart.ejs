@@ -26,21 +26,31 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
-    <div id="cartContainer" class="cartContainer">
-      <div id="cart" class="cartCardContainer cartCardContainerAlignCenter">
-        <!-- shopping cart html is generated in cart.js and injected here -->
-      </div>
-      <div>
-        <div id="cartTotals" class="cartTotals">
-          <!-- Cart Totals html is generated in cart.js and injected here -->
+    <div id="pageLayoutContainer" class="container">
+      <%- include('../partials/navBar', {user:user, navbar:navbar, settings:settings}) %> 
+      <div id="cartContainer" class="cartContainer">
+        <div id="cart" class="cartCardContainer cartCardContainerAlignCenter">
+          <!-- shopping cart html is generated in cart.js and injected here -->
+        </div>
+        <div>
+          <div id="cartTotals" class="cartTotals">
+            <!-- Cart Totals html is generated in cart.js and injected here -->
+          </div>
         </div>
       </div>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
-    <%- include('../partials/footer', { footer: footer }) %>
+    <script type="text/javascript">
+      const reSizePage = () => {
+        const layoutContainer = document.getElementById("pageLayoutContainer");
+        if (layoutContainer) {
+          layoutContainer.style.setProperty(
+            "width",
+            "<%= settings.pageWidthMaxPercentage %>%"
+          );
+        }
+      };
+      window.onload = reSizePage();
+    </script>
   </body>
 </html>

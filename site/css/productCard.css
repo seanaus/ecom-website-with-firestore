@@ -1,13 +1,15 @@
 .productCardLink {
     text-decoration: none;
     color: var(--fColor);
+    width: 100%;
 }
 .productCard {
     border: 1px solid white;
     border-radius: 5px;
     padding: 15px 5px;
-    margin: 15px;
     min-width: 300px;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
     /* height: 400px;
     width: 400px; */
     /* display: inline-grid; */
@@ -41,7 +43,11 @@
 }
 
 @media only screen and (min-width: 768px) {
-    /* .productCard {
-        min-width: 300px;
-    } */
+    .productCard {
+        width: 300px;
+        margin: 15px;
+    }
+    .productCardLink {
+        width: 300px;
+    }
 }
