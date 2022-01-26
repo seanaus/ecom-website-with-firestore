@@ -22,8 +22,10 @@
 </head>
 <body>
   <div id="pageLayoutContainer" class="container">
-    <%- include('../partials/navBar', { user: user,navbar: navbar, settings:
-    settings }) %> <%- include('../partials/content', { content:content }) %>
+    <%- include('../partials/navBar', { user: user,navbar: navbar, settings:settings }) %>
+    <div class="contentContainer">
+      <%- include('../partials/content', { content:content }) %>
+    </div>
     <%- include('../partials/footer', { footer: footer }) %>
   </div>
   <script>
@@ -33,5 +35,3 @@
   </script>
 </body>
 </html>
-
-

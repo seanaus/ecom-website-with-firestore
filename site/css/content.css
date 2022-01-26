@@ -1,34 +1,59 @@
-.titleText {
-  text-align: center;
-  font-size: xx-large;
+.contentContainer {
+  margin: 15px 35px 15px 35px;
 }
-.subTitleText {
+.h0 {
   font-family: optima;
-  font-size: large;
   opacity: 0.8;
   margin: 5px 0px 0px 0px;
+}
+.h1 {
+  font-size: xx-large;
+}
+.h2 {
+  font-size: x-large;
+}
+.h3 {
+  font-size: large;
+}
+.ul {
+  padding: 0px 0px 0px 10px;
+}
+.li {
+  font-family: optima;
+  font-size: medium;
+  opacity: 0.8;
+}
+.liDot {
+  font-size: 15px;
+  font-weight: 800;
+}
+.bold {
+  font-weight: bolder;
 }
 .subTitleImage {
   font-size: large;
   text-align: center;
   /* margin: 5px 0px 0px 0px;  */
   padding: 10px 0px 10px 0px;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 
 }
 .contentText {
   font-family: optima;
   font-size: small;
   opacity: 0.8;
-  margin: 5px auto 5px auto;
+  margin: 5px 5px 5px 5px;
 }
 .contentImage {
   /* min-width: 80%; */
   aspect-ratio: 2/1;
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+.pullCenter {
+  text-align: center;
 }

@@ -7,6 +7,8 @@ const {
   renderLocation,
   renderLogIn,
   renderRegistration,
+  renderPrivacyPolicy,
+  renderTermsAndConditions
 } = require("../controllers/routeCont");
 
 const navToHome = (req, res, next) => {
@@ -19,6 +21,9 @@ router.get("/location", renderLocation);
 router.get("/logIn", renderLogIn);
 router.get("/logOut", logOut, navToHome);
 router.get("/register", renderRegistration);
+router.get("/privacyPolicy", renderPrivacyPolicy);
+router.get("/termsAndConditions", renderTermsAndConditions);
+
 router.post("/logIn", logIn, navToHome);
 router.post("/register", createNew, navToHome);
 

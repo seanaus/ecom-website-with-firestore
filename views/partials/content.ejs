@@ -1,5 +1,5 @@
 <% content.onPage.forEach(item=> { %>
-	<% if(item.contentType==='TEXT' ) { %>
+	<% if(item.format==='TEXT' ) { %>
 		<div class="subTitleText">
 			<%= item.title %>
 		</div>
@@ -7,12 +7,12 @@
 			<%= item.content %>
 		</div>
 	<% } %>
-	<% if(item.contentType==='HTML' ) { %>
-		<div class="container">
+	<% if(item.format==='HTML' ) { %>
+		<!-- <div class="container"> -->
 			<%- item.content %>
-		</div>
+		<!-- </div> -->
 	<% } %>
-	<% if(item.contentType==='IMAGE' ) { %>
+	<% if(item.format==='IMAGE' ) { %>
 		<div class="contentImage" style="background-image: url('<%= item.content %>')">
 			<div class="container">
 				<% item.title %>
