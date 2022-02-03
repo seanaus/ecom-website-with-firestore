@@ -3,7 +3,7 @@
 }
 .h0 {
   font-family: optima;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   margin: 5px 0px 0px 0px;
 }
 .h1 {
@@ -21,7 +21,7 @@
 .li {
   font-family: optima;
   font-size: medium;
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 .liDot {
   font-size: 15px;
@@ -40,8 +40,8 @@
 }
 .contentText {
   font-family: optima;
-  font-size: small;
-  opacity: 0.8;
+  font-size: medium;
+  /* opacity: 0.8; */
   margin: 5px 5px 5px 5px;
 }
 .contentImage {

@@ -3,58 +3,30 @@ const firebase = require("../db");
 const ProductLevel01 = require("../models/productLevel01");
 const firestore = firebase.firestore();
 
-const loadProductLevel01 = async (id) => {
+const loadProductLevel01 = async (productLevelHierarchy, productLevel01) => {
   try {
-    if (typeof (id) != "undefined") {
-      const productLevelData = await firestore.collection("productLevel01").doc(id);
+    if (typeof productLevel01 != "undefined") {
+      const productLevelData = await firestore
+        .collection("productLevel01")
+        .doc(productLevel01);
       const data = await productLevelData.get();
       if (!data.empty) {
-        const productLevel01 = new ProductLevel01(
-          data.id,
-          data.data().label
-        );
-        return productLevel01
+        const productLevel01 = new ProductLevel01(data.id, data.data().label);
+        return productLevel01;
       } else {
-        console.log("NO ProductLevel data found for Id: " + id);
+        console.log(
+          `No ProductLevel01 data found for productLevel01 : ${productLevel01}`
+        );
       }
     } else {
-      return new ProductLevel01("-1","FUCK YOU!!!");
+      return new ProductLevel01("-1", "UNDEFINED");
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(
+      `loadProductLevel01 : ${error.message} productLevelHierarchy : ${productLevelHierarchy} productLevel01 : ${productLevel01}`
+    );
   }
 };
 module.exports = {
-  loadProductLevel01
+  loadProductLevel01,
 };
-
-
-// "use strict";
-// const firebase = require("../db");
-// const ProductLevel01 = require("../models/productLevel01");
-// const firestore = firebase.firestore();
-
-// const loadProductLevel01 = async (id) => {
-//   try {
-//     if (id === "UNDEFINED") {
-//         const productLevel01 = new ProductLevel01(
-//         "",
-//         ""
-//         );
-//         return productLevel01
-//     } else {
-//         const productLevelData = await firestore.collection("productLevel01").doc(id);
-//         const data = await productLevelData.get();
-//         const productLevel01 = new ProductLevel01(
-//         data.id,
-//         data.data().label
-//         );
-//         return productLevel01
-//     }
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-// module.exports = {
-//   loadProductLevel01
-// };
