@@ -23,11 +23,11 @@
   </head>
   <body>
     <div id="pageLayoutContainer" class="container">
-      <%- include('../partials/navBar', { user: user, navbar: navbar, settings:
-      settings }) %>
+      <%- include('../partials/navBar', { user: user, navbar: navbar, settings:settings }) %>
+      <%- include('../partials/productLevelControl', { productLevels: productLevels }) %>
       <div class="productsContainer">
-        <% products.forEach(product=> { %> <%-
-        include('../partials/productCard', { product: product}) %> <% }); %>
+        <% products.forEach(product=> { %> 
+          <%- include('../partials/productCard', { product: product}) %> <% }); %>
       </div>
       <%- include('../partials/footer', { footer: footer }) %>
     </div>

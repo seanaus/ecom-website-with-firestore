@@ -18,7 +18,7 @@ const renderProducts = async (req, res, next) => {
     navbar: await loadConfig("navbar"),
     footer: await loadConfig("footer"),
     user: activeUser(),
-    productLevel: productLevelsArray,
+    productLevels: productLevelsArray,
     products: productArray,
     cart: getCart(),
   });

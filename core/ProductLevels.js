@@ -15,11 +15,6 @@ const loadProductLevels = async () => {
     const productLevel02Array= await loadProductLevel02();
     const productLevel03Array = await loadProductLevel03();
     
-    console.log("1");
-    console.log(productLevel01Array[0])
-    console.log(productLevel02Array[0])
-    console.log(productLevel03Array[0])
-    
     const productLevelsData = await firestore.collection("productLevelHierarchy");
     const data = await productLevelsData.get();
 
