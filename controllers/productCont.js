@@ -11,6 +11,8 @@ const { getCart } = require("../core/cart");
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
   const productLevelsArray = await loadProductLevels();
+  // console.log("renderProducts");
+  // console.log(productLevelsArray);
   res.render("pages/products", {
     settings: await loadSettings(),
     navbar: await loadConfig("navbar"),

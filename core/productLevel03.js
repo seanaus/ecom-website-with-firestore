@@ -2,30 +2,25 @@
 const firebase = require("../db");
 const ProductLevel03 = require("../models/productLevel03");
 const firestore = firebase.firestore();
+let productLevel03Array = [];
 
-const loadProductLevel03 = async (productLevel, productLevel03) => {
+const loadProductLevel03 = async () => {
   try {
-    if (typeof productLevel03 != "undefined") {
-      const productLevelData = await firestore
-        .collection("productLevel03")
-        .doc(productLevel03);
-      const data = await productLevelData.get();
-      if (!data.empty) {
-        const productLevel03 = new ProductLevel03(data.id, data.data().label);
-        return productLevel03;
-      } else {
-        console.log(
-          `No ProductLevel03 data found for productLevel03 : ${productLevel03}`
-        );
-      }
-    } else {
-      return new ProductLevel03("-1", "UNDEFINED");
-    }
+    const productLevelData = await firestore.collection("productLevel03");
+    const data = await productLevelData.get();
+    data.forEach(doc => {
+      const productLevel03 = new ProductLevel03(
+        doc.id,
+        doc.data().label
+      )
+      productLevel03Array.push(productLevel03);
+    });
   } catch (error) {
     console.log(
-      `loadProductLevel03 : ${error.message} productLevel : ${productLevel} productLevel03 : ${productLevel03}`
+      `loadProductLevel03 : ${error.message}`
     );
   }
+  return productLevel03Array
 };
 module.exports = {
   loadProductLevel03,

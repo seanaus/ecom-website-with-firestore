@@ -7,71 +7,99 @@ const { loadProductLevel03 } = require("./productLevel03");
 
 const firestore = firebase.firestore();
 let productLevelArray = [];
-
 const loadProductLevels = async () => {
   try {
-    // productLevelHierarchyArray = [];
+    productLevelArray = [];
+
+    const productLevel01Array = await loadProductLevel01();
+    const productLevel02Array= await loadProductLevel02();
+    const productLevel03Array = await loadProductLevel03();
+    
+    console.log("1");
+    console.log(productLevel01Array[0])
+    console.log(productLevel02Array[0])
+    console.log(productLevel03Array[0])
+    
     const productLevelsData = await firestore.collection("productLevelHierarchy");
     const data = await productLevelsData.get();
-    productLevelArray = [];
-    if (data.empty) {
-      console.log("No productLevels records found");
-    } else {
-      data.forEach(async (doc) => {
-        try {
-          let productLevel01 = "";
-          let productLevel02 = "";
-          let productLevel03 = "";
 
-          console.log("productLevels - " + doc.id);
+    if (!data.empty) {
+      data.forEach(doc => {
+        // console.log(doc.id);
+        let productLevel01 = "undefined";
+        let productLevel02 = "undefined";
+        let productLevel03 = "undefined";
 
-          let productLevel01Id =
-            typeof doc.data().productLevel01 != "undefined"
-              ? doc.data().productLevel01
-              : "-1";
-          let productLevel02Id =
-            typeof doc.data().productLevel02 != "undefined"
-              ? doc.data().productLevel02
-              : "-1";
-          let productLevel03Id =
-            typeof doc.data().productLevel03 != "undefined"
-              ? doc.data().productLevel03
-              : "-1";
+        let productLevel01Id = typeof doc.data().productLevel01 != "undefined" ? doc.data().productLevel01 : "-1";
+        let productLevel02Id = typeof doc.data().productLevel02 != "undefined" ? doc.data().productLevel02 : "-1";
+        let productLevel03Id = typeof doc.data().productLevel03 != "undefined" ? doc.data().productLevel03 : "-1";
 
-          if (productLevel01Id !== "-1") {
-            productLevel01 = await loadProductLevel01(doc.id, productLevel01Id);
-          }
-          if (productLevel02Id !== "-1") {
-            productLevel02 = await loadProductLevel02(doc.id, productLevel02Id);
-          }
-          if (productLevel03Id !== "-1") {
-            productLevel03 = await loadProductLevel03(doc.id, productLevel03Id);
-          }
-          const productLevels = new ProductLevels(
-            doc.id,
-            productLevel01,
-            productLevel02,
-            productLevel03,
-            doc.data().productLevels
-          );
-          productLevelArray.push(productLevels);
-        } catch (error) {
-          console.log("productLevels : " + error.message);
+        if (productLevel01Id !== "-1") {
+          productLevel01 = productLevel01Array[findProductLevel(productLevel01Array, productLevel01Id)];
         }
+        if (productLevel02Id !== "-1") {
+          productLevel02 = productLevel02Array[findProductLevel(productLevel02Array, productLevel02Id)];
+        }
+        if (productLevel03Id !== "-1") {
+          productLevel03 = productLevel03Array[findProductLevel(productLevel03Array, productLevel03Id)];
+        }
+        const productLevels = new ProductLevels(
+          doc.id,
+          productLevel01,
+          productLevel02,
+          productLevel03,
+          doc.data().productLevels
+        )
+        productLevelArray.push(productLevels);
       });
+      return productLevelArray
+    } else {
+      console.log("No productLevels records found");
     }
+    
   } catch (error) {
-    console.log("productLevels" + error.message);
+    console.log(`productLevels :  ${error.message}`);
   }
-  return productLevelArray;
-  // if (productLevelHierarchyArray.length) {
-  //   console.log("LMFAO");
-  //   console.log(productLevelHierarchyArray);
-  //   return productLevelHierarchyArray;
-  // } else {
-  //   return false;
-  // }
-};
+}
+
+const findProductLevel = (productLevel, id) => {
+  for (let i= 0; i < productLevel.length; i++) {
+    if (productLevel[i].id === id) {
+      return i
+    }
+  }
+}
+
+// const findProductLevel = (productLevel,id) => {
+//   productLevel.forEach((item) => {
+//     if (item.id === id) {
+//       console.log("findProductLevel01 " + JSON.stringify(item));
+//       return item
+//     } 
+//   })
+// }
+// const findProductLevel02 = (productLevel02,id) => {
+//   if (typeof productLevel02) {
+//     productLevel02.forEach((rec) => {
+//       if (rec.id === id) {
+//         return rec
+//       } 
+//     })
+//   } else {
+//     console.log("No productLevel02 records available");
+//   }
+// }
+// const findProductLevel03 = (productLevel03,id) => {
+//   if (typeof productLevel03) {
+//     productLevel03.forEach((rec) => {
+//       if (rec.id === id) {
+//         return rec
+//       } 
+//     })
+//   } else {
+//     console.log("No productLevel03 records available");
+//   }
+// }
 module.exports = {
   loadProductLevels
 };
