@@ -1,4 +1,4 @@
-class ProductLevelHierarchy {
+class ProductLevels {
     constructor(
         id,
         productLevel01,
@@ -14,4 +14,4 @@ class ProductLevelHierarchy {
     }
 
 }
-module.exports = ProductLevelHierarchy
+module.exports = ProductLevels

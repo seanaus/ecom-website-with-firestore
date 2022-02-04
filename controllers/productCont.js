@@ -4,18 +4,19 @@ const firestore = firebase.firestore();
 const { loadSettings } = require("../core/settings");
 const { loadConfig } = require("../core/config");
 const { activeUser } = require("../core/auth");
-const { loadProductLevelHierarchy,loadProductLevelHierarchy2 } = require("../core/productLevelHierarchy");
+const { loadProductLevels } = require("../core/ProductLevels");
 const { loadProducts, getProduct } = require("../core/product");
 const { getCart } = require("../core/cart");
 
 const renderProducts = async (req, res, next) => {
   const productArray = await loadProducts();
+  const productLevelsArray = await loadProductLevels();
   res.render("pages/products", {
     settings: await loadSettings(),
     navbar: await loadConfig("navbar"),
     footer: await loadConfig("footer"),
     user: activeUser(),
-    productLevel: await loadProductLevelHierarchy2(),
+    productLevel: productLevelsArray,
     products: productArray,
     cart: getCart(),
   });

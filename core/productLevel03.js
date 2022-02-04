@@ -3,7 +3,7 @@ const firebase = require("../db");
 const ProductLevel03 = require("../models/productLevel03");
 const firestore = firebase.firestore();
 
-const loadProductLevel03 = async (productLevelHierarchy, productLevel03) => {
+const loadProductLevel03 = async (productLevel, productLevel03) => {
   try {
     if (typeof productLevel03 != "undefined") {
       const productLevelData = await firestore
@@ -23,7 +23,7 @@ const loadProductLevel03 = async (productLevelHierarchy, productLevel03) => {
     }
   } catch (error) {
     console.log(
-      `loadProductLevel03 : ${error.message} productLevelHierarchy : ${productLevelHierarchy} productLevel03 : ${productLevel03}`
+      `loadProductLevel03 : ${error.message} productLevel : ${productLevel} productLevel03 : ${productLevel03}`
     );
   }
 };
