@@ -24,6 +24,7 @@
   <body>
     <div id="pageLayoutContainer" class="container">
       <%- include('../partials/navBar', { user: user, navbar: navbar, settings:settings }) %>
+      <%- include('../partials/filters', { filters: filters }) %>
       <div class="productsContainer">
         <% products.forEach(product=> { %> 
           <%- include('../partials/productCard', { product: product}) %> <% }); %>

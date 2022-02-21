@@ -1,0 +1,35 @@
+
+<div style="border: 1px solid green;margin: auto;">
+    <% filters.items.forEach(item => { %>
+        <% const dataLevel01 =  item.id %> 
+        <div id="<%= item.id %>" 
+            data-Level-01 = "root" 
+            style="border: 1px solid red; display: inline-block;">
+            <%= item.label %>
+        </div>
+        <% if(item.subItems) { %>
+            <% item.subItem.forEach(item => { %>
+                <% const dataLevel02 =  item.id %> 
+                <div id="<%= item.id %>"
+                     data-level-01 = "<%= dataLevel01 %>" 
+                     style="border: 1px solid red; display: inline-block;">
+                     <%= item.label %>
+                </div>
+                <% if(item.subItems) { %>
+                    <% item.subItem.forEach(item => { %>
+                        <% const level03 =  item.id %>
+                        <div id="<%= item.id %>"
+                             data-level-01 = "<%= dataLevel01 %>" 
+                             data-level-02 = "<%= dataLevel02 %>" 
+                             style="border: 1px solid red; display: inline-block;">
+                            <%= item.label %>
+                        </div>
+                    <% }) %>
+                <% } %>
+            <% }) %>
+        <% } %>
+    <% }) %>
+</div>
+
+
+

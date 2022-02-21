@@ -2,7 +2,7 @@ const { activeUser } = require("../core/auth");
 const { loadPage } = require("../core/page");
 const { loadSettings } = require("../core/settings");
 const { loadConfig } = require("../core/config");
-const { slideShow } = require("../core/slideShow");
+// const { slideShow } = require("../core/slideShow");
 
 const renderHome = async (req, res, next) => {
   res.render("pages/index", {

@@ -12,6 +12,7 @@ const renderProducts = async (req, res, next) => {
   res.render("pages/products", {
     settings: await loadSettings(),
     navbar: await loadConfig("navbar"),
+    filters: await loadConfig("filters"),
     footer: await loadConfig("footer"),
     user: activeUser(),
     products: productArray,
