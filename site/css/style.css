@@ -98,10 +98,10 @@ input:focus {
   color: var(--themeHighlightBgColor);
 }
 .hideMe {
-  display: none;
+  display: none !important;
 }
 .showMe {
-  display: none;
+  display: none !important;
 }
 .formLayoutFix {
   display: flex;
