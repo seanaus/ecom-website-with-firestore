@@ -1,0 +1,49 @@
+<div class="filterPanel">
+    <!-- <div class="filterRow filterRow01"> -->
+        <% filters.items.forEach(item => { %>
+            <% const productLevel01 =  item.id %> 
+            <div id="<%= item.id %>" 
+                data-productLevel01 = "<%= productLevel01 %>"
+                data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
+                class="filterBtn">
+                <%= item.label %>
+            </div>
+            <% if(item.subItems) { %>
+                <div class="filterRow filterRow02 hideMe" data-productLevel01="<%= productLevel01 %>">
+                    <% item.subItem.forEach(item => { %>
+                        <% const productLevel02 =  item.id %>
+                        <div id="<%= item.id %>"
+                            data-productLevel01 = "<%= productLevel01 %>" 
+                            data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
+                            class="filterBtn">
+                            <%= item.label %>
+                        </div>
+                        <% if(item.subItems) { %>
+                            <div class="filterRow03 hideMe" data-productLevel01="<%= productLevel01 %>"  data-productLevel02="<%= productLevel02 %>">
+                                <% item.subItem.forEach(item => { %>
+                                    <% const productLevel03 =  item.id %>
+                                    <div id="<%= item.id %>"
+                                        data-productLevel01 = "<%= productLevel01 %>" 
+                                        data-productLevel02 = "<%= productLevel02 %>" 
+                                        data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
+                                        class="filterBtn">
+                                        <%= item.label %>
+                                    </div>
+                                    <% if(item.subItems) { %>
+                                        <% item.subItem.forEach(item => { %>
+                                        <% }) %>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+        <% }) %>
+    <!-- </div> -->
+</div>
+
+
+
+
+

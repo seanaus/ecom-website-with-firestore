@@ -1,45 +1,69 @@
 <div class="filterPanel">
-    <% filters.items.forEach(item => { %>
-        <% const productLevel01 =  item.id %> 
-        <div id="<%= item.id %>" 
-            data-productLevel01 = "<%= productLevel01 %>"
-            data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
-            class="filterBtn">
-            <%= item.label %>
-        </div>
-        <% if(item.subItems) { %>
-            <div class="filterPanel hideMe" data-productLevel01="<%= productLevel01 %>">
-                <% item.subItem.forEach(item => { %>
-                    <% const productLevel02 =  item.id %>
-                    <div id="<%= item.id %>"
-                        data-productLevel01 = "<%= productLevel01 %>" 
-                        data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
+    <% let level = 1 %>
+    <div class="filterRow filterRow01" 
+         data-container-level="<%= level %>">
+        <% filters.items.forEach(productLevel01 => { %>
+            <div id="<%= productLevel01.id %>" 
+                data-productLevel01 = "<%= productLevel01.id %>"
+                data-productGroupId = "<%= productLevel01.subItems ? 'none' : productLevel01.productGroupId %>" 
+                class="filterBtn">
+                <%= productLevel01.label %>
+            </div>    
+        <% }) %>
+    </div>
+    <% level = 2 %>
+    <% filters.items.forEach(productLevel01 => { %>
+        <% if(productLevel01.subItems) { %>
+            <div class="filterRow filterRow02 hideMe"
+                 data-container-level="<%= level %>"
+                 data-productLevel01="<%= productLevel01.id %>">
+                <% productLevel01.subItem.forEach(productLevel02 => { %>
+                    <div id="<%= productLevel02.id %>"
+                        data-productLevel01 = "<%= productLevel01.id %>" 
+                        data-productGroupId = "<%= productLevel02.subItems ? 'none' : productLevel02.productGroupId %>" 
                         class="filterBtn">
-                        <%= item.label %>
+                        <%= productLevel02.label %>
                     </div>
-                    <% if(item.subItems) { %>
-                        <div class="filterPanel hideMe" data-productLevel01="<%= productLevel01 %>"  data-productLevel02="<%= productLevel02 %>">
-                            <% item.subItem.forEach(item => { %>
-                                <% const productLevel03 =  item.id %>
-                                <div id="<%= item.id %>"
-                                    data-productLevel01 = "<%= productLevel01 %>" 
-                                    data-productLevel02 = "<%= productLevel02 %>" 
-                                    data-productGroupId = "<%= item.subItems ? 'none' : item.productGroupId %>" 
-                                    class="filterBtn">
-                                    <%= item.label %>
-                                </div>
-                                <% if(item.subItems) { %>
-                                    <% item.subItem.forEach(item => { %>
-                                    <% }) %>
-                                <% } %>
-                            <% }) %>
-                        </div>
-                    <% } %>
                 <% }) %>
             </div>
         <% } %>
     <% }) %>
+    <% level = 3 %>
+    <% filters.items.forEach(productLevel01 => { %>
+        <% if(productLevel01.subItems) { %>
+                <% productLevel01.subItem.forEach(productLevel02 => { %>
+                    <% if(productLevel02.subItems) { %>
+                        <div class="filterRow filterRow03 hideMe" 
+                            data-container-level="<%= level %>"
+                            data-productLevel01="<%= productLevel01.id %>"
+                            data-productLevel02="<%= productLevel02.id %>">
+                            <% productLevel02.subItem.forEach(productLevel03 => { %>
+                                <div id="<%= productLevel03.id %>"
+                                    data-productLevel01 = "<%= productLevel01.id %>" 
+                                    data-productLevel02 = "<%= productLevel02.id %>" 
+                                    data-productGroupId = "<%= productLevel03.subItems ? 'none' : productLevel03.productGroupId %>" 
+                                    class="filterBtn">
+                                    <%= productLevel03.label %>
+                                </div>
+                            <% }) %>
+                        </div>
+                    <% } %>
+                <% }) %>
+        <% } %>
+    <% }) %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
