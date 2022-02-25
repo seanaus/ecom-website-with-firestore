@@ -1,10 +1,16 @@
 <div class="filterPanel">
     <% let level = 1 %>
-    <div class="filterRow filterRow01" 
-         data-container-level="<%= level %>">
+    <div 
+         data-node-type = "parent"
+         data-node-level = "<%= level %>"
+         data-togglable = "false"
+         data-productLevel = "root"
+         class="filterRow filterRow01">
         <% filters.items.forEach(productLevel01 => { %>
             <div id="<%= productLevel01.id %>" 
-                data-productLevel01 = "<%= productLevel01.id %>"
+                data-node-type = "child"
+                data-node-level = "<%= level %>"
+                data-productLevel = "<%= productLevel01.id %>"
                 data-productGroupId = "<%= productLevel01.subItems ? 'none' : productLevel01.productGroupId %>" 
                 class="filterBtn">
                 <%= productLevel01.label %>
@@ -14,13 +20,18 @@
     <% level = 2 %>
     <% filters.items.forEach(productLevel01 => { %>
         <% if(productLevel01.subItems) { %>
-            <div class="filterRow filterRow02 hideMe"
-                 data-container-level="<%= level %>"
-                 data-productLevel01="<%= productLevel01.id %>">
+            <div 
+                data-node-type = "parent"
+                data-node-level = "<%= level %>"
+                data-togglable = "true"
+                data-productLevel = "<%= productLevel01.id %>"
+                class="filterRow filterRow02 hideMe">
                 <% productLevel01.subItem.forEach(productLevel02 => { %>
-                    <div id="<%= productLevel02.id %>"
-                        data-productLevel01 = "<%= productLevel01.id %>" 
-                        data-productGroupId = "<%= productLevel02.subItems ? 'none' : productLevel02.productGroupId %>" 
+                    <div id="<%= productLevel02.id %>"  
+                        data-node-type = "child"
+                        data-node-level = "<%= level %>"
+                        data-productLevel = "<%= productLevel01.id %>"
+                        data-productGroupId = "<%= productLevel02.subItems ? 'none' : productLevel02.productGroupId %>"
                         class="filterBtn">
                         <%= productLevel02.label %>
                     </div>
@@ -33,15 +44,18 @@
         <% if(productLevel01.subItems) { %>
                 <% productLevel01.subItem.forEach(productLevel02 => { %>
                     <% if(productLevel02.subItems) { %>
-                        <div class="filterRow filterRow03 hideMe" 
-                            data-container-level="<%= level %>"
-                            data-productLevel01="<%= productLevel01.id %>"
-                            data-productLevel02="<%= productLevel02.id %>">
+                        <div 
+                            data-node-type = "parent"
+                            data-node-level = "<%= level %>"
+                            data-togglable = "true"
+                            data-productLevel = "<%= productLevel01.id %>,<%= productLevel02.id %>"
+                            class="filterRow filterRow03 hideMe">
                             <% productLevel02.subItem.forEach(productLevel03 => { %>
-                                <div id="<%= productLevel03.id %>"
-                                    data-productLevel01 = "<%= productLevel01.id %>" 
-                                    data-productLevel02 = "<%= productLevel02.id %>" 
-                                    data-productGroupId = "<%= productLevel03.subItems ? 'none' : productLevel03.productGroupId %>" 
+                                <div id="<%= productLevel03.id %>" 
+                                    data-node-type = "child"
+                                    data-node-level = "<%= level %>"
+                                    data-productLevel = "<%= productLevel01.id %>,<%= productLevel02.id %>" 
+                                    data-productGroupId = "<%= productLevel03.subItems ? 'none' : productLevel03.productGroupId %>"
                                     class="filterBtn">
                                     <%= productLevel03.label %>
                                 </div>
