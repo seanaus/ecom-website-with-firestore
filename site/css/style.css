@@ -10,6 +10,7 @@
   --themeActiveLink: rgb(0, 223, 255);
   --themeHighlightBgColor: rgb(255, 0, 0);
   --themeHighlightFColor: rgb(180, 255, 0);
+  --themeHighlightOpacity: 0.4;
   --themeButtonFace: rgb(255, 0, 0);
   --themeButtonText: rgb(255, 255, 255);
   --themeBoxShadow: rgba(136, 136, 136, 0.4);

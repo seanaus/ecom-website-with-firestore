@@ -44,16 +44,20 @@ const filterAction = (event) => {
     // data-productLevel = "productLevel01,productLevel02" 
     // data-productGroupId = "'none' || productGroupId"
     const btn = event.target;
-    // const parent = btn.parentElement
     const level = btn.attributes["data-node-level"].value;
+
     clearSubFilters(level);
+    clearIsSelected(level);
     // const productLevels = btn.attributes["data-productLevel"].split(',');
-    const productLevels = productLevelArray(btn.attributes["data-productLevel"].value);
-    // const productLevels = btn.attributes["data-productLevel"].value;
-    productLevels.forEach((productLevel) => {
-        console.log(`${level} - ${productLevel}`);
-        showSubFilters(level, productLevel);
-    }); 
+    //const productLevels = productLevelArray(btn.attributes["data-productLevel"].value);
+    const productLevel = btn.attributes["data-productLevel"].value;
+    console.log(`productLevel ${productLevel}`);
+    // productLevels.forEach((productLevel) => {
+    //     console.log(`${level} - ${productLevel}`);
+    //     showSubFilters(level, productLevel);
+    // }); 
+    showSubFilters(level, productLevel);
+    addClass(btn,"isSelected");
 };
 const clearSubFilters = (level) => {
     const btns = document.querySelectorAll("div[data-node-type ='parent']");
@@ -64,11 +68,10 @@ const clearSubFilters = (level) => {
     });
 };
 const showSubFilters = (level, productLevel) => {
-    console.log(`showSubFilters - ${level} - ${productLevel}`);
+    // console.log(`showSubFilters - ${level} - ${productLevel}`);
     const btns = document.querySelectorAll("div[data-node-type ='parent']");
-    console.log(btns);
+    // console.log(btns);
     btns.forEach((btn) => {
-
         if (parseInt(btn.attributes["data-node-level"].value) == parseInt(level) + 1 && btn.attributes["data-togglable"].value == 'true' && btn.attributes["data-productLevel"].value == productLevel) {
             removeClass(btn,"hideMe")     
         }
@@ -76,14 +79,14 @@ const showSubFilters = (level, productLevel) => {
 };
 const productLevelArray = (productLevels) => {
     const isArray = productLevels.search(",");
-    console.log(isArray);
+    // console.log(isArray);
     if (isArray>0) {
         return productLevels.split(",")
     } else {
         const tempArray = [];
         console.log(productLevels);
         tempArray.push(productLevels);
-                console.log(tempArray);
+                // console.log(tempArray);
         return tempArray
     }
 };
@@ -95,6 +98,14 @@ const productLevelArray = (productLevels) => {
 //         }
 //     });
 // };
+const clearIsSelected = (level)=> {
+    const btns=document.querySelectorAll("div[data-node-type='child']");
+    btns.forEach((btn)=>{
+        if (parseInt(btn.attributes["data-node-level"].value) >= parseInt(level)) {
+            removeClass(btn,"isSelected")     
+        }
+    });
+}
 const removeClass = (element, className) => {
   if (element) {
     element.classList.remove(className);
