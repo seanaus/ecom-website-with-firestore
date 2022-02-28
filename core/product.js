@@ -1,9 +1,40 @@
 "use strict";
 const firebase = require("../db");
 const Product = require("../models/product");
+const ProductGroup = require("../models/productGroup");
 const firestore = firebase.firestore();
 let productsArray = [];
+let productGroupArray = [];
+const loadProductGroups = async () => {
+  try {
+    productGroupArray = [];
 
+    const productGroup = await firestore.collection("productGroup");
+    const data = await productGroup.get();
+
+    if (data.empty) {
+      console.log("No Product Group records found");
+    } else {
+      data.forEach((doc) => {
+        const productGroup = new ProductGroup(
+          doc.id,
+          doc.data().productLevel01Id,
+          doc.data().productLevel02Id,
+          doc.data().productLevel03Id,
+          doc.data().productId
+        );
+        productGroupArray.push(productGroup);
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+  if (productGroupArray.length) {
+    return productGroupArray;
+  } else {
+    return false;
+  }
+};
 const loadProducts = async () => {
   try {
     productsArray = [];
@@ -35,6 +66,16 @@ const loadProducts = async () => {
   } else {
     return false;
   }
+};
+const loadFilteredProducts = async () => {
+  try {
+    productsArray = [];
+    // const pl = query.params.productlevel01Id;
+    console.log(`loadFilteredProducts ${pl}`);
+  } catch (error) {
+    console.log(error.message);
+  }
+  return true
 };
 const getProducts = () => {
   if (productsArray) {
@@ -84,5 +125,7 @@ module.exports = {
   getProducts,
   getProduct,
   loadProducts,
+  loadFilteredProducts,
+  loadProductGroups,
   asGBP
 };

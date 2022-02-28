@@ -34,7 +34,7 @@
       id="<%= productLevel02.id %>"
       data-node-type="child"
       data-node-level="<%= level %>"
-      data-productLevel="<%= productLevel01.id %>,<%= productLevel02.id %>"
+      data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>"
       data-productGroupId="<%= productLevel02.productGroupId && productLevel02.subItems == 'false' ? productLevel02.productGroupId : 'none' %>"
       class="filterBtn"
     >
@@ -50,7 +50,7 @@
     data-node-type="parent"
     data-node-level="<%= level %>"
     data-togglable="true"
-    data-productLevel="<%= productLevel01.id %>,<%= productLevel02.id %>"
+    data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>"
     class="filterRow filterRow03 hideMe"
   >
     <% productLevel02.subItem.forEach(productLevel03 => { %>
@@ -58,7 +58,7 @@
       id="<%= productLevel03.id %>"
       data-node-type="child"
       data-node-level="<%= level %>"
-      data-productLevel="<%= productLevel01.id %>,<%= productLevel02.id %>"
+      data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>|<%= productLevel03.id %>"
       data-productGroupId="<%= productLevel03.productGroupId && productLevel03.subItems == 'false' ? productLevel03.productGroupId : 'none' %>"
       class="filterBtn"
     >

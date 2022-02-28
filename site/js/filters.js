@@ -7,25 +7,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // 13/01/2022
 // ...
 initialize = () => {
-
-    // const btnBreaking = document.getElementById("breaking");
-    // const btnCars = document.getElementById("cars");
-    // const btnParts = document.getElementById("parts");
-    // const btnRestoring = document.getElementById("restoring");
-
-    // if (btnBreaking) {
-    //     btnBreaking.addEventListener("click", filterAction);
-    // }
-    // if (btnCars) {
-    //     btnCars.addEventListener("click", filterAction);
-    // }
-    // if (btnParts) {
-    //     btnParts.addEventListener("click", filterAction);
-    // }
-    // if (btnRestoring) {
-    //     btnRestoring.addEventListener("click", filterAction);
-    // }
-
     const btns = document.querySelectorAll("div[data-node-type='child']");
     btns.forEach((btn) => {
         if (btn) {
@@ -45,19 +26,13 @@ const filterAction = (event) => {
     // data-productGroupId = "'none' || productGroupId"
     const btn = event.target;
     const level = btn.attributes["data-node-level"].value;
-
+    const productLevel = btn.attributes["data-productLevel"].value;
+    console.log(`productLevel is ${productLevel}`);
     clearSubFilters(level);
     clearIsSelected(level);
-    // const productLevels = btn.attributes["data-productLevel"].split(',');
-    //const productLevels = productLevelArray(btn.attributes["data-productLevel"].value);
-    const productLevel = btn.attributes["data-productLevel"].value;
-    console.log(`productLevel ${productLevel}`);
-    // productLevels.forEach((productLevel) => {
-    //     console.log(`${level} - ${productLevel}`);
-    //     showSubFilters(level, productLevel);
-    // }); 
     showSubFilters(level, productLevel);
-    addClass(btn,"isSelected");
+    addClass(btn, "isSelected");
+    
 };
 const clearSubFilters = (level) => {
     const btns = document.querySelectorAll("div[data-node-type ='parent']");
@@ -68,35 +43,23 @@ const clearSubFilters = (level) => {
     });
 };
 const showSubFilters = (level, productLevel) => {
-    // console.log(`showSubFilters - ${level} - ${productLevel}`);
     const btns = document.querySelectorAll("div[data-node-type ='parent']");
-    // console.log(btns);
     btns.forEach((btn) => {
         if (parseInt(btn.attributes["data-node-level"].value) == parseInt(level) + 1 && btn.attributes["data-togglable"].value == 'true' && btn.attributes["data-productLevel"].value == productLevel) {
             removeClass(btn,"hideMe")     
         }
     });
 };
-const productLevelArray = (productLevels) => {
-    const isArray = productLevels.search(",");
-    // console.log(isArray);
-    if (isArray>0) {
-        return productLevels.split(",")
-    } else {
-        const tempArray = [];
-        console.log(productLevels);
-        tempArray.push(productLevels);
-                // console.log(tempArray);
-        return tempArray
-    }
-};
-// const hideFilters = () => {
-//     const btns = document.querySelectorAll("div[data-container-level]");
-//     btns.forEach((btn) => {
-//         if (btn.attributes["data-container-level"].value !== "1") {
-//             addClass(btn,"hideMe")     
-//         }
-//     });
+// const productLevelArray = (productLevels) => {
+//     const isArray = productLevels.search(",");
+//     if (isArray>0) {
+//         return productLevels.split(",")
+//     } else {
+//         const tempArray = [];
+//         console.log(productLevels);
+//         tempArray.push(productLevels);
+//         return tempArray
+//     }
 // };
 const clearIsSelected = (level)=> {
     const btns=document.querySelectorAll("div[data-node-type='child']");
@@ -115,4 +78,15 @@ const addClass = (element, className) => {
   if (element) {
     element.classList.add(className);
   }
+};
+const applyFilter = (level) => {
+    if (parseInt(level)===1) {
+        
+    }
+    if (parseInt(level)===2) {
+        
+    }
+    if (parseInt(level)===3) {
+        
+    }
 };
