@@ -25,23 +25,27 @@ const renderFilteredProducts = async (req, res, next) => {
   // const productLevel02Id = req.query.productLevel02Id;
   // const productLevel03Id = req.query.productLevel03Id;
   const productLevel = req.query.productLevel;
+  const filterParams = productLevel.split("|");
+  
   const productGroupArray = await loadProductGroups();
+  const searchResult = filterProductGroups(productGroupArray, filterParams);
+  console.log(searchResult);
+  
+/*   productGroupArray.forEach((productGroup) => {
 
-  // const filteredBy01 = productGroupArray.filter((productGroup) => {
-  //   return productGroup.productLevel01Id == productLevel01Id
-  // })
-  // const filteredBy02 = filteredBy01.filter((productGroup) => {
-  //   return productGroup.productLevel02Id == productLevel02Id
-  // }) 
-  // const filteredBy03 = filteredBy02.filter((productGroup) => {
-  //   return productGroup.productLevel03Id == productLevel03Id
-  // }) 
-
-  // console.log(`renderFilteredProducts ${filteredBy01.id}`);
-  // console.log(`renderFilteredProducts ${filteredBy02.id}`);
-  // console.log(`renderFilteredProducts ${filteredBy03.id}`);
-
-  console.log(`renderFilteredProducts ${productLevel}`);
+    if (productGroup.productLevel01Id == `${filterParams[0]}`) {
+      console.log("MATCH-01");
+      productLevel01.push(productGroup)
+    }
+    if (productGroup.productLevel01Id == `${filterParams[0]}` && productGroup.productLevel02Id == `${filterParams[1]}`) {
+      console.log("MATCH-02");
+      productLevel02.push(productGroup)
+    }
+    if (productGroup.productLevel01Id == `${filterParams[0]}` && productGroup.productLevel02Id == `${filterParams[1]}` && productGroup.productLevel03Id == `${filterParams[2]}`) {
+      console.log("MATCH-03");
+      productLevel03.push(productGroup)
+    }
+  }); */
 
   const productArray = await loadProducts();
   res.render("pages/products", {
@@ -72,6 +76,20 @@ const renderProduct = async(req, res, next) => {
   }
   next();
 };
+const filterProductGroups = (sourceArray, paramArray) => {
+
+	switch(paramArray.length) {
+  	case 1:
+		return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0]);
+    		break;
+  	case 2:
+		return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1]);
+    		break;
+  	case 3:
+		return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1] && productGroup.productLevel03Id == paramArray[2])
+    		break;
+	}
+}
 module.exports = {
   renderProducts,
   renderFilteredProducts,
