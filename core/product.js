@@ -4,6 +4,7 @@ const Product = require("../models/product");
 const ProductGroup = require("../models/productGroup");
 const firestore = firebase.firestore();
 let productsArray = [];
+let filterParams = [];
 let productGroupArray = [];
 const loadProductGroups = async () => {
   try {
@@ -29,16 +30,22 @@ const loadProductGroups = async () => {
   } catch (error) {
     console.log(error.message);
   }
-  if (productGroupArray.length) {
-    return productGroupArray;
+  // If Filter Parameters have been passed Apply Them Otherwise Return All Data
+  if (filterParams.length > 0) {
+    return filterProductGroups(productGroupArray, filterParams);
   } else {
-    return false;
+    return productGroupArray;
   }
 };
-const loadProducts = async () => {
+const loadProducts = async (productLevel = "") => {
   try {
     productsArray = [];
+    filterParams = [];
 
+    filterParams = setSearchCriteria(productLevel);
+    // Build Search List (ProductId List)... built from search criteria
+    productGroupArray = await loadProductGroups(filterParams)
+    // Get Product Collection
     const products = await firestore.collection("products");
     const data = await products.get();
 
@@ -55,27 +62,19 @@ const loadProducts = async () => {
           doc.data().unitCost,
           asGBP.format(parseFloat(doc.data().unitCost))
         );
-        productsArray.push(product);
+        // Only select products that match search criteria
+        if (productGroupArray.includes(doc.id)) {
+          productsArray.push(product); 
+        }
       });
     }
   } catch (error) {
     console.log(error.message);
   }
-  if (productsArray.length) {
-    return productsArray;
-  } else {
-    return false;
-  }
+  return productsArray;
 };
-const loadFilteredProducts = async () => {
-  try {
-    productsArray = [];
-    // const pl = query.params.productlevel01Id;
-    console.log(`loadFilteredProducts ${pl}`);
-  } catch (error) {
-    console.log(error.message);
-  }
-  return true
+const setSearchCriteria = (productLevel) => {
+  return productLevel === undefined || productLevel === "" ? "*".split("|") : productLevel.split("|");
 };
 const getProducts = () => {
   if (productsArray) {
@@ -110,6 +109,20 @@ const getProduct = (id) => {
     return false;
   }
 };
+const filterProductGroups = (sourceArray, paramArray) => {
+  if (paramArray[0] == "*") {
+    return sourceArray.map(product => { return product.productId });
+  } else {
+    switch(paramArray.length) {
+      case 1:
+        return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0]).map(product => { return product.productId });
+      case 2:
+        return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1]).map(product => { return product.productId });
+      case 3:
+        return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1] && productGroup.productLevel03Id == paramArray[2]).map(product => { return product.productId })
+    }
+  }
+}
 // Sean Austin
 // 13/01/2022
 // Format numbers to currency in GBP
@@ -125,7 +138,5 @@ module.exports = {
   getProducts,
   getProduct,
   loadProducts,
-  loadFilteredProducts,
-  loadProductGroups,
   asGBP
 };

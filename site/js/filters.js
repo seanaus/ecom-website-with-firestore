@@ -32,6 +32,7 @@ const filterAction = (event) => {
     clearIsSelected(level);
     showSubFilters(level, productLevel);
     addClass(btn, "isSelected");
+    window.location.href = `../products?productLevel=${productLevel}`;
     
 };
 const clearSubFilters = (level) => {
