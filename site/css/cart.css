@@ -121,6 +121,7 @@
   border: 1px solid var(--themeBoxShadow);
   box-shadow: 5px 5px 8px var(--themeBoxShadow);
   margin: 0px 15px 15px 15px;
+  min-width: 350px;
 }
 .cartTotalCell {
   padding: 5px;

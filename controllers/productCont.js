@@ -4,12 +4,12 @@ const firestore = firebase.firestore();
 const { loadSettings } = require("../core/settings");
 const { loadConfig } = require("../core/config");
 const { activeUser } = require("../core/auth");
-const { loadProducts, getProduct } = require("../core/product");
+const { loadProductData, findProduct } = require("../core/product");
 const { getCart } = require("../core/cart");
 
 const renderProducts = async (req, res, next) => {
 
-  const productArray = await loadProducts(req.query.productLevel);
+  const productArray = await loadProductData(req.query.productLevel);
   
   res.render("pages/products", {
     settings: await loadSettings(),
@@ -24,7 +24,7 @@ const renderProducts = async (req, res, next) => {
 };
 const renderProduct = async(req, res, next) => {
   const id = req.params.id;
-  const product = getProduct(id);
+  const product = findProduct(id);
   if (!product) {
     console.log("Product with the given ID not found");
   } else {
