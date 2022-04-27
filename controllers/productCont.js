@@ -3,6 +3,7 @@ const firebase = require("../db");
 const firestore = firebase.firestore();
 const { loadSettings } = require("../core/settings");
 const { loadConfig } = require("../core/config");
+const { loadFilters } = require("../core/filters");
 const { activeUser } = require("../core/auth");
 const { loadProductData, findProduct } = require("../core/product");
 const { getCart } = require("../core/cart");
@@ -14,7 +15,8 @@ const renderProducts = async (req, res, next) => {
   res.render("pages/products", {
     settings: await loadSettings(),
     navbar: await loadConfig("navbar"),
-    filters: await loadConfig("filters"),
+    // filters: await loadConfig("filters"),
+    filters: await loadFilters(),
     footer: await loadConfig("footer"),
     user: activeUser(),
     products: productArray,
