@@ -1,23 +1,35 @@
-<% const runMe = (one)=> { %>
+<% const productLevelAtt = (productLevel01="",productLevel02="",productLevel03="")=> { %>
+  <% let productLevel = ""; %>
+    <% productLevel=productLevel(productLevel01); %>
+  <% return `{PL01: ${one},PL02: ${two},PL03: ${three}}` %>
+<% } %>
+<% const productLevelKeyValue = (productLevel,index)=> { %>
+  <% const productLevel="{}"; %>
   <% const two ="TWO"; %>
   <% const three  ="THREE"; %>
-  <% return `{'PL01': ${one},'PL02': ${two},'PL03': ${three}}` %>
+  <% return `{PL01: ${one},PL02: ${two},PL03: ${three}}` %>
 <% } %>
+<% let level = 0; %>
+
 <div class="filterPanel">
   <% filters.items.forEach(productLevel01 => { %>
-    <div id="<%= productLevel01.id %>" data-node-type="child" data-node-level="1" data-productLevel="<%= productLevel01.id %>" data-productGroupId="<%= productLevel01.productGroupId && productLevel01.subItems == 'false' ? productLevel01.productGroupId : 'none' %>" class="filterBtn">
+    <% level = 1; %>
+    <% const keyValue = productLevelKeyValue(productLevel01,level); %>
+    <div id="<%= productLevel01.id %>" data-node-type="child" data-node-level="<%= level %>" data-productLevel="<%= productLevel01.id %>" data-productGroupId="<%= productLevel01.productGroupId && productLevel01.subItems == 'false' ? productLevel01.productGroupId : 'none' %>" class="filterBtn">
       <%= productLevel01.label %>
     </div>
     <% if(productLevel01.subItems) { %>
-      <div data-node-type="parent" data-node-level="2" data-togglable="true" data-productLevel="<%= productLevel01.id %>" class="hideMe">
+      <% level = 2; %>
+      <div data-node-type="parent" data-node-level="<%= level %>" data-togglable="true" data-productLevel="<%= productLevel01.id %>" class="hideMe">
         <% productLevel01.subItem.forEach(productLevel02 => { %>
-          <div id="<%= productLevel02.id %>" data-node-type="child" data-node-level="2" data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>" data-productGroupId="<%= productLevel02.productGroupId && productLevel02.subItems == 'false' ? productLevel02.productGroupId : 'none' %>" class="filterBtn">
+          <div id="<%= productLevel02.id %>" data-node-type="child" data-node-level="<%= level %>" data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>" data-productGroupId="<%= productLevel02.productGroupId && productLevel02.subItems == 'false' ? productLevel02.productGroupId : 'none' %>" class="filterBtn">
             <%= productLevel02.label %>
           </div>
           <% if(productLevel02.subItems) { %>
-            <div data-node-type="parent" data-node-level="3" data-togglable="true" data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>" class="hideMe">
+            <% level = 3; %>
+            <div data-node-type="parent" data-node-level="<%= level %>" data-togglable="true" data-productLevel="<%= productLevel01.id %>|<%= productLevel02.id %>" class="hideMe">
               <% productLevel02.subItem.forEach(productLevel03 => { %>
-                <div id="<%= productLevel03.id %>" data-node-type="child" data-node-level="3" data-productLevel="<%= runMe(productLevel01.id) %>" data-productGroupId="<%= productLevel03.productGroupId && productLevel03.subItems == 'false' ? productLevel03.productGroupId : 'none' %>" class="filterBtn">
+                <div id="<%= productLevel03.id %>" data-node-type="child" data-node-level="<%= level %>" data-productLevel="<%= productLevelAtt(productLevel01.id,productLevel02.id,productLevel03.id) %>" data-productGroupId="<%= productLevel03.productGroupId && productLevel03.subItems == 'false' ? productLevel03.productGroupId : 'none' %>" class="filterBtn">
                   <%= productLevel03.label %>
                 </div>
               <% }) %>
