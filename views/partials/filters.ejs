@@ -1,18 +1,12 @@
-<% const renderItems = (items) => { %>
-  <% if(IsArray(items)) { %>
-    <% const element = document.createElement("div"); %>
-    <% const textnode = document.createTextNode(JSON.stringify(items)); %>
-    <% element.appendChild(textnode); %>
-    <% document.body.appendChild(element); %>
-    <% element.innerHTML = JSON.stringify(items) %>
-  <% } %>
-<% } %>
-
 <div class="filterPanel">
-  
-
-
+  <% filters.forEach(item => { %>
+    <div id="<%= item.id %>" 
+          data-id = "<%= item.id %>" 
+          data-level = "<%= item.level %>" 
+          data-name = "<%= item.name %>" 
+          data-parentId = "<%= item.parentId %>"
+          data-children = "<%= JSON.stringify(item.children) %>">
+          <%= item.name %>
+     </div>
+  <% }) %>
 </div>
-
-
-

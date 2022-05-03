@@ -11,7 +11,7 @@ class FilterItem {
             this.level = level;
             this.name = name;
             this.parentId = parentId;
-        
+            this.children = [];
         };
 
 }
