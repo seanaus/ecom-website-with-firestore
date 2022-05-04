@@ -1,7 +1,7 @@
-<% const addFilterRows = (count=15)=> {  %>
+<% const addFilterRows = (count)=> {  %>
   <% count = count == 0 ? 1 : count;  %>
   <% for(let level = 1; level <= count; level++) { %>
-    <%  addHTMLElement("body","div",level)  %>
+    <%  addHTMLElement("filterPanel","div",level)  %>
   <% }  %>
 <% }  %>
 <% const addHTMLElement = (parentId="body",type="div",id="",value="",nodeType="parent")=> { %>
@@ -27,7 +27,7 @@
   <% if(id !="") { %>
     <% newElement.setAttribute("id", `${id}`); %>
     <% newElement.setAttribute("data-level", `${id}`); %>
-  <% }
+  <% } %>
   <% newElement.setAttribute("class", "filterRow"); %>
 
   // Append as child to the parent
@@ -36,6 +36,7 @@
 <% } %>
 
 <div id="filterPanel" class="filterPanel">
+  <% addFilterRows(3) %>
   <% filters.forEach(item => { %>
     <div id="<%= item.id %>" 
           data-id = "<%= item.id %>" 
