@@ -1,50 +1,22 @@
-<% const addFilterRows = (count)=> {  %>
-  <% count = count == 0 ? 1 : count;  %>
-  <% for(let level = 1; level <= count; level++) { %>
-    <%  addHTMLElement("filterPanel","div",level)  %>
-  <% }  %>
-<% }  %>
-<% const addHTMLElement = (parentId="body",type="div",id="",value="",nodeType="parent")=> { %>
-  
-  //parentId - text value used to select the parent element
-  //type - text value stating the type of HTML element to be added
-  //value - text value, this will be visible on screen
-
-  // Get Elements by id of the form inputs
-  <% let parentElement = document.getElementById(parentId); %> 
-  <% let newElement =""; %>
-
-  // createElement() method is used
-  // to create a new element
-  <% newElement = document.createElement(type); %>
-
-  // Append a text node for this example
-  <% newElement.appendChild(document.createTextNode(value)); %>
-
-  // setAttribute() is used to set
-  // the attributes of the element
-  <% newElement.setAttribute("data-node-type", `${nodeType}`); %>
-  <% if(id !="") { %>
-    <% newElement.setAttribute("id", `${id}`); %>
-    <% newElement.setAttribute("data-level", `${id}`); %>
-  <% } %>
-  <% newElement.setAttribute("class", "filterRow"); %>
-
-  // Append as child to the parent
-  // i.e. body
-  <% parentElement.appendChild(newElement); %>
-<% } %>
-
+<% let levels = []  %>
 <div id="filterPanel" class="filterPanel">
-  <% addFilterRows(3) %>
   <% filters.forEach(item => { %>
-    <div id="<%= item.id %>" 
+    
+    <% if (!levels.includes(item.level)) { %>
+      <% levels.push(item.level); %>
+    <% } %>
+    
+  <!--     <div id="<%= item.id %>" 
           data-id = "<%= item.id %>" 
           data-level = "<%= item.level %>" 
           data-name = "<%= item.name %>" 
           data-parentId = "<%= item.parentId %>"
           data-children = "<%= JSON.stringify(item.children) %>">
           <%= item.name %>
-     </div>
+     </div> -->
   <% }) %>
 </div>
+<script>
+  localStorage.setItem("filterLevels", "<%= levels.length %>");
+</script>
+
