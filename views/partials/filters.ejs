@@ -1,22 +1,32 @@
-<% let levels = []  %>
+<% const filterItems = (level)=> { %>
+  <% return filters.items.filter(item => item.level === level); %>
+<% } %>
+<% let items = []; %>
 <div id="filterPanel" class="filterPanel">
-  <% filters.forEach(item => { %>
-    
-    <% if (!levels.includes(item.level)) { %>
-      <% levels.push(item.level); %>
-    <% } %>
-    
-  <!--     <div id="<%= item.id %>" 
+  <% filters.levels.forEach(level=> { %>
+    <div id="<%= level %>"
+      data-id = "<%= level %>" 
+      data-level = "<%= level %>" 
+      data-node-type = "PARENT"
+      class="filterRow"
+    >
+      <% items = filterItems(level) %>
+      <% items.forEach(item => { %>
+        <% styleAttribute = `grid-row: ${level}` %>
+        <% console.log(styleAttribute) %>
+        <div id="<%= item.id %>" 
           data-id = "<%= item.id %>" 
           data-level = "<%= item.level %>" 
           data-name = "<%= item.name %>" 
           data-parentId = "<%= item.parentId %>"
-          data-children = "<%= JSON.stringify(item.children) %>">
-          <%= item.name %>
-     </div> -->
+          data-children = "<%= JSON.stringify(item.children) %>"
+          class="filterBtn"
+          style="<%= styleAttribute %>"
+        >
+        <%= item.name %>
+        </div>
+      <% }) %>
+    </div>
   <% }) %>
 </div>
-<script>
-  localStorage.setItem("filterLevels", "<%= levels.length %>");
-</script>
 

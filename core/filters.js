@@ -2,16 +2,18 @@
 const firebase = require("../db");
 const firestore = firebase.firestore();
 const { loadConfig } = require("../core/config");
+const Filters = require("../models/Filters");
 const FilterItem = require("../models/FilterItem");
 
-let nodes = [];
-let levels = [];
+let filters = new Filters();
+// let nodes = [];
+let level = 0;
 
 const IsArray = (aryCheck) => {
   return aryCheck && Array.isArray(aryCheck) && aryCheck.length > 0;
 };
 const getChildren = (node) => {
-  const children = nodes
+  const children = filters.items
     .filter((check) => check.parentId === node.id)
     .map((child) => {
       return child.id;
@@ -75,8 +77,10 @@ const parse = (node) => {
 
 const loadFilters = async () => {
   try {
-    nodes = [];
-    levels = [];
+    // nodes = [];
+    // levels = [];
+    filters = new Filters();
+
     const data = await firestore.collection("components");
     const docs = await data.get();
     if (docs.empty) {
@@ -91,18 +95,18 @@ const loadFilters = async () => {
               item.name,
               item.parentId
             );
-            nodes.push(node);
+            filters.add(node);
           });
         }
       });
-      nodes.forEach((node) => {
+      filters.items.forEach((node) => {
         const children = getChildren(node);
         children.forEach((child) => {
           node.children.push(child);
         });
       });
-      // console.log(nodes);
-      return nodes;
+      //console.log(filters);
+      return filters;
     }
   } catch (error) {
     console.log(error.message);

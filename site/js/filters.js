@@ -1,6 +1,9 @@
 window.onload = () => {
-    const count = localStorage.getItem("filterLevels");
-    addFilterRows(count);
+    // const count = localStorage.getItem("filterLevels");
+  const count = "<%= filters.levels.length %>"
+  addFilterRows(count);
+  // const items = "<%= filters.items %>"
+  // console.log(JSON.stringify(items));
 }
 const addFilterRows = (count) => {
   count = count == 0 ? 1 : count;
