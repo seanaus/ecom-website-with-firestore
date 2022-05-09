@@ -4,26 +4,24 @@
 <% let items = []; %>
 <div id="filterPanel" class="filterPanel">
   <% filters.levels.forEach(level=> { %>
-    <div id="<%= level %>"
-      data-id = "<%= level %>" 
-      data-level = "<%= level %>" 
+    <div id="P<%= level %>"
+      data-node-id = "<%= level %>" 
+      data-node-level = "<%= level %>" 
       data-node-type = "PARENT"
-      class="filterRow"
+      class="<%= level > 1 ? 'filterRow hideMe' : 'filterRow' %>"
     >
       <% items = filterItems(level) %>
       <% items.forEach(item => { %>
-        <% styleAttribute = `grid-row: ${level}` %>
-        <% console.log(styleAttribute) %>
-        <div id="<%= item.id %>" 
-          data-id = "<%= item.id %>" 
-          data-level = "<%= item.level %>" 
-          data-name = "<%= item.name %>" 
-          data-parentId = "<%= item.parentId %>"
-          data-children = "<%= JSON.stringify(item.children) %>"
+        <div id="C<%= item.id %>" 
+          data-node-id = "<%= item.id %>" 
+          data-node-level = "<%= item.level %>" 
+          data-node-name = "<%= item.name %>" 
+          data-node-parentId = "<%= item.parentId %>"
+          data-node-children = "<%= JSON.stringify(item.children) %>"
+          data-node-type = "CHILD"
           class="filterBtn"
-          style="<%= styleAttribute %>"
         >
-        <%= item.name %>
+        <%= item.name.toUpperCase() %>
         </div>
       <% }) %>
     </div>
