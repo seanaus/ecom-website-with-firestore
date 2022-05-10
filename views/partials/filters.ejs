@@ -3,28 +3,68 @@
 <% } %>
 <% let items = []; %>
 <div id="filterPanel" class="filterPanel">
+  <div id="R<%= "1" %>"
+    data-node-type = "ROW"
+    class="filterRow"
+  >
+    <% items = filterItems(1) %>
+    <% items.forEach(item => { %>
+      <div id="C<%= item.id %>" 
+        data-node-id = "<%= item.id %>" 
+        data-node-level = "<%= item.level %>" 
+        data-node-name = "<%= item.name %>" 
+        data-node-parentId = "<%= item.parentId %>"
+        data-node-children = "<%= JSON.stringify(item.children) %>"
+        data-node-type = "CHILD"
+        class="filterBtn"
+      >
+      <%= item.name.toUpperCase() %>
+      </div>
+    <% }) %>
+  </div>
   <% filters.levels.forEach(level=> { %>
-    <div id="P<%= level %>"
-      data-node-id = "<%= level %>" 
-      data-node-level = "<%= level %>" 
-      data-node-type = "PARENT"
-      class="<%= level > 1 ? 'filterRow hideMe' : 'filterRow' %>"
-    >
-      <% items = filterItems(level) %>
-      <% items.forEach(item => { %>
-        <div id="C<%= item.id %>" 
-          data-node-id = "<%= item.id %>" 
-          data-node-level = "<%= item.level %>" 
-          data-node-name = "<%= item.name %>" 
-          data-node-parentId = "<%= item.parentId %>"
-          data-node-children = "<%= JSON.stringify(item.children) %>"
-          data-node-type = "CHILD"
-          class="filterBtn"
-        >
-        <%= item.name.toUpperCase() %>
-        </div>
-      <% }) %>
-    </div>
+    <% if (level > 1) { %>
+      <div id="R<%= level %>"
+        data-node-type = "ROW"
+        class="<%= level > 1 ? 'filterRow hideMe' : 'filterRow' %>"
+      >
+        <% let parentId = 0; %>
+        <% items = filterItems(level) %>
+        <% items.forEach(item => { %>
+          <% if(parentId === item.parentId) { %>
+            <div id="C<%= item.id %>" 
+              data-node-id = "<%= item.id %>" 
+              data-node-level = "<%= item.level %>" 
+              data-node-name = "<%= item.name %>" 
+              data-node-parentId = "<%= item.parentId %>"
+              data-node-children = "<%= JSON.stringify(item.children) %>"
+              data-node-type = "CHILD"
+              class="filterBtn"
+            >
+            <%= item.name.toUpperCase() %>
+            </div>
+          <% } else { %>
+            <% parentId = item.parentId %>
+            <div id="P<%= parentId %>"
+              data-node-type = "PARENT"
+              class="filterRow hideMe"
+            >
+              <div id="C<%= item.id %>" 
+                data-node-id = "<%= item.id %>" 
+                data-node-level = "<%= item.level %>" 
+                data-node-name = "<%= item.name %>" 
+                data-node-parentId = "<%= item.parentId %>"
+                data-node-children = "<%= JSON.stringify(item.children) %>"
+                data-node-type = "CHILD"
+                class="filterBtn"
+              >
+              <%= item.name.toUpperCase() %>
+              </div>
+            </div>
+          <% } %>  
+        <% }) %>
+      </div>
+    <% } %>
   <% }) %>
 </div>
 
