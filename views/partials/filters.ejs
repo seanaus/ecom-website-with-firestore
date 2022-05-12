@@ -1,7 +1,12 @@
-<% const filterItems = (level)=> { %>
-  <% return filters.items.filter(item => item.level === level); %>
+<% const filterItems = (level,parentId=0)=> { %>
+  <% if(parentId>0) { %>
+      <% return filters.items.filter(item => item.level === level && item.parentId === parentId); %>
+  <% } else { %>
+      <% return filters.items.filter(item => item.level === level); %>
+  <% } %>
 <% } %>
 <% let items = []; %>
+<% let itemGroup = []; %>
 <div id="filterPanel" class="filterPanel">
   <div id="R<%= "1" %>"
     data-node-type = "ROW"
@@ -44,6 +49,7 @@
             <%= item.name.toUpperCase() %>
             </div>
           <% } else { %>
+            <% itemGroup = filterItems(level,item.parentId) %>
             <% parentId = item.parentId %>
             <div id="P<%= parentId %>"
               data-node-type = "PARENT"
