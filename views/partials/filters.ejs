@@ -5,14 +5,15 @@
       <% return filters.items.filter(item => item.level === level); %>
   <% } %>
 <% } %>
+<% let row = 1; %>
 <% let items = []; %>
 <% let itemGroup = []; %>
 <div id="filterPanel" class="filterPanel">
-  <div id="R<%= "1" %>"
+  <div id="R<%= row %>"
     data-node-type = "ROW"
     class="filterRow"
   >
-    <% items = filterItems(1) %>
+    <% items = filterItems(row) %>
     <% items.forEach(item => { %>
       <div id="C<%= item.id %>" 
         data-node-id = "<%= item.id %>" 
@@ -36,38 +37,11 @@
         <% let parentId = 0; %>
         <% items = filterItems(level) %>
         <% items.forEach(item => { %>
-          <% if(parentId === item.parentId) { %>
-            <div id="C<%= item.id %>" 
-              data-node-id = "<%= item.id %>" 
-              data-node-level = "<%= item.level %>" 
-              data-node-name = "<%= item.name %>" 
-              data-node-parentId = "<%= item.parentId %>"
-              data-node-children = "<%= JSON.stringify(item.children) %>"
-              data-node-type = "CHILD"
-              class="filterBtn"
-            >
-            <%= item.name.toUpperCase() %>
-            </div>
-          <% } else { %>
+          <% if(parentId !== item.parentId) { %>
             <% itemGroup = filterItems(level,item.parentId) %>
-            <% parentId = item.parentId %>
-            <div id="P<%= parentId %>"
-              data-node-type = "PARENT"
-              class="filterRow hideMe"
-            >
-              <div id="C<%= item.id %>" 
-                data-node-id = "<%= item.id %>" 
-                data-node-level = "<%= item.level %>" 
-                data-node-name = "<%= item.name %>" 
-                data-node-parentId = "<%= item.parentId %>"
-                data-node-children = "<%= JSON.stringify(item.children) %>"
-                data-node-type = "CHILD"
-                class="filterBtn"
-              >
-              <%= item.name.toUpperCase() %>
-              </div>
-            </div>
-          <% } %>  
+            <%- include('../partials/filterGroup', { itemGroup: itemGroup, parentId: item.parentId, level: level }) %>
+          <% } %>
+          <% parentId = item.parentId %>
         <% }) %>
       </div>
     <% } %>
