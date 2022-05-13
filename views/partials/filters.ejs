@@ -1,3 +1,4 @@
+<!-- EJS Functions -->
 <% const filterItems = (level,parentId=0)=> { %>
   <% if(parentId>0) { %>
       <% return filters.items.filter(item => item.level === level && item.parentId === parentId); %>
@@ -5,45 +6,36 @@
       <% return filters.items.filter(item => item.level === level); %>
   <% } %>
 <% } %>
-<% let row = 1; %>
+<!-- Component -->
+<% let initLevel = 1; %>
+<% let itemGroups = 0; %>
 <% let items = []; %>
 <% let itemGroup = []; %>
+<% let cache = {} %>
 <div id="filterPanel" class="filterPanel">
-  <div id="R<%= row %>"
-    data-node-type = "ROW"
-    class="filterRow"
-  >
-    <% items = filterItems(row) %>
-    <% items.forEach(item => { %>
-      <div id="C<%= item.id %>" 
-        data-node-id = "<%= item.id %>" 
-        data-node-level = "<%= item.level %>" 
-        data-node-name = "<%= item.name %>" 
-        data-node-parentId = "<%= item.parentId %>"
-        data-node-children = "<%= JSON.stringify(item.children) %>"
-        data-node-type = "CHILD"
-        class="filterBtn"
-      >
-      <%= item.name.toUpperCase() %>
-      </div>
-    <% }) %>
-  </div>
   <% filters.levels.forEach(level=> { %>
-    <% if (level > 1) { %>
-      <div id="R<%= level %>"
-        data-node-type = "ROW"
-        class="<%= level > 1 ? 'filterRow hideMe' : 'filterRow' %>"
-      >
-        <% let parentId = 0; %>
+    <% itemGroups = 1; %>
+    <% if (level === initLevel) { %>
+      <% itemGroup = filterItems(initLevel) %>
+      <%- include('../partials/filterGroup', { itemGroup: itemGroup, 
+                                                      parentId: 0, 
+                                                      level: initLevel,
+                                                      itemGroups: itemGroups }); %>
+    <% } else { %>
+        <% cache = {}; %>
         <% items = filterItems(level) %>
         <% items.forEach(item => { %>
-          <% if(parentId !== item.parentId) { %>
+          <% if(item.parentId !== cache.parentId) { %>
             <% itemGroup = filterItems(level,item.parentId) %>
-            <%- include('../partials/filterGroup', { itemGroup: itemGroup, parentId: item.parentId, level: level }) %>
+            <%- include('../partials/filterGroup', { itemGroup: itemGroup, 
+                                                      parentId: item.parentId, 
+                                                      level: level,
+                                                      itemGroups: itemGroups });
+            %>
+            <% itemGroups++; %>
           <% } %>
-          <% parentId = item.parentId %>
+          <% cache = item; %>
         <% }) %>
-      </div>
     <% } %>
   <% }) %>
 </div>

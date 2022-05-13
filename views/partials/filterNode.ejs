@@ -1,0 +1,11 @@
+<div id="C<%= node.id %>" 
+    data-node-id = "<%= node.id %>" 
+    data-node-level = "<%= node.level %>" 
+    data-node-name = "<%= node.name %>" 
+    data-node-parentId = "<%= node.parentId %>"
+    data-node-children = "<%= JSON.stringify(node.children) %>"
+    data-node-type = "CHILD"
+    class="filterBtn"
+>
+    <%= node.name.toUpperCase() %>
+</div>

@@ -1,20 +1,11 @@
-<div id="P<%= parentId %>"
-    data-node-type = "PARENT"
-    class="filterRow hideMe"
-  >
-    <% itemGroup.forEach(subItem => { %>
-        <div id="C<%= subItem.id %>" 
-            data-node-id = "<%= subItem.id %>" 
-            data-node-level = "<%= subItem.level %>" 
-            data-node-name = "<%= subItem.name %>" 
-            data-node-parentId = "<%= subItem.parentId %>"
-            data-node-children = "<%= JSON.stringify(subItem.children) %>"
-            data-node-type = "CHILD"
-            class="filterBtn"
-        >
-        <%= subItem.name.toUpperCase() %>
-        </div>
-    <% }) %>
-  </div>
-
-
+<% let id = `${level}:${itemGroups}` %>
+<div id="L<%= id %>"
+  data-node-type = "PARENT"
+  data-node-parentId = "<%= parentId %>"
+  data-node-toggle = "<%= level !== 1 ? true : false %>"
+  class="filterRow <%= level !== 1 ? 'hideMe' : '' %>"
+>
+  <% itemGroup.forEach(node => { %>
+    <%- include('../partials/filterNode', { node: node }) %>
+  <% }) %>
+</div>
