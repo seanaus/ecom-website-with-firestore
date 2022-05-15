@@ -1,62 +1,98 @@
 window.onload = () => {
   initialize();
-}
+};
 const initialize = () => {
-  console.log("INIT");
-  // const filterState = JSON.parse(localStorage.getItem("filterState"));
   const btns = document.querySelectorAll("div[data-node-type='CHILD']");
   btns.forEach((btn) => {
     if (btn) {
       btn.addEventListener("click", filterAction);
     }
   });
-} 
-const filterAction = (event) => {
-  const btn = event.target
-  const nodeId = btn.attributes["data-node-id"].value;
-  const nodeLevel = btn.attributes["data-node-level"].value;
-  const subLevel = parseInt(nodeLevel) + 1;
-  const nodeName = btn.attributes["data-node-name"].value;
-  const nodeParentId = btn.attributes["data-node-parentId"].value;
-  const nodeChildren = JSON.parse(btn.attributes["data-node-children"].value);
-  const nodeType = btn.attributes["data-node-type"].value;
+};
+const removeClass = (element, className) => {
+  if (element) {
+    element.classList.remove(className);
+  }
+};
+const addClass = (element, className) => {
+  if (element) {
+    element.classList.add(className);
+  }
+};
+const calcSubLevel = (level) => {
+  return parseInt(level) + 1;
+}
+const clearSubFilters = (level) => {
+    const btns = document.querySelectorAll("div[data-node-type ='PARENT']");
+    btns.forEach((btn) => {
+        if (parseInt(btn.attributes["data-node-level"].value) > parseInt(level) && btn.attributes["data-node-toggle"]) {
+            addClass(btn,"hideMe")
+        }
+    });
+};
+const showSubFilters = (level,Id)=> {
+  const subLevel = calcSubLevel(level);
+  const subSelector = `div[data-node-level='${subLevel}'][data-node-parentId='${Id}'][data-node-type='PARENT'][data-node-toggle='true']`;
+  const subParent = document.querySelector(subSelector);
+  if (subParent) removeClass(subParent, "hideMe");
+}
+const clearIsSelected = (level)=> {
+  const subSelector = `div[data-node-level='${subLevel}'][data-node-type='CHILD']`;
+  const subLevel = calcSubLevel(level);
+  const subBtns = document.querySelectorAll(subSelector);
+  subBtns.forEach((subBtn) => {
+    if (subBtn) removeClass(subBtn, "isSelected");
+  });
+}
+const isSelected = ()=> {
   
-  const reset = document.querySelectorAll("div[data-node-type='CHILD']");
+}
+const filterAction = (event) => {
+  // Activated Child
+  const btn = event.target;
+  const Id = btn.attributes["data-node-id"].value;
+  const level = btn.attributes["data-node-level"].value;
+  const name = btn.attributes["data-node-name"].value;
+  const parentId = btn.attributes["data-node-parentId"].value;
+  const children = JSON.stringify(btn.attributes["data-node-children"].value);
+  const type = btn.attributes["data-node-type"].value;
+
+  clearSubFilters(level);
+  showSubFilters(level,Id);
+
+  // const reset = document.querySelectorAll("div[data-node-type='CHILD']");
 
   // TRY TO SELECT SUB LEVEL PARENT
-  const parent = document.getElementById(`P${subLevel}`);
-  // CHECK FOR SUB NODES
-  const hasSubLevel = parent.id ? true : false
-  if (hasSubLevel) {
-    // SHOW PARENT
-    removeClass(parent, "hideMe")
-    // SHOW CHILDREN RELATED TO THE PARENT
-    const selector = `div[data-node-level='${subLevel}'] div[data-node-parentId='${nodeId}']`
-    console.log(selector)
-    const subItems = document.querySelectorAll(selector);
-    subItems.forEach((subItem) => { 
-      removeClass(subItem,"hideMe")
-    })
-    console.log(subItems);
-  }
 
-  
+  // CHECK FOR SUB NODES
+  // const hasSubLevel = parent.id ? true : false
+  // if (hasSubLevel) {
+  //   // SHOW PARENT
+  //   removeClass(parent, "hideMe")
+  //   // SHOW CHILDREN RELATED TO THE PARENT
+  //   const selector = `div[data-node-level='${subLevel}'] div[data-node-parentId='${nodeId}']`
+  //   console.log(selector)
+  //   const subItems = document.querySelectorAll(selector);
+  //   subItems.forEach((subItem) => {
+  //     removeClass(subItem,"hideMe")
+  //   })
+  //   console.log(subItems);
+  // }
+
   // console.log(`id: ${nodeId}`);
   // console.log(`level: ${nodeLevel}`);
   // console.log(`name: ${nodeName}`);
   // console.log(`parent: ${nodeParentId}`);
   // console.log(`children: ${nodeChildren}`);
   // console.log(`nodeType: ${nodeType}`);
-  
-
-}
+};
 
 // window.onload = () => {
-    // const count = localStorage.getItem("filterLevels");
-  // const count = "<%= filters.levels.length %>"
-  // addFilterRows(count);
-  // const items = "<%= filters.items %>"
-  // console.log(JSON.stringify(items));
+// const count = localStorage.getItem("filterLevels");
+// const count = "<%= filters.levels.length %>"
+// addFilterRows(count);
+// const items = "<%= filters.items %>"
+// console.log(JSON.stringify(items));
 // }
 // const addFilterRows = (count) => {
 //   count = count == 0 ? 1 : count;
@@ -70,32 +106,32 @@ const filterAction = (event) => {
 //   id = "",
 //   value = "",
 //   nodeType = "parent") => {
-  //parentId - text value used to select the parent element
-  //type - text value stating the type of HTML element to be added
-  //value - text value, this will be visible on screen
+//parentId - text value used to select the parent element
+//type - text value stating the type of HTML element to be added
+//value - text value, this will be visible on screen
 
-  // Get Elements by id of the form inputs
-  // let parentElement = document.getElementById(parentId);
-  // let newElement = "";
+// Get Elements by id of the form inputs
+// let parentElement = document.getElementById(parentId);
+// let newElement = "";
 
-  // createElement() method is used
-  // to create a new element
-  // newElement = document.createElement(type);
+// createElement() method is used
+// to create a new element
+// newElement = document.createElement(type);
 
-  // Append a text node for this example
-  // newElement.appendChild(document.createTextNode(value));
+// Append a text node for this example
+// newElement.appendChild(document.createTextNode(value));
 
-  // setAttribute() is used to set
-  // the attributes of the element
-  // newElement.setAttribute("data-node-type", `${nodeType}`);
-  // if (id != "") {
-  //   newElement.setAttribute("id", `${id}`);
-  //   newElement.setAttribute("data-level", `${id}`);
-  // }
-  // newElement.setAttribute("class", "filterRow");
+// setAttribute() is used to set
+// the attributes of the element
+// newElement.setAttribute("data-node-type", `${nodeType}`);
+// if (id != "") {
+//   newElement.setAttribute("id", `${id}`);
+//   newElement.setAttribute("data-level", `${id}`);
+// }
+// newElement.setAttribute("class", "filterRow");
 
-  // Append as child to the parent
-  // i.e. body
+// Append as child to the parent
+// i.e. body
 //   parentElement.appendChild(newElement);
 // };
 // document.addEventListener('DOMContentLoaded', (event) => {
@@ -201,7 +237,7 @@ const filterAction = (event) => {
 //         }
 //     });
 // }
-const removeClass = (element, className) => {
+/* const removeClass = (element, className) => {
   if (element) {
     element.classList.remove(className);
   }
@@ -210,7 +246,7 @@ const addClass = (element, className) => {
   if (element) {
     element.classList.add(className);
   }
-};
+}; */
 // const applyFilter = (level) => {
 //     if (parseInt(level)===1) {
 

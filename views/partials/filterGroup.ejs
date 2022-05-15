@@ -1,6 +1,7 @@
 <% let id = `${level}:${itemGroups}` %>
 <div id="L<%= id %>"
   data-node-type = "PARENT"
+  data-node-level = "<%= level %>"
   data-node-parentId = "<%= parentId %>"
   data-node-toggle = "<%= level !== 1 ? true : false %>"
   class="filterRow <%= level !== 1 ? 'hideMe' : '' %>"
