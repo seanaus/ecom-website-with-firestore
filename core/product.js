@@ -3,8 +3,7 @@ const firebase = require("../db");
 const Product = require("../models/product");
 const ProductGroup = require("../models/productGroup");
 const firestore = firebase.firestore();
-// let productArray = [];
-// let productGroupArray = [];
+
 let productsArray = [];
 const loadProductGroups = async () => {
   let productGroupArray = [];
@@ -18,9 +17,7 @@ const loadProductGroups = async () => {
       data.forEach((doc) => {
         const productGroup = new ProductGroup(
           doc.id,
-          doc.data().productLevel01Id,
-          doc.data().productLevel02Id,
-          doc.data().productLevel03Id,
+          doc.data().productLevelId,
           doc.data().productId
         );
         productGroupArray.push(productGroup);
@@ -45,8 +42,6 @@ const loadProducts = async () => {
       data.forEach((doc) => {
           const product = new Product(
             doc.id,
-            BLANK,
-            BLANK,
             BLANK,
             doc.data().name,
             doc.data().description,
@@ -74,9 +69,7 @@ const loadProductData = async () => {
       if (idx >= 0) {
         const product = new Product(
           productArrayRaw[idx].id,
-          productGroup.productLevel01Id,
-          productGroup.productLevel02Id,
-          productGroup.productLevel03Id,
+          productGroup.productLevelId,
           productArrayRaw[idx].name,
           productArrayRaw[idx].description,
           productArrayRaw[idx].imageCard,
@@ -86,7 +79,6 @@ const loadProductData = async () => {
         )
         productsArray.push(product);
       }
-      // const matchedProductGroup = productGroupArray.filter(productGroup => productGroup.productId == doc.id);
     });
   } catch (error) {
     console.log(error.message);
@@ -112,9 +104,7 @@ const findProduct = (id) => {
     if (idx >= 0) {
       return new Product(
         productsArray[idx].id,
-        productsArray[idx].productLevel01Id,
-        productsArray[idx].productLevel02Id,
-        productsArray[idx].productLevel03Id,
+        productsArray[idx].productLevelId,
         productsArray[idx].name,
         productsArray[idx].description,
         productsArray[idx].imageCard,
@@ -128,57 +118,12 @@ const findProduct = (id) => {
   } else {
     return false;
   }
-
-/*   const product = filterProducts(productsArray, id);
-  const product = productsArray.filter(searchProduct => searchProduct.id == id);
-  console.log(productsArray.length);
-  if (product) {
-    return product
-  } else {
-    return false
-  }
-  return product */
-  
-  
 };
 const filterProducts = (sourceArray, id) => {
-  // console.log("filterProductGroup");
-  // console.log(`arr ${sourceArray.productId}`);
-  // console.log(`productId ${productId}`);
-  // console.log(sourceArray.filter(productGroup => productGroup.productId == productId));
-//  console.log(`PID : ${sourceArray.filter(productGroup => productGroup.productId == productId).map(product => { return product })}`)
+  //console.log(`PID : ${sourceArray.filter(productGroup => productGroup.productId == productId).map(product => { return product })}`)
   // return sourceArray.filter(productGroup => productGroup.productId == productId).map(product => { return product.productId });
   return sourceArray.filter(searchProduct => searchProduct.id === id);
-  // if (paramArray[0] == "*") {
-  //   return sourceArray.map(product => { return product.productId });
-  // } else {
-  //   switch(paramArray.length) {
-  //     case 1:
-  //       return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0]).map(product => { return product.productId });
-  //     case 2:
-  //       return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1]).map(product => { return product.productId });
-  //     case 3:
-  //       return sourceArray.filter(productGroup => productGroup.productLevel01Id == paramArray[0] && productGroup.productLevel02Id == paramArray[1] && productGroup.productLevel03Id == paramArray[2]).map(product => { return product.productId })
-  //   }
-  // }
 }
-
-// const matchProductGroup = async(sourceArray, productId) => {
-//   try {
-//     let idx = 0;
-//     sourceArray.forEach(async(productGroup) => {
-//       // console.log(`MATCH: ${productGroup.productId} TO: ${productId}`)
-//       if (productGroup.productId == productId) {
-//         // console.log(`MATCH: ${productGroup.productId} TO: ${productId}`)
-//         // console.log(idx);
-//         return idx;
-//       }
-//       idx++;
-//     });
-//   } catch {
-//     console.log(error.message);
-//   }
-// }
 const matchProduct = (sourceArray,id) => {
   let idx = -1;
   for (let i = 0; i < sourceArray.length; i++) {

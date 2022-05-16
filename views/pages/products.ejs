@@ -29,7 +29,8 @@
       <%- include('../partials/filters', { filters: filters }) %>
       <div class="productsContainer">
         <% products.forEach(product=> { %> 
-          <%- include('../partials/productCard', { product: product}) %> <% }); %>
+          <%- include('../partials/productCard', { product: product}) %> 
+        <% }); %>
       </div>
       <%- include('../partials/footer', { footer: footer }) %>
     </div>

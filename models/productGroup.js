@@ -1,15 +1,11 @@
 class ProductGroup {
     constructor(
         id,
-        productLevel01Id,
-        productLevel02Id,
-        productLevel03Id,
+        productLevelId,
         productId
     ) {
         this.id = id;
-        this.productLevel01Id = productLevel01Id;
-        this.productLevel02Id = productLevel02Id;
-        this.productLevel03Id = productLevel03Id;
+        this.productLevelId = productLevelId;
         this.productId = productId;
     }
 

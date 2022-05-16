@@ -11,18 +11,19 @@
 } */
 .filterPanel {
   display: grid;
-  gap: 1px;
-  padding: 15px;
+  gap: 10px;
   border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  padding: 10px;
 }
 .filterRow {
     display: flex;
     justify-content: center;
     grid-column-gap: 20px;
     flex-wrap: wrap;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    padding: 15px;
     /* width: 100%; */
 }
 /* .filterRow01 {
@@ -63,7 +64,7 @@
 .filterBtn {
     font-size: x-small;
     min-width: 100px;
-    min-height: 60px;
+    --min-height: 60px;
     padding: 5px;
     border-radius: 0;
     overflow: visible;
