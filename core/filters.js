@@ -36,15 +36,24 @@ const getChildren = (node) => {
 // }
 
 const parse = (node) => {
-  // let items = [];
-  // const children = getChildren(node);
-  // if (IsArray(children)) {
-  //   children.forEach((child) => {
-  //     items.push(child);
-  //   });
-  // }
-  return children;
+  let items = [];
+  const children = getChildren(node);
+  if (IsArray(children)) {
+    saveChildren(children,items)
+  } else {
+    return items;
+  }
 };
+const saveChildren = (children, items) => {
+  children.forEach((child) => {
+    items.push(child);
+  });
+  if(isArray(items)) {
+    return items;
+  } else {
+    return [];
+  }
+}
 // const editNode = (srcObj, values) => {
 //   return Object.assign(srcObj, { children: values });
 // };
@@ -106,6 +115,8 @@ const loadFilters = async () => {
         });
       });
       //console.log(filters);
+      const tempNode = parseTree(filters.items[14]);
+      console.log(JSON.stringify(tempNode));
       return filters;
     }
   } catch (error) {
@@ -113,6 +124,45 @@ const loadFilters = async () => {
     return [];
   }
 };
+
+const parseTree = (node) => {
+
+	let children = [];
+	let cache = node.children;
+  // console.log("node");
+  // console.log(node.children);
+	do {
+		cache = parseBranch(cache);
+		// if(cache.length > 0) {
+      console.log("CACHE")
+      console.log(cache)
+			children = children.concat(cache);
+		// }
+	} while (cache.length > 0);
+  //console.log(children);
+  return children
+}
+const parseBranch = (children) => {
+	let branch = [];
+  // console.log("parseBranch");
+	children.forEach((id)=> {
+    // console.log(child)
+    // let a = filters.items.filter((i) => i.id == child)
+     branch = branch.concat(filters.items
+    .filter((item) => item.id == id)
+    .map((x) => {
+      return x.children;
+    }))
+		// branch = branch.concat(child.children);
+    // console.log(branch);
+    // console.log(JSON.stringify(a));
+	})
+  // console.log("BRANCH");
+  // console.log(branch);
+
+	return branch
+}
+
 module.exports = {
   loadFilters,
 };
