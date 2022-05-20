@@ -114,9 +114,9 @@ const loadFilters = async () => {
           node.children.push(child);
         });
       });
-      //console.log(filters);
-      const tempNode = parseTree(filters.items[14]);
-      console.log(JSON.stringify(tempNode));
+      filters.items.forEach((node) => {
+        node.children = node.children.concat(parseTree(node));
+      });
       return filters;
     }
   } catch (error) {
@@ -133,33 +133,27 @@ const parseTree = (node) => {
   // console.log(node.children);
 	do {
 		cache = parseBranch(cache);
-		// if(cache.length > 0) {
-      console.log("CACHE")
-      console.log(cache)
-			children = children.concat(cache);
-		// }
+		if(cache.length > 0) {
+      cache.forEach((group) => { 
+        group.forEach((groupItem) => {
+          children.push(groupItem)
+         })
+      })
+		}
 	} while (cache.length > 0);
   //console.log(children);
   return children
 }
 const parseBranch = (children) => {
-	let branch = [];
-  // console.log("parseBranch");
+  let branch = [];
 	children.forEach((id)=> {
-    // console.log(child)
-    // let a = filters.items.filter((i) => i.id == child)
-     branch = branch.concat(filters.items
+    branch = branch.concat(filters.items
     .filter((item) => item.id == id)
-    .map((x) => {
-      return x.children;
+    .map((node) => {
+      return node.children;
     }))
-		// branch = branch.concat(child.children);
-    // console.log(branch);
-    // console.log(JSON.stringify(a));
 	})
-  // console.log("BRANCH");
-  // console.log(branch);
-
+  
 	return branch
 }
 
