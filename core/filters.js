@@ -6,88 +6,15 @@ const Filters = require("../models/Filters");
 const FilterItem = require("../models/FilterItem");
 
 let filters = new Filters();
-// let nodes = [];
 let level = 0;
 
 const IsArray = (aryCheck) => {
   return aryCheck && Array.isArray(aryCheck) && aryCheck.length > 0;
 };
-const getChildren = (node) => {
-  const children = filters.items
-    .filter((check) => check.parentId === node.id)
-    .map((child) => {
-      return child.id;
-    });
-  if (IsArray(children)) {
-    return children;
-  } else {
-    return [];
-  }
-};
-
-// const renderItems = (items)=>{
-//   if(IsArray(items)) {
-//         const element = document.createElement("div");
-//         const textnode = document.createTextNode(JSON.stringify(items));
-//         element.appendChild(textnode);
-//         document.body.appendChild(element);
-//         element.innerHTML = JSON.stringify(items)
-//   }
-// }
-
-const parse = (node) => {
-  let items = [];
-  const children = getChildren(node);
-  if (IsArray(children)) {
-    saveChildren(children,items)
-  } else {
-    return items;
-  }
-};
-const saveChildren = (children, items) => {
-  children.forEach((child) => {
-    items.push(child);
-  });
-  if(isArray(items)) {
-    return items;
-  } else {
-    return [];
-  }
-}
-// const editNode = (srcObj, values) => {
-//   return Object.assign(srcObj, { children: values });
-// };
-// const loadFiltersOld = async () => {
-//   let nodes = [];
-// try {
-//   let nodes = [];
-//   const filters = await loadConfig("filters");
-//   filters.items.forEach((item, idx) => {
-//     const node = new FilterItem(
-//       item.id,
-//       item.level,
-//       item.name,
-//       item.parentId,
-// item.children = parse(item)
-// );
-//   console.log("NODE");
-//   console.log(JSON.stringify(node));
-// nodes.push(node);
-//   });
-//   return nodes
-// } catch (error) {
-//   console.log(error.message);
-//   return []
-// }
-//   console.log("NODES");
-//   console.log(JSON.stringify(nodes));
-//   return nodes;
-// };
 
 const loadFilters = async () => {
   try {
-    // nodes = [];
-    // levels = [];
+
     filters = new Filters();
 
     const data = await firestore.collection("components");
@@ -109,13 +36,7 @@ const loadFilters = async () => {
         }
       });
       filters.items.forEach((node) => {
-        const children = getChildren(node);
-        children.forEach((child) => {
-          node.children.push(child);
-        });
-      });
-      filters.items.forEach((node) => {
-        node.children = node.children.concat(parseTree(node));
+        node.children = parseTree(node.id);
       });
       return filters;
     }
@@ -124,39 +45,35 @@ const loadFilters = async () => {
     return [];
   }
 };
-
-const parseTree = (node) => {
-
+const getChildren = (id) => {
+  const children = filters.items
+    .filter((check) => check.parentId == id)
+    .map((child) => {
+      return child.id;
+    });
+  if (IsArray(children)) {
+    return children;
+  } else {
+    return [];
+  }
+};
+const parseTree = (id) => {
 	let children = [];
-	let cache = node.children;
-  // console.log("node");
-  // console.log(node.children);
-	do {
-		cache = parseBranch(cache);
-		if(cache.length > 0) {
-      cache.forEach((group) => { 
-        group.forEach((groupItem) => {
-          children.push(groupItem)
-         })
-      })
-		}
-	} while (cache.length > 0);
-  //console.log(children);
+  let cache = [];
+  cache.push(id);
+  while (cache.length > 0) {
+    cache = parseBranch(cache);
+    children = children.concat(cache);
+  }
   return children
 }
-const parseBranch = (children) => {
-  let branch = [];
-	children.forEach((id)=> {
-    branch = branch.concat(filters.items
-    .filter((item) => item.id == id)
-    .map((node) => {
-      return node.children;
-    }))
-	})
-  
-	return branch
+const parseBranch = (check) => {
+  let pass = [];
+  check.forEach((id) => {
+    pass = pass.concat(getChildren(id));
+  });
+	return pass;
 }
-
 module.exports = {
   loadFilters,
 };
