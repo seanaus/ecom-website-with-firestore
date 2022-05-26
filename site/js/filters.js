@@ -1,3 +1,5 @@
+// const { remove } = require("local-storage");
+
 window.onload = () => {
   initialize();
 };
@@ -60,11 +62,47 @@ const filterAction = (event) => {
   const level = btn.attributes["data-node-level"].value;
   const name = btn.attributes["data-node-name"].value;
   const parentId = btn.attributes["data-node-parentId"].value;
-  const children = JSON.stringify(btn.attributes["data-node-children"].value);
+  const children = JSON.parse(btn.attributes["data-node-children"].value);
   const type = btn.attributes["data-node-type"].value;
 
   showSubFilters(level,Id);
   isSelected(btn);
+  //removeFilters();
+  applyFilters(children);
  
 };
+// const removeFilters = ()=> {
+//   const selector = "a[data-node-type='product']";
+//   const products = document.querySelectorAll(selector);
+//   //console.log("REMOVE FILTERS");
+//   // console.log(JSON.stringify(products));
+//   products.forEach((product) => {
+//     removeClass(product, "hideMe");
+//   });
+// }
+const applyFilters = (children)=> {
+  // let selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
+  let selector = `a[data-node-type='product']`;
+  let products = document.querySelectorAll(selector);
+  let productLevelId = 0;
 
+  products.forEach((product) => {
+    productLevelId = parseInt(product.attributes["data-node-productlevelid"].value);
+    if(children.includes(productLevelId)) {
+      removeClass(product, "hideMe");
+    } else {
+      addClass(product, "hideMe");
+    }
+  });
+}
+const applyFiltersl = (children) => {
+  let selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
+
+  children.forEach((productLevelId)=>{
+    // selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
+    const products = document.querySelectorAll(selector)
+    products.forEach((product)=>{
+      addClass(product, "hideMe");
+    })
+  })
+}

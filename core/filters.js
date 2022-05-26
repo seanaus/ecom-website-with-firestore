@@ -11,7 +11,6 @@ let level = 0;
 const IsArray = (aryCheck) => {
   return aryCheck && Array.isArray(aryCheck) && aryCheck.length > 0;
 };
-
 const loadFilters = async () => {
   try {
 
@@ -19,6 +18,7 @@ const loadFilters = async () => {
 
     const data = await firestore.collection("components");
     const docs = await data.get();
+    
     if (docs.empty) {
       console.log("ERROR: No filter data found");
     } else {
@@ -35,9 +35,7 @@ const loadFilters = async () => {
           });
         }
       });
-      filters.items.forEach((node) => {
-        node.children = parseTree(node.id);
-      });
+      createNodeRelationships(filters.items);
       return filters;
     }
   } catch (error) {
@@ -45,6 +43,11 @@ const loadFilters = async () => {
     return [];
   }
 };
+const createNodeRelationships = (nodes) => {
+  nodes.forEach((node) => {
+    node.children = parseTree(node.id);
+  });
+}
 const getChildren = (id) => {
   const children = filters.items
     .filter((check) => check.parentId == id)
