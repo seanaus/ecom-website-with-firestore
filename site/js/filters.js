@@ -1,5 +1,3 @@
-// const { remove } = require("local-storage");
-
 window.onload = () => {
   initialize();
 };
@@ -64,24 +62,15 @@ const filterAction = (event) => {
   const parentId = btn.attributes["data-node-parentId"].value;
   const children = JSON.parse(btn.attributes["data-node-children"].value);
   const type = btn.attributes["data-node-type"].value;
+ 
 
   showSubFilters(level,Id);
   isSelected(btn);
-  //removeFilters();
-  applyFilters(children);
+  applyFilters(filterSelection(Id,children));
  
 };
-// const removeFilters = ()=> {
-//   const selector = "a[data-node-type='product']";
-//   const products = document.querySelectorAll(selector);
-//   //console.log("REMOVE FILTERS");
-//   // console.log(JSON.stringify(products));
-//   products.forEach((product) => {
-//     removeClass(product, "hideMe");
-//   });
-// }
-const applyFilters = (children)=> {
-  // let selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
+const applyFilters = (children) => {
+  
   let selector = `a[data-node-type='product']`;
   let products = document.querySelectorAll(selector);
   let productLevelId = 0;
@@ -94,15 +83,12 @@ const applyFilters = (children)=> {
       addClass(product, "hideMe");
     }
   });
-}
-const applyFiltersl = (children) => {
-  let selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
 
-  children.forEach((productLevelId)=>{
-    // selector = `a[data-node-type='product'][data-node-productlevelid='${productLevelId}']`;
-    const products = document.querySelectorAll(selector)
-    products.forEach((product)=>{
-      addClass(product, "hideMe");
-    })
-  })
+}
+const filterSelection = (Id, children) => {
+  // COMBINE NODEID AND CHILDNODEID'S FOR PRODUCT SEARCH
+  let selection = [];
+  selection.push(parseInt(Id));
+  selection = selection.concat(children);
+  return selection
 }
