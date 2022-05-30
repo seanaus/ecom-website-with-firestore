@@ -2,7 +2,9 @@
   width: 100%;
   display: grid;
   grid-template-columns: auto;
-  margin: 30px auto 0px auto;
+  /* margin: 30px auto 0px auto; */
+  margin-top: auto;
+
   z-index: 1;
   /* position: fixed;
   bottom: 0;

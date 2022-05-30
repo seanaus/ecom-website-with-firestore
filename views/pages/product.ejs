@@ -19,13 +19,8 @@
   <script defer type="module" src="/js/cart.js"></script>
   <title><%= settings.projectName %></title>
 </head>
-
 <body>
-    <%- include('../partials/navBar', { user: user,
-                                        navbar: navbar, 
-                                        settings: settings 
-                                      }) 
-    %> 
+  <div id="pageLayoutContainer" class="container">
     <div class="productWrapper">
       <div id="id" class="hide">
         <%=product.id %>
@@ -48,18 +43,19 @@
       </div>
     </div>
     <%- include('../partials/footer', { footer: footer }) %>
-    <script>
-      const data = {
-        id: "<%= product.id %>",
-        name: "<%= product.name %>",
-        description: "<%= product.description %>",
-        imageCard: "<%= product.imageCard %>",
-        image: "<%= product.image %>",
-        unitCost: "<%= product.unitCost %>",
-        formattedCost: "<%= product.formattedCost %>",
-      };
-      localStorage.setItem("product", JSON.stringify(data));
-    </script>
+  </div>
+  <script>
+    const data = {
+      id: "<%= product.id %>",
+      name: "<%= product.name %>",
+      description: "<%= product.description %>",
+      imageCard: "<%= product.imageCard %>",
+      image: "<%= product.image %>",
+      unitCost: "<%= product.unitCost %>",
+      formattedCost: "<%= product.formattedCost %>",
+    };
+    localStorage.setItem("product", JSON.stringify(data));
+  </script>
 </body>
 
 </html>

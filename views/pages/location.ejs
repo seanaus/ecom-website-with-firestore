@@ -22,11 +22,13 @@
   </head>
 
   <body>
-    <%- include('../partials/navBar', { user: user, navbar: navbar, settings:
-    settings }) %>
+
     <div id="pageLayoutContainer" class="container">
-      <%- include('../partials/maps') %> 
-	  <%- include('../partials/footer', { footer: footer }) %>
+      <%- include('../partials/navBar', { user: user, navbar: navbar, settings: settings }) %>
+      <div class="container">
+        <%- include('../partials/maps') %>
+      </div>
+      <%- include('../partials/footer', { footer: footer }) %>
     </div>
     <script>
       document
