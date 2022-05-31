@@ -52,22 +52,33 @@ const renderRegistration = async (req, res, next) => {
   });
   next();
 };
-const renderPrivacyPolicy = async (req, res, next) => {
-  res.render("pages/privacyPolicy", {
+// const renderPrivacyPolicy = async (req, res, next) => {
+//   res.render("pages/privacyPolicy", {
+//     settings: await loadSettings(),
+//     user: activeUser(),
+//     navbar: await loadConfig("navbar"),
+//     content: await loadPage("privacyPolicy"),
+//     footer: await loadConfig("footer")
+//   });
+//   next();
+// };
+// const renderTermsAndConditions = async (req, res, next) => {
+//   res.render("pages/termsAndConditions", {
+//     settings: await loadSettings(),
+//     user: activeUser(),
+//     navbar: await loadConfig("navbar"),
+//     content: await loadPage("termsAndConditions"),
+//     footer: await loadConfig("footer")
+//   });
+//   next();
+// };
+const renderGenericDocument =  async(req, res, next) => {
+  const id = req.params.route;
+  res.render(`pages/documentViewer`, {
     settings: await loadSettings(),
     user: activeUser(),
     navbar: await loadConfig("navbar"),
-    content: await loadPage("privacyPolicy"),
-    footer: await loadConfig("footer")
-  });
-  next();
-};
-const renderTermsAndConditions = async (req, res, next) => {
-  res.render("pages/termsAndConditions", {
-    settings: await loadSettings(),
-    user: activeUser(),
-    navbar: await loadConfig("navbar"),
-    content: await loadPage("termsAndConditions"),
+    content: await loadPage(id),
     footer: await loadConfig("footer")
   });
   next();
@@ -78,6 +89,5 @@ module.exports = {
   renderLocation,
   renderLogIn,
   renderRegistration,
-  renderPrivacyPolicy,
-  renderTermsAndConditions
+  renderGenericDocument
 };

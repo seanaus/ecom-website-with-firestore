@@ -24,9 +24,6 @@ const loadPage = async (pageId) => {
     } catch (error) {
         console.log(error.message);
     }
-/*     console.log(pageData.id);
-    console.log(pageData.onPage[0].title);
-    console.log(pageData.onPage[0].content); */
     return pageData;
 }
 module.exports = {

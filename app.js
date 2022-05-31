@@ -12,6 +12,7 @@ const cartRoutes = require("./routes/cartRoutes");
 app.use(express.static(path.join(__dirname, "site")));
 app.use(favicon(path.join(__dirname, "site/favicon/", "favicon.ico")));
 
+
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(methodOverride("_method"));
